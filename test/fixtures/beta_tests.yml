@@ -1,0 +1,14 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bettatest:
+  name: bettatest.com
+  user: big_cheese
+  tags: tag_1, tag_2
+
+productivity:
+  name: productivity
+  user: smartphone_developer
+  tags: tag_3, tag_4
+megalithic:
+  name: megalithic bloatware
+  user: software_house
+  tags: tag_2, tag_3

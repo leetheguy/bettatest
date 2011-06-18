@@ -1,0 +1,73 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+<% user = User.new :password => "password" %>
+mister_tester:
+  name: Mister Tester
+  email: mister_tester@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+<% user = User.new :password => "password" %>
+senor_tostada:
+  name: Senor Tostada
+  email: senior_tostada@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+<% user = User.new :password => "password" %>
+captain_hacker:
+  name: Captain Hacker
+  email: captain_hacker@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+  inactive_until: 1.fortnight.from_now
+
+<% user = User.new :password => "password" %>
+confused:
+  name: Iam 99% Confused
+  email: iam_confused@bettatest.com
+  betta_email_opt_in: false
+  agreed_to_tos: true
+  email_confirmed: false
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+<% user = User.new :password => "password" %>
+smartphone_developer:
+  name: Smartphone Developer
+  email: smartphone_developer@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+<% user = User.new :password => "password" %>
+software_house:
+  name: Software House
+  email: software_house@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+<% user = User.new :password => "password" %>
+big_cheese:
+  name: Big Cheese
+  email: big_cheese@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+  is_admin: true

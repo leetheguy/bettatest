@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+broke:
+  name: the thingy broke
+  description: into pieces
+  ticket_category: ticket_cat_2
+
+fell_apart:
+  name: the thingy fell apart
+  description: into pieces
+  ticket_category: ticket_cat_1

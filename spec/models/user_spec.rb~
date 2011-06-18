@@ -1,0 +1,38 @@
+require 'spec_helper'
+
+describe User do
+	let(:example_user) {
+		User.new 	:name => "Example User",
+							:email => "user@example.com",
+							:betta_email_opt_in => true,
+							:agreed_to_tos => true,
+							:email_confirmed => true,
+							:security_question => "Is true true?",
+							:security_answer => "yes"
+	}
+	
+  it "all begins with a valid example user" do
+    example_user.should be_valid?
+  end
+
+	it "validates acceptance of agreed_to_tos" do
+    example_user.agreed_to_tos = false
+		example_user.agreed_to_tos.should be_true
+	end
+	
+	it "validates confirmation of email"
+	it "validates confirmation of password"
+	it "validates format of email"
+	it "validates length of password is greater than 6"
+	it "validates length of password is less than 20"
+	it "validates length of name is greater than 3"
+	it "validates length of name is less than 40"
+	it "validates uniqueness of email"
+	it "validates presence of email"
+	it "validates presence of password"
+	it "validates presence of name"
+	
+  it "should restrict access to password hash"
+  it "should restrict access to password salt"
+  it "converts days of suspension to time for inactive_until"
+end

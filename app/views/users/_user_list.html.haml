@@ -1,0 +1,14 @@
+%tr
+	%th.center{:colspan => 3}
+		%h3.dark-blue= heyo
+- :user_collection.each do |user|
+	%tr
+		%td= user.name
+		%td= user.email
+		%td
+			= link_to 'show', user
+			-if @iamadmin
+				|
+				= link_to 'edit', edit_user_path(user)
+				|
+				= link_to 'destroy', user, :confirm => 'Are you sure?', :method => :delete

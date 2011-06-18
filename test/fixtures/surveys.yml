@@ -1,0 +1,4 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+survey:
+  name:        How much wood would a woodchuck chuck?
+  description: If he was so inclined.

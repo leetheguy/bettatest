@@ -1,0 +1,73 @@
+%h1.dark-blue listing users
+%table
+  - show_to :admin
+    = render "user_list", :locals => {:name => "beginners", :user_collection => @beginners}
+    %tr
+      %th.center{:colspan => 3}
+        %h3.dark-blue testers
+    - @testers.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          = link_to 'show', user
+          - show_to :admin
+            |
+            = link_to 'edit', edit_user_path(user)
+            |
+            = link_to 'destroy', user, :confirm => 'Are you sure?', :method => :delete
+    %tr
+      %th.center{:colspan => 3}
+        %h3.dark-blue developers
+    - @developers.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          = link_to 'show', user
+          - show_to :admin
+            |
+            = link_to 'edit', edit_user_path(user)
+            |
+            = link_to 'destroy', user, :confirm => 'Are you sure?', :method => :delete
+    %tr
+      %th.center{:colspan => 3}
+        %h3.dark-blue admins
+    - @admins.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          = link_to 'show', user
+          - show_to :admin
+            |
+            = link_to 'edit', edit_user_path(user)
+            |
+            = link_to 'destroy', user, :confirm => 'Are you sure?', :method => :delete
+  -#
+    %tr
+      %th.center{:colspan => 3}
+        %h3.dark-blue anomolies
+    - @anomolies.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          = link_to 'show', user
+          - show_to :admin
+            |
+            = link_to 'edit', edit_user_path(user)
+            |
+            = link_to 'destroy', user, :confirm => 'Are you sure?', :method => :delete
+  - @beta_tests.each do |test|
+    %tr
+      %th.center{:colspan => 3}
+        %h3.dark-blue
+          users in
+          = test.name
+    - test.users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          = link_to 'show', user

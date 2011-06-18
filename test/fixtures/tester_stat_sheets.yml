@@ -1,0 +1,42 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+mister_tester_bettatest:
+  level: 2
+  points: 60
+  days_at_level: 5
+  user: mister_tester
+  beta_test: bettatest_test
+
+senor_tostada_bettatest:
+  level: 3
+  points: 90
+  days_at_level: 20
+  user: senor_tostada
+  beta_test: bettatest_test
+
+mister_tester_productivity:
+  level: 1
+  points: 20
+  days_at_level: 5
+  user: mister_tester
+  beta_test: productivity_test
+
+senor_tostada_productivity_test:
+  level: 2
+  points: 50
+  days_at_level: 20
+  user: senor_tostada
+  beta_test: productivity_test
+
+mister_tester_megalithic_test:
+  level: 3
+  points: 75
+  days_at_level: 5
+  user: mister_tester
+  beta_test: megalithic_test
+
+senor_tester_megalithic_test:
+  level: 1
+  points: 7
+  days_at_level: 20
+  user: senor_tostada
+  beta_test: megalithic_test

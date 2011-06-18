@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+borked:
+  name: borked
+  description: totally borked
+  beta_test: bettatest_test
+
+foobarred:
+  name: foobarred
+  description: totally foobarred
+  beta_test: bettatest_test

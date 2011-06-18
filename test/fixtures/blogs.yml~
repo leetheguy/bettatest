@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+Blog.delete_all
+betta_test_blog:
+  row.name: betta test is awesome
+  row.post: I mean really really friggin awesome.\nBecause I`m just too awesome.
+  row.beta_test: bettatest_test
+
+megalithic_blog:
+  row.name: megalithicbloatware.com owns the world
+  row.post: MBW was valued in the 18th digit this quarter.\nThis quarter we earned more money than the world.
+  row.beta_test: megalithic_test

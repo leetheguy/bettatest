@@ -1,0 +1,184 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended to check this file into your version control system.
+
+ActiveRecord::Schema.define(:version => 20110225225731) do
+
+  create_table "beta_tests", :force => true do |t|
+    t.string   "name",                                          :null => false
+    t.integer  "max_testers",                :default => 100
+    t.integer  "starting_points",            :default => 10
+    t.integer  "active_min_pts",             :default => 25
+    t.integer  "involved_min_pts",           :default => 75
+    t.integer  "daily_drop_pts",             :default => 1
+    t.integer  "daily_login_pts",            :default => 1
+    t.integer  "forum_post_pts",             :default => 3
+    t.integer  "rate_up_lose_pts",           :default => 1
+    t.integer  "rate_up_give_pts",           :default => 2
+    t.integer  "rate_down_lose_pts",         :default => 2
+    t.integer  "rate_down_take_pts",         :default => 1
+    t.integer  "survey_vote_pts",            :default => 3
+    t.integer  "tester_days_to_gift",        :default => 0
+    t.integer  "active_days_to_gift",        :default => 0
+    t.integer  "involved_days_to_gift",      :default => 10
+    t.boolean  "involved_can_merge_tickets", :default => true
+    t.boolean  "involved_can_add_tickets",   :default => false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.boolean  "open",                       :default => false
+    t.boolean  "active",                     :default => false
+    t.string   "link"
+    t.string   "password"
+  end
+
+  add_index "beta_tests", ["name"], :name => "index_beta_tests_on_name", :unique => true
+
+  create_table "beta_tests_tags", :id => false, :force => true do |t|
+    t.integer "beta_test_id"
+    t.integer "tag_id"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.string   "name",                           :null => false
+    t.text     "post",                           :null => false
+    t.boolean  "draft",        :default => true
+    t.integer  "beta_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_categories", :force => true do |t|
+    t.string   "name",                        :null => false
+    t.text     "description"
+    t.integer  "beta_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "access_level", :default => 1
+  end
+
+  create_table "forum_posts", :force => true do |t|
+    t.text     "post",           :null => false
+    t.integer  "forum_topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_topics", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "forum_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "referrals", :force => true do |t|
+    t.integer  "reward_at",      :default => 3
+    t.integer  "rewards_given",  :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "referred_by_id"
+  end
+
+  add_index "referrals", ["referred_by_id"], :name => "index_referrals_on_referred_by_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.decimal  "low_tier_price",        :precision => 3, :scale => 2, :default => 14.0
+    t.decimal  "high_tier_price",       :precision => 3, :scale => 2, :default => 6.0
+    t.decimal  "low_tier_year_price",   :precision => 3, :scale => 2, :default => 149.0
+    t.decimal  "high_tier_year_price",  :precision => 3, :scale => 2, :default => 299.0
+    t.integer  "low_tier_months_left",                                :default => 0
+    t.integer  "high_tier_months_left",                               :default => 0
+    t.integer  "current_tier",                                        :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_options", :force => true do |t|
+    t.string   "name",                      :null => false
+    t.integer  "votes",      :default => 0
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", :force => true do |t|
+    t.string   "name",                        :null => false
+    t.text     "description"
+    t.integer  "beta_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "access_level", :default => 1
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tester_stat_sheets", :force => true do |t|
+    t.integer  "level",         :default => 0
+    t.integer  "points",        :default => 0
+    t.integer  "days_at_level", :default => 0
+    t.integer  "user_id"
+    t.integer  "beta_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "level_frozen",  :default => false
+    t.boolean  "points_frozen", :default => false
+    t.integer  "position"
+  end
+
+  create_table "ticket_categories", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "description"
+    t.integer  "beta_test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tickets", :force => true do |t|
+    t.string   "name",                                   :null => false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",             :default => "open"
+    t.integer  "ticket_category_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                                 :null => false
+    t.boolean  "betta_email_opt_in", :default => false, :null => false
+    t.boolean  "agreed_to_tos",      :default => false, :null => false
+    t.date     "last_login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "email_confirmed",    :default => false
+    t.string   "name"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "email_code"
+    t.boolean  "is_admin",           :default => false
+    t.integer  "inactive_until",     :default => 0
+    t.string   "security_question"
+    t.string   "security_answer"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
+end

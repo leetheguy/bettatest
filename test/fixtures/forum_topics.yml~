@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.
+topic_1:
+  row.name: a forum topic
+  row.description: a place to discuss stuff relevant to a forum topic
+  row.user: senor_tostada
+  row.forum_category: forum_cat_1

@@ -1,0 +1,16 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ :name => "Chicago" }, { :name => "Copenhagen" }])
+#   Mayor.create(:name => "Daley", :city => cities.first)
+												
+bettatest_test.tags = [tag_1, tag_2, tag_3]
+bettatest_test.save
+productivity_test.tags = [tag_2, tag_3, tag_4]
+productivity_test.save
+megalithic_test.tags = [tag_2, tag_3]
+megalithic_test.save
+
+

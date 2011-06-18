@@ -1,0 +1,21 @@
+<h1>Listing tester_stat_sheets</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tester_stat_sheets.each do |tester_stat_sheet| %>
+  <tr>
+    <td><%= link_to 'Show', tester_stat_sheet %></td>
+    <td><%= link_to 'Edit', edit_tester_stat_sheet_path(tester_stat_sheet) %></td>
+    <td><%= link_to 'Destroy', tester_stat_sheet, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tester stat sheet', new_tester_stat_sheet_path %>

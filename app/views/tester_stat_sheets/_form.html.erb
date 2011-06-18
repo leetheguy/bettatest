@@ -1,0 +1,17 @@
+<%= form_for(@tester_stat_sheet) do |f| %>
+  <% if @tester_stat_sheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tester_stat_sheet.errors.count, "error") %> prohibited this tester_stat_sheet from being saved:</h2>
+
+      <ul>
+      <% @tester_stat_sheet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

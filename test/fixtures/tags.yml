@@ -1,0 +1,12 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+tag_1:
+  name: peanut-butter
+
+tag_2:
+  name: chocolate
+
+tag_3:
+  name: moose
+
+tag_4:
+  name: wallbanger

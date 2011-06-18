@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+option_1:
+  name: a cord
+  votes: 3
+  survey: survey
+
+option_2:
+  name: a bushel
+  votes: 1
+  survey: survey
+
+option_3:
+  name: a peck
+  votes: 9
+  survey: survey
+
+option_4:
+  name: a woodchuck can`t chuck wood
+  votes: 82
+  survey: survey

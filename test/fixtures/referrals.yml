@@ -1,0 +1,8 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+senor_tostada:
+  user: senor_tostada
+  referred_by: big_cheese
+
+smartphone_developer:
+  user: smartphone_developer
+  referred_by: senor_tostada

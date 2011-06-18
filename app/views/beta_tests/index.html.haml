@@ -1,0 +1,22 @@
+%h1 Listing beta_tests
+=paginate @beta_tests
+%table
+  -count = 1
+  %tr
+    -@beta_tests.each do |beta_test|
+      %td
+        = beta_test.name
+        %br
+        =link_to 'Show', beta_test
+        &nbsp;|&nbsp;
+        =link_to 'Edit', edit_beta_test_path(beta_test)
+        &nbsp;|&nbsp;
+        =link_to 'Destroy', beta_test, :confirm => 'Are you sure?', :method => :delete
+      -if count == 4
+        - count = 1
+        </tr>
+        <tr>
+      -else
+        -count += 1
+%br
+= link_to 'New Beta test', new_beta_test_path

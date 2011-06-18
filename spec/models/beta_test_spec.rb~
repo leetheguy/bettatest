@@ -1,0 +1,9 @@
+require 'spec_helper'
+
+describe BetaTest do
+  it "is in experimental mode" do
+    bt = BetaTest.first
+    should_be_true = bt.involved_can_merge_tickets
+    should_be_true.should be_false
+  end
+end

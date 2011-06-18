@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+noob_category:
+  name       : forum for noobses
+  description: "The place for noobs to run around in circles, yelling and waving their arms wildly."
+  beta_test  : bettatest_test
+
+active_category:
+  name: forum for the active
+  description: "You think you're so smart, dont you? Good!"
+  beta_test: bettatest_test
+
+involved_category:
+  name: forum for the involved
+  description: "Welcome to the 1337 hizouse party yo!"
+  beta_test: bettatest_test

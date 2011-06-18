@@ -1,0 +1,62 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+<% user = User.new :password => "mtester" %>
+mister_tester:
+  name: Mister Tester
+  email: mister_tester@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_salt: <%= user.password_salt %>
+  password_hash: <%= user.password_hash %>
+
+senor_tostada:
+  name: Senor Tostada
+  email: senior_tostada@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password: meester
+
+captain_hacker:
+  name: Captain Hacker
+  email: captain_hacker@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password: password
+  inactive_until: 1.fortnight.from_now
+
+confused:
+  name: Iam 99% Confused
+  email: iam_confused@bettatest.com
+  betta_email_opt_in: false
+  agreed_to_tos: true
+  email_confirmed: false
+  password: isthisbetter
+
+smartphone_developer:
+  name: Smartphone Developer
+  email: smartphone_developer@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password: smeveloper
+
+software_house:
+  name: Software House
+  email: software_house@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password_hash: warhose
+  password_salt: 
+
+big_cheese:
+  name: Big Cheese
+  email: big_cheese@bettatest.com
+  betta_email_opt_in: true
+  agreed_to_tos: true
+  email_confirmed: true
+  password: goldWatch
+  is_admin: true

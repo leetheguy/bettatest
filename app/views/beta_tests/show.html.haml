@@ -1,0 +1,10 @@
+%p.notice= @notice
+%h1.dark-blue= @beta_test.name
+%h3= "status: #{ @beta_test.status }"
+- if current_user.has_role?(:developer, @beta_test) || current_user.has_role?(:admin)
+  = link_to 'edit', edit_beta_test_path(@beta_test)
+  |
+- if !current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test)
+  = link_to 'join this test', :controller => :tester_stat_sheets, :beta_test => @beta_test.id
+  |
+= link_to 'back', beta_tests_path

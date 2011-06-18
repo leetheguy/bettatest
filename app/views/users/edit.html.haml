@@ -1,0 +1,29 @@
+%h1.dark-blue.span-22.last 
+  preferences for 
+  = @user.name
+- if @user.errors.any?
+  .span-22.error_messages.last
+    %h2.dark-blue Form is invalid
+    %ul
+    - for message in @user.errors.full_messages
+      %li= message
+    %br/
+= form_tag(@url_for_update, :method => :put) do
+  .span-11.border
+    %p.right= label_tag :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
+  .span-11.left.last
+    = check_box_tag :betta_email_opt_in
+  .span-11.border
+    %p.right= label_tag :password, 'old password (required to make changes)'
+  .span-11.left.last
+    = password_field_tag :password
+  .span-11.border
+    %p.right= label_tag :new_password, 'new password (leave blank to keep current password)'
+  .span-11.left.last
+    = password_field_tag :new_password
+  .span-11.border
+    %p.right= label_tag :password_confirmation, 'password confirmation'
+  .span-11.left.last
+    = password_field_tag :password_confirmation
+  .span-22.last
+    %p.button= submit_tag 'save changes', :confirm => 'Are you sure?'
