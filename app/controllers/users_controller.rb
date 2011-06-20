@@ -47,6 +47,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(params[:user])
 		if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       session[:id] = @user.id
 			redirect_to unconfirmed_user_path, :notice => 'Your account has been created.'
 		else
