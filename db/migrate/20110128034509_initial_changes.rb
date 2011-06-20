@@ -25,7 +25,7 @@ class InitialChanges < ActiveRecord::Migration
     rename_column :survey_options,  :option,    :name
     rename_column :blogs,           :title,     :name
 		
-		remove_column :tester_stats, :users
+		remove_column :users, :tester_stats
     
     add_column    :tickets, :ticket_category_id, :integer
   end
