@@ -1,0 +1,7 @@
+= "#{@user.name},"
+
+Thank you for signing up at bettatest.com!
+= "All that's left is to confirm your email address by #{link_to "clicking here", :controller => :user, :email_code => @user.email_code}."
+
+Sincerely,
+Gil Fish, the happy email robot
