@@ -1,6 +1,7 @@
 @import "blueprint"
 @import "blueprint/grid"
 @import "compass/css3/border-radius"
+@import "compass/css3/inline-block"
 
 +blueprint
 
@@ -41,6 +42,81 @@ $blueprint-grid-margin          : 10px
     left                        : $default-padding
     right                       : $default-padding
 
+=tab-box-h
+  color                         : $color-2
+  margin                        : 0px
+  padding                       : 0px
+
+=plain-text-h
+  color                         : $color-2
+  text-align                    : center
+
+.bubble
+  +bubble
+  +inline-block
+  padding                       : 15px
+  margin                        : 10px
+  p
+    margin-bottom               : 5px
+  h1
+    +tab-box-h
+  h2
+    +tab-box-h
+  h3
+    +tab-box-h
+
+.tab-container
+  padding                       : $default-padding
+ 
+.tab-container-8
+  +column(8)
+
+.tab-container-8-last
+  +column(8, true)
+
+.tab-container-4
+  +column(4)
+
+.tab-container-4-last
+  +column(4, true)
+
+.bg-2
+  background                    : $color-2
+
+.bg-1
+  background                    : $color-1
+
+.color-2
+  color                         : $color-2
+
+.color-1
+  color                         : $color-1
+
+.tab-box-top
+  h1
+    +tab-box-h
+  h2
+    +tab-box-h
+  +top-tab
+  margin
+    top                         : 0px
+    bottom                      : 0px
+
+.tab-box-bottom
+  +border-bottom-radius(15px)
+  border                        : solid $default-border-thickness $color-2
+  margin                        : $default-padding
+  margin                        :
+    top                         : 0px
+    bottom                      : 0px
+  padding                       : $default-padding
+  border-top                    : 0px
+  background                    : white
+  color                         : black
+
+div.tab_container-16
+  +column(16, true)
+  margin-bottom                 : 5px
 
 div.content
   +container
@@ -69,48 +145,25 @@ div.content
       top                       : $default-padding
       bottom                    : $default-border-radius
     margin-left                 : -10px
-    //margin-right                : -10px
+  .center-tab-box-container
+    +column(16)
+    margin-left                 : -10px
+  .center-tab-box-top
+    h1
+      +tab-box-h
+    h2
+      +tab-box-h
+    +column(16, last)
+    +top-tab
+    margin                      : 0px
+  .center-tab-box-bottom
+    +column(16, last)
+    @extend .tab-box-bottom
+    margin                      : 0px
+    //padding                     : 0px
   .right
     margin-top                  : $default-border-radius  
     +column(4, true)
-
-.tab-container
-  padding                       : $default-padding
- 
-.tab-container-8
-  +column(8)
-
-.tab-container-8-last
-  +column(8, true)
-
-.color-2
-  color                         : $color-2
-
-.color-1
-  color                         : $color-1
-
-
-.tab-box-top
-  h1
-    color                       : $color-2
-    margin                      : 0px
-    padding                     : 0px
-  +top-tab
-  margin
-    top                         : 0px
-    bottom                      : 0px
-
-.tab-box-bottom
-  +border-bottom-radius(15px)
-  border                        : solid $default-border-thickness $color-2
-  margin                        : $default-padding
-  margin                        :
-    top                         : 0px
-    bottom                      : 0px
-  padding                       : $default-padding
-  border-top                    : 0px
-  background                    : white
-  color                         : black
 
 body.static
   background:
@@ -125,27 +178,24 @@ body.static
   .list-item
     +border-radius()
     padding                     : $default-padding
-    font-weight                   : bold
-    color                         : $color-2
-    list-style-position           : inside
-    padding-left                  : 5px
-    margin-bottom                 : 3px
-
+    font-weight                 : bold
+    color                       : $color-2
+    list-style-position         : inside
+    padding-left                : 5px
+    margin-bottom               : 3px
   .feature-list-1
     @extend .list-item
-    background                    : $color-3
-
+    background                  : $color-3
   .feature-list-2
     @extend .list-item
-    background                    : $color-4
-
+    background                  : $color-4
   .feature-list-3
     @extend .list-item
-    background                    : $color-5
-    margin-bottom                 : 0px
+    background                  : $color-5
+    margin-bottom               : 0px
 
 .header
-  margin-bottom                 : -70px
+  margin-bottom                 : -50px
   background                    :
     image                       : $bg-image-wave
     repeat                      : repeat-x
@@ -153,3 +203,14 @@ body.static
 
 .footer
   text-align                    : center
+
+.plain-text
+  +column(16, true)
+  h3
+    +plain-text-h
+  h2
+    +plain-text-h
+  h1
+    +plain-text-h
+  caption
+    text-align                  : center

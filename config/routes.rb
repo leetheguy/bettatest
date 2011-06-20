@@ -17,7 +17,6 @@ Bettatest::Application.routes.draw do
             :forum_categories, :forum_topics, :forum_posts,
             :surveys, :survey_options,
             :tester_stat_sheets, :tickets, :ticket_categories
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

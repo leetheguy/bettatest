@@ -14,15 +14,4 @@
     .content
       = yield
     = render "layouts/betta_footer"
-
-    / Start of StatCounter Code 
-    %script{:type => "text/javascript"}
-      var sc_project=6599943; 
-      var sc_invisible=1; 
-      var sc_security="06b2bd27"; 
-    %script{:type => "text/javascript", :src => "http://www.statcounter.com/counter/counter_xhtml.js"}
-    %noscript
-      %div{:class => "statcounter"}
-        %a{:title => "tumblr visitor stats", :class => "statcounter", :href => "http://statcounter.com/tumblr/"}
-          %img{:class => "statcounter", :src => "http://c.statcounter.com/6599943/0/06b2bd27/1/", :alt => "tumblr visitor stats"}/
-    / End of StatCounter Code 
+    = render "layouts/stat_counter"

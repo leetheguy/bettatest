@@ -1,22 +1,24 @@
-%h1 Listing beta_tests
-=paginate @beta_tests
-%table
-  -count = 1
-  %tr
-    -@beta_tests.each do |beta_test|
-      %td
+=render 'layouts/left_nav'
+.center-bubble
+  %h1.color-2 listing beta tests
+  .bubble
+    %h3= link_to 'create a beta test', new_beta_test_path
+  .bubble
+    =paginate @beta_tests
+  %br
+  -@beta_tests.each do |beta_test|
+    .tab-container-16
+      .tab-box-top
         = beta_test.name
-        %br
-        =link_to 'Show', beta_test
-        &nbsp;|&nbsp;
-        =link_to 'Edit', edit_beta_test_path(beta_test)
-        &nbsp;|&nbsp;
-        =link_to 'Destroy', beta_test, :confirm => 'Are you sure?', :method => :delete
-      -if count == 4
-        - count = 1
-        </tr>
-        <tr>
-      -else
-        -count += 1
-%br
-= link_to 'New Beta test', new_beta_test_path
+      .tab-box-bottom
+        %p=beta_test.description
+        %p=beta_test.status
+        -if beta_test.active
+          =link_to 'join', :controller => :tester_stat_sheets, :action => :new, :beta_test => beta_test
+          &nbsp;|&nbsp;
+        =link_to 'visit', beta_test
+  .bubble
+    %h3= link_to 'create a beta test', new_beta_test_path
+  .bubble
+    =paginate @beta_tests
+.right

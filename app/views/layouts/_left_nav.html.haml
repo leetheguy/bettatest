@@ -1,0 +1,23 @@
+.left-nav
+  -if current_user
+    .left-tab-2
+      =link_to 'log out', :log_out
+    .left-tab-3
+      =link_to 'dashboard', :dashboard
+    .left-tab-2
+      =link_to 'explore', :controller => :beta_tests
+    .left-tab-1
+      =link_to 'about', :about
+    .left-tab-1
+      =link_to 'contact', :contact
+  -else
+    .left-tab-2
+      =link_to 'log in', :log_in
+    .left-tab-3
+      =link_to 'sign up', :sign_up
+    .left-tab-2
+      =link_to 'explore', :controller => :beta_tests
+    .left-tab-1
+      =link_to 'about', :about
+    .left-tab-1
+      =link_to 'contact', :contact
