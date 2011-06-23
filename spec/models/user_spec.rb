@@ -131,6 +131,11 @@ describe User do
       model.should be_invalid
     end
 
+    it "makes user confirmed if email code matches" do
+      model.confirm(model.email_code)
+      model.should have_role :user
+    end
+
     it "should restrict access to password hash"
     it "should restrict access to password salt"
     it "converts days of suspension to time for inactive_until"

@@ -7,7 +7,7 @@ describe SessionsController do
     it "only allows anonymous visitors" do
       session[:id] = user.id
       get :new
-      response.should redirect_to root_url
+      response.should be_redirect
     end
   end
 

@@ -21,9 +21,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
-	def current_user
-	  @current_user ||= User.find(session[:id]) if session[:id]
-	end  
+  def current_user
+#    @current_user = nil
+#    session[:id] = nil
+    @current_user = User.find(session[:id]) if session[:id]
+  end  
 
   def current_beta_test
     @current_beta_test = BetaTest.find(session[:beta_test]) if session[:beta_test]

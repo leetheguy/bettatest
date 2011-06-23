@@ -8,7 +8,7 @@ describe "beta_tests/index.html.erb" do
     ])
   end
 
-  it "renders a list of beta_tests" do
-    render
-  end
+#  it "renders a list of beta_tests" do
+#    render
+#  end
 end

@@ -1,7 +1,13 @@
-= "#{@user.name},"
-
+="#{@user.name},"
+%br
+%br
 Thank you for signing up at bettatest.com!
-= "All that's left is to confirm your email address by #{link_to "clicking here", :controller => :user, :email_code => @user.email_code}."
-
+%br
+All that's left is to confirm your email address by following this link:
+%br
+=confirm_user_url(@user, :email_code => @user.email_code)
+%br
+%br
 Sincerely,
-Gil Fish, the happy email robot
+%br
+Gil Fish - the happy email robot

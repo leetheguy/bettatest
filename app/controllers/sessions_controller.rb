@@ -1,10 +1,4 @@
 class SessionsController < ApplicationController
-  rescue_from Acl9::AccessDenied, :with => :session_redirect
-
-  def session_redirect
-    redirect_to root_path
-  end
-
   access_control do
     allow :admin,     :to => [:index]
     allow anonymous,  :to => [:new, :create]
@@ -26,7 +20,8 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-	  reset_session
+    session[:id] = nil
+    current_user = nil
 	  redirect_to root_url, :notice => "Logged out!"
 	end
 end

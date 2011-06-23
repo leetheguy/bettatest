@@ -78,6 +78,12 @@ class User < ActiveRecord::Base
     self.has_role! :unconfirmed
   end
 
+  def confirm(code)
+    if code == email_code
+      make_user_confirmed
+    end
+  end
+
   def make_user_confirmed
     self.has_no_roles!
     self.has_role! :user

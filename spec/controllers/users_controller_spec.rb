@@ -7,6 +7,17 @@ describe UsersController do
     @mock_user ||= mock_model(User, stubs).as_null_object
   end
 
+  describe "GET confirm_email" do
+    it "makes an approved user a confirmed user" do
+      unconfirmed
+      get :confirm, :id => unconfirmed.id, :email_code => unconfirmed.email_code
+      user = User.find unconfirmed.id
+      response.should redirect_to users_path(user)
+      user.should have_role :user
+      user.should_not have_role :unconfirmed
+    end
+  end
+
   describe "GET index" do
     specify { can_has_access?(developer) { get :index } }
 

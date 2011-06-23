@@ -5,12 +5,11 @@
     %h3 Everybody values their privacy and bettatest.com respects that. Bettatest.com will never give away your information without your consent. However, your email will be shared with every developer you agree to test for.
   = form_for @user do |f|
     - if @user.errors.any?
-      .bubble
-        .span-22.error_messages.last
-          %h2.dark-blue Form is invalid
-          %ul
-          - for message in @user.errors.full_messages
-            %li= message
+      .bubble.error_messages
+        %h2.dark-blue form is invalid
+        %ul
+        - for message in @user.errors.full_messages
+          %li= message
       %br
     .bubble
       %p= f.label :name, 'Screen name that others will see.'

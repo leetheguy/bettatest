@@ -9,4 +9,4 @@ ActionMailer::Base.smtp_settings = {
 }
 
 ActionMailer::Base.default_url_options[:host] = "bettatest.com"
-#Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
+Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?

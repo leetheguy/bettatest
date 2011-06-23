@@ -5,11 +5,19 @@ class UsersController < ApplicationController
   access_control do
     allow :developer, :to => [:index]
     allow all, :to => [:show]
+    allow all, :to => [:confirm]
     allow anonymous, :to => [:new, :create]
     allow logged_in, :to => [:edit, :update], :if => :current_user == :edited_user
     deny :naughty, :to => [:edit, :update]
     deny :unconfirmed, :to => [:edit, :update]
     allow :admin
+  end
+
+  def confirm
+    @user = User.find params[:id]
+    code = params[:email_code]
+    @user.confirm(code)
+    redirect_to users_path(@user)
   end
 
   # GET /users
