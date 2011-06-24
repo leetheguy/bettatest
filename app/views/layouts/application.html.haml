@@ -12,6 +12,8 @@
   %body.blueprint.static
     = render "layouts/betta_header"
     .content
+      =render '/layouts/left_nav'
       = yield
+      =render '/layouts/right_default'
     = render "layouts/betta_footer"
     = render "layouts/stat_counter"

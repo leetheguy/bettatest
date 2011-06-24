@@ -1,10 +1,8 @@
-=render 'layouts/left_nav'
 .center-bubble
   %h1.color-2 listing beta tests
   .bubble
     %h3= link_to 'create a beta test', new_beta_test_path
-  .bubble
-    =paginate @beta_tests
+  =paginate @beta_tests
   %br
   -@beta_tests.each do |beta_test|
     .tab-container-16
@@ -22,4 +20,3 @@
     %h3= link_to 'create a beta test', new_beta_test_path
   .bubble
     =paginate @beta_tests
-.right
