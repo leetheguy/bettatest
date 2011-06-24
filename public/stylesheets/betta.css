@@ -1281,26 +1281,41 @@ textarea {
 }
 
 /* line 165, ../../app/stylesheets/betta.sass */
-.bg-2 {
-  background: #0d4553;
+.color-5 {
+  color: #ff6000;
 }
 
 /* line 171, ../../app/stylesheets/betta.sass */
-.bg-1 {
-  background: #a0e0f0;
+.color-4 {
+  color: #ffc000;
 }
 
 /* line 177, ../../app/stylesheets/betta.sass */
+.color-3 {
+  color: #d0ff00;
+}
+
+/* line 183, ../../app/stylesheets/betta.sass */
 .color-2 {
   color: #0d4553;
 }
 
-/* line 183, ../../app/stylesheets/betta.sass */
+/* line 189, ../../app/stylesheets/betta.sass */
 .color-1 {
   color: #a0e0f0;
 }
 
-/* line 189, ../../app/stylesheets/betta.sass */
+/* line 195, ../../app/stylesheets/betta.sass */
+.bg-2 {
+  background: #0d4553;
+}
+
+/* line 201, ../../app/stylesheets/betta.sass */
+.bg-1 {
+  background: #a0e0f0;
+}
+
+/* line 207, ../../app/stylesheets/betta.sass */
 .tab-box-top {
   color: #0d4553;
   border: solid #0d4553 3px;
@@ -1328,25 +1343,25 @@ textarea {
   margin-left: 5px;
   margin-right: 5px;
 }
-/* line 191, ../../app/stylesheets/betta.sass */
+/* line 209, ../../app/stylesheets/betta.sass */
 .tab-box-top h1 {
   color: #0d4553;
   margin: 0px;
   padding: 0px;
 }
-/* line 195, ../../app/stylesheets/betta.sass */
+/* line 213, ../../app/stylesheets/betta.sass */
 .tab-box-top h2 {
   color: #0d4553;
   margin: 0px;
   padding: 0px;
 }
-/* line 201, ../../app/stylesheets/betta.sass */
+/* line 219, ../../app/stylesheets/betta.sass */
 .tab-box-top margin {
   top: 0px;
   bottom: 0px;
 }
 
-/* line 209, ../../app/stylesheets/betta.sass */
+/* line 227, ../../app/stylesheets/betta.sass */
 .tab-box-bottom, div.content .center-tab-box-bottom {
   -moz-border-radius-bottomleft: 15px;
   -webkit-border-bottom-left-radius: 15px;
@@ -1370,7 +1385,7 @@ textarea {
   color: black;
 }
 
-/* line 233, ../../app/stylesheets/betta.sass */
+/* line 251, ../../app/stylesheets/betta.sass */
 div.tab_container-16 {
   display: inline;
   float: left;
@@ -1383,7 +1398,7 @@ div.tab_container-16 {
   overflow-x: hidden;
 }
 
-/* line 241, ../../app/stylesheets/betta.sass */
+/* line 259, ../../app/stylesheets/betta.sass */
 div.content {
   width: 950px;
   margin: 0 auto;
@@ -1391,7 +1406,7 @@ div.content {
   *zoom: 1;
   margin-top: 0px;
 }
-/* line 247, ../../app/stylesheets/betta.sass */
+/* line 265, ../../app/stylesheets/betta.sass */
 div.content .left, div.content .left-nav {
   margin-top: 50px;
   display: inline;
@@ -1403,7 +1418,7 @@ div.content .left, div.content .left-nav {
 * html div.content .left, * html div.content .left-nav {
   overflow-x: hidden;
 }
-/* line 257, ../../app/stylesheets/betta.sass */
+/* line 275, ../../app/stylesheets/betta.sass */
 div.content .left-nav .left-tab, div.content .left-nav .left-tab-1, div.content .left-nav .left-tab-2, div.content .left-nav .left-tab-3 {
   color: #0d4553;
   border: solid #0d4553 3px;
@@ -1430,19 +1445,19 @@ div.content .left-nav .left-tab, div.content .left-nav .left-tab-1, div.content 
   border-right: 0px;
   margin: 0px;
 }
-/* line 263, ../../app/stylesheets/betta.sass */
+/* line 281, ../../app/stylesheets/betta.sass */
 div.content .left-nav .left-tab-1 {
   background: #d0ff00;
 }
-/* line 269, ../../app/stylesheets/betta.sass */
+/* line 287, ../../app/stylesheets/betta.sass */
 div.content .left-nav .left-tab-2 {
   background: #ffc000;
 }
-/* line 275, ../../app/stylesheets/betta.sass */
+/* line 293, ../../app/stylesheets/betta.sass */
 div.content .left-nav .left-tab-3 {
   background: #ff6000;
 }
-/* line 281, ../../app/stylesheets/betta.sass */
+/* line 299, ../../app/stylesheets/betta.sass */
 div.content .center-bubble {
   display: inline;
   float: left;
@@ -1465,7 +1480,7 @@ div.content .center-bubble {
 * html div.content .center-bubble {
   overflow-x: hidden;
 }
-/* line 295, ../../app/stylesheets/betta.sass */
+/* line 313, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top {
   display: inline;
   float: left;
@@ -1499,13 +1514,13 @@ div.content .center-tab-box-top {
   margin: 0px;
   margin-left: -10px;
 }
-/* line 297, ../../app/stylesheets/betta.sass */
+/* line 315, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top h1 {
   color: #0d4553;
   margin: 0px;
   padding: 0px;
 }
-/* line 301, ../../app/stylesheets/betta.sass */
+/* line 319, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top h2 {
   color: #0d4553;
   margin: 0px;
@@ -1515,7 +1530,7 @@ div.content .center-tab-box-top h2 {
 * html div.content .center-tab-box-top {
   overflow-x: hidden;
 }
-/* line 313, ../../app/stylesheets/betta.sass */
+/* line 331, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-bottom {
   display: inline;
   float: left;
@@ -1528,7 +1543,7 @@ div.content .center-tab-box-bottom {
 * html div.content .center-tab-box-bottom {
   overflow-x: hidden;
 }
-/* line 325, ../../app/stylesheets/betta.sass */
+/* line 343, ../../app/stylesheets/betta.sass */
 div.content .right {
   margin-top: 50px;
   display: inline;
@@ -1541,7 +1556,7 @@ div.content .right {
   overflow-x: hidden;
 }
 
-/* line 333, ../../app/stylesheets/betta.sass */
+/* line 351, ../../app/stylesheets/betta.sass */
 body.static {
   background-image: url(../images/water.png);
   background-repeat: repeat;
@@ -1549,12 +1564,12 @@ body.static {
   background-color: #a0e0f0;
 }
 
-/* line 347, ../../app/stylesheets/betta.sass */
+/* line 365, ../../app/stylesheets/betta.sass */
 .feature-list {
   padding: 5px;
   margin: 0px;
 }
-/* line 353, ../../app/stylesheets/betta.sass */
+/* line 371, ../../app/stylesheets/betta.sass */
 .feature-list .list-item, .feature-list .feature-list-1, .feature-list .feature-list-2, .feature-list .feature-list-3 {
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -1569,21 +1584,21 @@ body.static {
   padding-left: 5px;
   margin-bottom: 3px;
 }
-/* line 369, ../../app/stylesheets/betta.sass */
+/* line 387, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-1 {
   background: #d0ff00;
 }
-/* line 375, ../../app/stylesheets/betta.sass */
+/* line 393, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-2 {
   background: #ffc000;
 }
-/* line 381, ../../app/stylesheets/betta.sass */
+/* line 399, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-3 {
   background: #ff6000;
   margin-bottom: 0px;
 }
 
-/* line 391, ../../app/stylesheets/betta.sass */
+/* line 409, ../../app/stylesheets/betta.sass */
 .header {
   margin-bottom: -50px;
   background-image: url(../images/wave-matched.png);
@@ -1591,12 +1606,12 @@ body.static {
   background-position: center top;
 }
 
-/* line 405, ../../app/stylesheets/betta.sass */
+/* line 423, ../../app/stylesheets/betta.sass */
 .footer {
   text-align: center;
 }
 
-/* line 411, ../../app/stylesheets/betta.sass */
+/* line 429, ../../app/stylesheets/betta.sass */
 .plain-text {
   display: inline;
   float: left;
@@ -1607,27 +1622,27 @@ body.static {
 * html .plain-text {
   overflow-x: hidden;
 }
-/* line 415, ../../app/stylesheets/betta.sass */
+/* line 433, ../../app/stylesheets/betta.sass */
 .plain-text h3, .plain-text div.content .left-nav .left-tab, div.content .left-nav .plain-text .left-tab, .plain-text div.content .left-nav .left-tab-1, div.content .left-nav .plain-text .left-tab-1, .plain-text div.content .left-nav .left-tab-2, div.content .left-nav .plain-text .left-tab-2, .plain-text div.content .left-nav .left-tab-3, div.content .left-nav .plain-text .left-tab-3 {
   color: #0d4553;
   text-align: center;
 }
-/* line 419, ../../app/stylesheets/betta.sass */
+/* line 437, ../../app/stylesheets/betta.sass */
 .plain-text h2 {
   color: #0d4553;
   text-align: center;
 }
-/* line 423, ../../app/stylesheets/betta.sass */
+/* line 441, ../../app/stylesheets/betta.sass */
 .plain-text h1 {
   color: #0d4553;
   text-align: center;
 }
-/* line 427, ../../app/stylesheets/betta.sass */
+/* line 445, ../../app/stylesheets/betta.sass */
 .plain-text caption {
   text-align: center;
 }
 
-/* line 433, ../../app/stylesheets/betta.sass */
+/* line 451, ../../app/stylesheets/betta.sass */
 .buffer {
   margin-bottom: 200px;
 }
