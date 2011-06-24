@@ -145,9 +145,6 @@ div.content
       top                       : $default-padding
       bottom                    : $default-border-radius
     margin-left                 : -10px
-  .center-tab-box-container
-    +column(16)
-    margin-left                 : -10px
   .center-tab-box-top
     h1
       +tab-box-h
@@ -156,10 +153,12 @@ div.content
     +column(16, last)
     +top-tab
     margin                      : 0px
+    margin-left                 : -10px
   .center-tab-box-bottom
     +column(16, last)
     @extend .tab-box-bottom
     margin                      : 0px
+    margin-left                 : -10px
     //padding                     : 0px
   .right
     margin-top                  : $default-border-radius  

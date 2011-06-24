@@ -1466,18 +1466,6 @@ div.content .center-bubble {
   overflow-x: hidden;
 }
 /* line 295, ../../app/stylesheets/betta.sass */
-div.content .center-tab-box-container {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 630px;
-  margin-left: -10px;
-}
-/* line 147, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html div.content .center-tab-box-container {
-  overflow-x: hidden;
-}
-/* line 301, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top {
   display: inline;
   float: left;
@@ -1509,14 +1497,15 @@ div.content .center-tab-box-top {
   margin-left: 5px;
   margin-right: 5px;
   margin: 0px;
+  margin-left: -10px;
 }
-/* line 303, ../../app/stylesheets/betta.sass */
+/* line 297, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top h1 {
   color: #0d4553;
   margin: 0px;
   padding: 0px;
 }
-/* line 307, ../../app/stylesheets/betta.sass */
+/* line 301, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-top h2 {
   color: #0d4553;
   margin: 0px;
@@ -1526,19 +1515,20 @@ div.content .center-tab-box-top h2 {
 * html div.content .center-tab-box-top {
   overflow-x: hidden;
 }
-/* line 317, ../../app/stylesheets/betta.sass */
+/* line 313, ../../app/stylesheets/betta.sass */
 div.content .center-tab-box-bottom {
   display: inline;
   float: left;
   margin-right: 0;
   width: 630px;
   margin: 0px;
+  margin-left: -10px;
 }
 /* line 147, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html div.content .center-tab-box-bottom {
   overflow-x: hidden;
 }
-/* line 327, ../../app/stylesheets/betta.sass */
+/* line 325, ../../app/stylesheets/betta.sass */
 div.content .right {
   margin-top: 50px;
   display: inline;
@@ -1551,7 +1541,7 @@ div.content .right {
   overflow-x: hidden;
 }
 
-/* line 335, ../../app/stylesheets/betta.sass */
+/* line 333, ../../app/stylesheets/betta.sass */
 body.static {
   background-image: url(../images/water.png);
   background-repeat: repeat;
@@ -1559,12 +1549,12 @@ body.static {
   background-color: #a0e0f0;
 }
 
-/* line 349, ../../app/stylesheets/betta.sass */
+/* line 347, ../../app/stylesheets/betta.sass */
 .feature-list {
   padding: 5px;
   margin: 0px;
 }
-/* line 355, ../../app/stylesheets/betta.sass */
+/* line 353, ../../app/stylesheets/betta.sass */
 .feature-list .list-item, .feature-list .feature-list-1, .feature-list .feature-list-2, .feature-list .feature-list-3 {
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -1579,21 +1569,21 @@ body.static {
   padding-left: 5px;
   margin-bottom: 3px;
 }
-/* line 371, ../../app/stylesheets/betta.sass */
+/* line 369, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-1 {
   background: #d0ff00;
 }
-/* line 377, ../../app/stylesheets/betta.sass */
+/* line 375, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-2 {
   background: #ffc000;
 }
-/* line 383, ../../app/stylesheets/betta.sass */
+/* line 381, ../../app/stylesheets/betta.sass */
 .feature-list .feature-list-3 {
   background: #ff6000;
   margin-bottom: 0px;
 }
 
-/* line 393, ../../app/stylesheets/betta.sass */
+/* line 391, ../../app/stylesheets/betta.sass */
 .header {
   margin-bottom: -50px;
   background-image: url(../images/wave-matched.png);
@@ -1601,12 +1591,12 @@ body.static {
   background-position: center top;
 }
 
-/* line 407, ../../app/stylesheets/betta.sass */
+/* line 405, ../../app/stylesheets/betta.sass */
 .footer {
   text-align: center;
 }
 
-/* line 413, ../../app/stylesheets/betta.sass */
+/* line 411, ../../app/stylesheets/betta.sass */
 .plain-text {
   display: inline;
   float: left;
@@ -1617,27 +1607,27 @@ body.static {
 * html .plain-text {
   overflow-x: hidden;
 }
-/* line 417, ../../app/stylesheets/betta.sass */
+/* line 415, ../../app/stylesheets/betta.sass */
 .plain-text h3, .plain-text div.content .left-nav .left-tab, div.content .left-nav .plain-text .left-tab, .plain-text div.content .left-nav .left-tab-1, div.content .left-nav .plain-text .left-tab-1, .plain-text div.content .left-nav .left-tab-2, div.content .left-nav .plain-text .left-tab-2, .plain-text div.content .left-nav .left-tab-3, div.content .left-nav .plain-text .left-tab-3 {
   color: #0d4553;
   text-align: center;
 }
-/* line 421, ../../app/stylesheets/betta.sass */
+/* line 419, ../../app/stylesheets/betta.sass */
 .plain-text h2 {
   color: #0d4553;
   text-align: center;
 }
-/* line 425, ../../app/stylesheets/betta.sass */
+/* line 423, ../../app/stylesheets/betta.sass */
 .plain-text h1 {
   color: #0d4553;
   text-align: center;
 }
-/* line 429, ../../app/stylesheets/betta.sass */
+/* line 427, ../../app/stylesheets/betta.sass */
 .plain-text caption {
   text-align: center;
 }
 
-/* line 435, ../../app/stylesheets/betta.sass */
+/* line 433, ../../app/stylesheets/betta.sass */
 .buffer {
   margin-bottom: 200px;
 }
