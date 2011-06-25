@@ -141,6 +141,27 @@ describe BetaTestsController do
         assigns(:beta_test).should be(mock_beta_test)
       end
 
+      it "toggles open state if it recieves the open param" do
+        bt = Factory.create :beta_test, :open => false
+        put :update, :id => bt.id, :beta_test => bt.id, :open => true
+        bt = BetaTest.find bt.id
+        bt.open.should be_true
+        put :update, :id => bt.id, :beta_test => bt.id, :open => false
+        bt = BetaTest.find bt.id
+        bt.open.should be_false
+        response.should render_template('edit')
+      end
+
+      it "toggles active state if it recieves the active param" do
+        bt = Factory.create :beta_test, :active => false
+        put :update, :id => bt.id, :beta_test => bt.id, :active => true
+        bt = BetaTest.find bt.id
+        bt.active.should be_true
+        put :update, :id => bt.id, :beta_test => bt.id, :active => false
+        bt = BetaTest.find bt.id
+        bt.active.should be_false
+      end
+
       it "redirects to the beta_test"
 #        BetaTest.stub(:find) { mock_beta_test(:update_attributes => true) }
 #        put :update, :id => "42"

@@ -11,9 +11,14 @@
     = stylesheet_link_tag "betta"
   %body.blueprint.static
     = render "layouts/betta_header"
+    -if current_beta_test
+      = render "layouts/top_nav"
     .content
-      =render '/layouts/left_nav'
+      =render 'layouts/left_nav'
       = yield
-      =render '/layouts/right_default'
+      =render 'layouts/right_default'
     = render "layouts/betta_footer"
     = render "layouts/stat_counter"
+    =# debug current_user
+    =# debug current_beta_test
+    =# session.inspect

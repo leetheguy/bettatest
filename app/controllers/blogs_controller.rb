@@ -36,14 +36,10 @@ class BlogsController < ApplicationController
     @blog = Blog.new(params[:blog])
     @blog.beta_test = current_beta_test
 
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to(@blog, :notice => 'Blog was successfully created.') }
-        format.xml  { render :xml => @blog, :status => :created, :location => @blog }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @blog.errors, :status => :unprocessable_entity }
-      end
+    if @blog.save
+      redirect_to(@blog, :notice => 'Blog was successfully created.')
+    else
+      render :action => "new"
     end
   end
 

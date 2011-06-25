@@ -1,3 +1,20 @@
-%h1 New beta_test
-= render 'form'
-= link_to 'Back', beta_tests_path
+.center-bubble
+  %h1 new betta test
+  =form_for(@beta_test) do |f|
+    = render 'layouts/errors', :object => @beta_test
+    .bubble
+      %p= f.label :name, 'Name of your project.'
+      = f.text_field :name
+    %br
+    .bubble
+      %p= f.label :link, 'Link to your project.'
+      = f.text_field :link
+    %br
+    .bubble
+      %p= f.label :link, 'Password to access your project.'
+      = f.text_field :password
+    %br
+    .bubble
+      = f.submit "create betta test"
+    .bubble
+      = link_to 'back', beta_tests_path

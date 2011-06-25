@@ -1,18 +1,22 @@
-=render 'layouts/left_nav'
 .center-bubble
-
   %h1.color-2= @beta_test.name
+  -if notice
+    .bubble
+      %p.notice= @notice
+  .tab-box-top
+    %h2.color-2= "status: #{ @beta_test.status }"
+  .tab-box-bottom
+    -if @beta_test.description
+      =@beta_test.description
+    -else
+      No description for this test has been provided.
+  - if current_user && (current_user.has_role?(:developer, @beta_test) || current_user.has_role?(:admin))
+    .bubble
+      %h3= link_to 'edit', edit_beta_test_path(@beta_test)
+  - if current_user && (!current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test))
+    .bubble
+      %h3= link_to 'join', new_tester_stat_sheet_path(:id => 4, :beta_test => @beta_test.id)
+  %br
+  %br
   .bubble
-    %p.notice= @notice
-  .bubble
-    
-  .bubble
-    %h3= "status: #{ @beta_test.status }"
-- if current_user.has_role?(:developer, @beta_test) || current_user.has_role?(:admin)
-  = link_to 'edit', edit_beta_test_path(@beta_test)
-  |
-- if !current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test)
-  = link_to 'join this test', :controller => :tester_stat_sheets, :beta_test => @beta_test.id
-  |
-= link_to 'back', beta_tests_path
-.right
+    %h3= link_to 'back to list', beta_tests_path

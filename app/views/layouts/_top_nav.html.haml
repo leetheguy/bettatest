@@ -1,0 +1,37 @@
+.top-container
+  .top-container-left
+    &nbsp;
+  .top-container-center
+    .top-nav-tabs
+      .top-nav-tab
+        -if current_controller == 'beta_tests'
+          about
+        -else
+          =link_to 'about', current_beta_test
+      .top-nav-tab
+        -if current_controller == 'blogs'
+          blog
+        -else
+          =link_to 'blog', blogs_path
+      .top-nav-tab
+        -if current_controller == 'forums'
+          forums
+        -else
+          =link_to 'forums', forum_categories_path
+      .top-nav-tab
+        -if current_controller == 'surveys'
+          surveys
+        -else
+          =link_to 'surveys', surveys_path
+      .top-nav-tab
+        -if current_controller == 'leaders'
+          leaders
+        -else
+          =link_to 'leaders', leaders_path
+      .top-nav-tab
+        -if current_controller == 'tickets'
+          tickets
+        -else
+          =link_to 'tickets', tickets_path
+  .top-container-right
+    &nbsp;

@@ -4,9 +4,19 @@ class ApplicationController < ActionController::Base
 
   rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
-  helper_method :current_user
+  helper_method :current_user, :current_beta_test, :current_forum_topic, :current_forum_category, :current_survey, :current_ticket_category, :current_action, :current_controller
+
+  before_filter :clear_beta_test
 
   protected
+  def clear_beta_test
+    session[:beta_test] = nil
+    session[:forum_category] = nil
+    session[:forum_topic] = nil
+    session[:survey] = nil
+    session[:ticket_category] = nil
+  end
+
   def default_redirect
     if current_user
       if current_user.has_role? :unconfirmed
@@ -17,33 +27,44 @@ class ApplicationController < ActionController::Base
         redirect_to dashboard_path
       end
     else
-      redirect_to root_path
+      redirect_to sign_up_path
     end
   end
   
   def current_user
-#    @current_user = nil
-#    session[:id] = nil
     @current_user = User.find(session[:id]) if session[:id]
   end  
 
+  def current_controller
+    controller_name
+  end
+
+  def current_action
+    action_name
+  end
+
   def current_beta_test
+    @current_beta_test = nil
     @current_beta_test = BetaTest.find(session[:beta_test]) if session[:beta_test]
   end
 
   def current_forum_topic
+    @current_forum_topic = nil
     @current_forum_topic = ForumTopic.find(session[:forum_topic]) if session[:forum_topic]
   end
 
   def current_forum_category
+    @current_forum_category = nil
     @current_forum_category = ForumCategory.find(session[:forum_category]) if session[:forum_category]
   end
 
   def current_survey
+    @current_survey = nil
     @current_survey = Survey.find(session[:survey]) if session[:survey]
   end
 
   def current_ticket_category
+    @current_ticket_category = nil
     @current_ticket_category = TicketCategory.find(session[:ticket_category]) if session[:ticket_category]
   end
 

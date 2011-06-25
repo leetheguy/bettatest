@@ -4,18 +4,25 @@
     %h3= link_to 'create a beta test', new_beta_test_path
   =paginate @beta_tests
   %br
-  -@beta_tests.each do |beta_test|
-    .tab-container-16
-      .tab-box-top
-        = beta_test.name
-      .tab-box-bottom
-        %p=beta_test.description
-        %p=beta_test.status
-        -if beta_test.active
-          =link_to 'join', :controller => :tester_stat_sheets, :action => :new, :beta_test => beta_test
+  -if @beta_tests
+    -@beta_tests.each do |beta_test|
+      .tab-container-16
+        .tab-box-top
+          = beta_test.name
+        .tab-box-bottom
+          -if beta_test.description
+            =beta_test.description
+          -else
+            No description for this test has been provided.
+          %hr
+          %p=beta_test.status
+          -if beta_test.active
+            =link_to 'join', new_tester_stat_sheet_path(:beta_test => beta_test)
+            &nbsp;|&nbsp;
+          =link_to 'check the blog', blogs_path(:beta_test => beta_test)
           &nbsp;|&nbsp;
-        =link_to 'visit', beta_test
-    %br
+          =link_to 'visit', beta_test
+      %br
   .bubble
     %h3= link_to 'create a beta test', new_beta_test_path
   =paginate @beta_tests

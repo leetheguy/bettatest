@@ -11,6 +11,7 @@ Bettatest::Application.routes.draw do
 	match 'sign_up'           => 'users#new', :as => 'sign_up'
 	match 'preferences'       => 'users#edit', :as => 'preferences'
   match 'dashboard'			  	=> 'users#show'
+  match 'leaders'           => 'beta_tests#leaders'
 #  match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
   resources :beta_tests, :sessions,
@@ -21,6 +22,10 @@ Bettatest::Application.routes.draw do
 
   resources :users do
     get 'confirm', :on => :member
+  end
+
+  resources :beta_tests do
+    get 'leaders', :on => :member
   end
 
   # The priority is based upon order of creation:

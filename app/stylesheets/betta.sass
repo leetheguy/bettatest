@@ -16,6 +16,11 @@ $default-border-radius          : 50px
 $default-border-thickness       : 3px
 $default-padding                : 5px
 $blueprint-grid-margin          : 10px
+$top-nav-tabs                   : 6
+
+
+=test-border
+  border                        : solid 1px black
 
 =bubble
   color                         : $color-2
@@ -127,13 +132,49 @@ div.tab_container-16
   +column(16, true)
   margin-bottom                 : 5px
 
+.top-container
+  +container
+  .top-container-left
+    +column(4)
+  .top-container-center
+    +column(16)
+    z-index                       : 100
+    position                      : relative
+    .top-nav-tabs
+      padding                     : 0px
+      padding                     :
+        left                      : $default-border-radius
+        right                     : $default-border-radius - 10
+      .top-nav-tab
+        @extend .tab-box-top
+        margin                    : 0px
+        width                     : (540px / $top-nav-tabs) - 20
+        +inline-block
+        
+  .top-container-right
+    +column(4, last)
+//
+  @extend .tab-box-top
+  +column(16, true)
+  +push(4)
+  margin                      : 0px
+  padding                     : 0px
+  padding                     :
+    left                      : $default-border-radius
+    right                     : $default-border-radius
+
 div.content
   +container
-  margin-top                    : 0px
+  margin-top                      : 0px
   .left
-    margin-top                  : $default-border-radius  
+    z-index                       : 100
+    position                      : relative
+    margin-top                    : $default-border-radius  
     +column(4)
   .left-nav
+    z-index                       : 100
+    left                          : 10px
+    position                      : relative
     @extend .left
     .left-tab
       +left_tab
@@ -153,7 +194,6 @@ div.content
     padding                     :
       top                       : $default-padding
       bottom                    : $default-border-radius
-    margin-left                 : -10px
   .center-tab-box-top
     h1
       +tab-box-h
@@ -162,12 +202,10 @@ div.content
     +column(16, last)
     +top-tab
     margin                      : 0px
-    margin-left                 : -10px
   .center-tab-box-bottom
     +column(16, last)
     @extend .tab-box-bottom
     margin                      : 0px
-    margin-left                 : -10px
     //padding                     : 0px
   .right
     margin-top                  : $default-border-radius  
@@ -203,6 +241,8 @@ body.static
     margin-bottom               : 0px
 
 .header
+  z-index                       : 1
+  position                      : relative
   margin-bottom                 : -50px
   background                    :
     image                       : $bg-image-wave
@@ -224,4 +264,4 @@ body.static
     text-align                  : center
 
 .buffer
-  margin-bottom                 : 200px
+  padding                       : 50px

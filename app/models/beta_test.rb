@@ -36,4 +36,20 @@ class BetaTest < ActiveRecord::Base
     s += active ? "active (" : "inactive (not"
     s += " ready for testers)"
   end
+
+  def open_test
+    self.open = true
+  end
+
+  def close_test
+    self.open = false
+  end
+
+  def activate_test
+    self.active = true
+  end
+
+  def deactivate_test
+    self.active = false
+  end
 end 

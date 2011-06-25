@@ -1,4 +1,44 @@
-%h1 Editing beta_test
-= render 'form'
-= link_to 'Show', @beta_test |
-= link_to 'Back', beta_tests_path
+.center-bubble
+  %h1.color-2 edit betta test
+  =form_for(@beta_test) do |f|
+    -if @beta_test.open
+      .bubble
+        This betta test is<br/>open to the general public.
+        %br
+        =f.submit "make private", :public => false
+    -else
+      .bubble
+        This betta test is<br/>closed to the general public.
+        %br
+        =f.submit "make public", :public => true
+    -if @beta_test.active
+      .bubble
+        This betta test is<br/>active and open to testing.
+        %br
+        =f.submit "deactivate", :active => false
+    -else
+      .bubble
+        This betta test is<br/>inactive and closed to testing.
+        %br
+        =f.submit "activate", :active => true
+    = render 'layouts/errors', :object => @beta_test
+    .bubble
+      %p= f.label :name, 'Name of your project.'
+      = f.text_field :name
+    %br
+    .bubble
+      %p= f.label :description, 'Description of your project.'
+      = f.text_area :description
+    %br
+    .bubble
+      %p= f.label :link, "Link to your project. (Your project's homepage.)"
+      = f.text_field :link
+    %br
+    .bubble
+      %p= f.label :link, 'Password to access your project.'
+      = f.text_field :password
+    %br
+    .bubble
+      = f.submit "update betta test"
+    .bubble
+      = link_to 'back', beta_test_path(@beta_test)
