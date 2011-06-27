@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  skip_before_filter :clear_beta_test
   before_filter :current_beta_test, :only => [:edit, :update]
 
   access_control do
@@ -8,19 +9,16 @@ class BlogsController < ApplicationController
   end
 
   # GET /blogs
-  # GET /blogs.xml
   def index
-    @blogs = Blog.where(:beta_test => current_beta_test)
+    @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => false).order(:created_at).page(params[:page]).per(10)
   end
 
   # GET /blogs/1
-  # GET /blogs/1.xml
   def show
     @blog = Blog.find(params[:id])
   end
 
   # GET /blogs/new
-  # GET /blogs/new.xml
   def new
     @blog = Blog.new
   end
@@ -31,7 +29,6 @@ class BlogsController < ApplicationController
   end
 
   # POST /blogs
-  # POST /blogs.xml
   def create
     @blog = Blog.new(params[:blog])
     @blog.beta_test = current_beta_test
@@ -44,7 +41,6 @@ class BlogsController < ApplicationController
   end
 
   # PUT /blogs/1
-  # PUT /blogs/1.xml
   def update
     @blog = Blog.find(params[:id])
 
@@ -60,7 +56,6 @@ class BlogsController < ApplicationController
   end
 
   # DELETE /blogs/1
-  # DELETE /blogs/1.xml
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy

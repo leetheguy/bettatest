@@ -1,0 +1,25 @@
+.center-bubble
+  %h1.color-2 blogs
+  =paginate @blogs
+  - if @blogs.count > 0
+    - @blogs.each do |blog|
+      .tab-container-16
+        .tab-box-top
+          = blog.name
+          = "(posted on: #{blog.created_at})"
+        .tab-box-bottom
+          = blog.post[0...1000]
+          - if current_user && current_user.has_role?(:developer, current_beta_test)
+            .bubble
+              = link_to 'edit post', edit_blog_path(blog)
+            .bubble
+              = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
+  - else
+    .buffer
+      %br
+      %h3.color-2 No blogs have been published for this betta test.
+
+  - if current_user && current_user.has_role?(:developer, current_beta_test)
+    = link_to 'create a new post', new_blog_path
+  =paginate @blogs
+

@@ -10,6 +10,7 @@ gem 'acl9'
 gem 'mocha'
 gem 'heroku'
 gem 'kaminari'
+gem 'redcarpet'
 
 group :development do
   gem 'newrelic_rpm', '2.13.4'
