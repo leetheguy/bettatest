@@ -1716,3 +1716,12 @@ body.static {
 .buffer {
   padding: 50px;
 }
+
+/* line 537, ../../app/stylesheets/betta.sass */
+.center-tab-box-bubble-box {
+  text-align: center;
+}
+/* line 541, ../../app/stylesheets/betta.sass */
+.center-tab-box-bubble-box .bubble {
+  background-color: #a0e0f0;
+}

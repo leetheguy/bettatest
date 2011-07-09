@@ -104,6 +104,11 @@ describe BlogsController do
       login admin
     end
 
+    it "redirects cancel button to blogs index" do
+
+    end
+
+
     describe "with valid params" do
       it "updates the requested blog" do
         Blog.stub(:find).with("37") { mock_blog(:beta_test => current_beta_test) }

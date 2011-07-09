@@ -1,6 +1,8 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
+    = auto_discovery_link_tag :atom, "/feed"
+    = auto_discovery_link_tag :rss, "/feed.rss"
     = csrf_meta_tag
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
     %title Bettatest
@@ -22,3 +24,4 @@
     =# debug current_user
     =# debug current_beta_test
     =# session.inspect
+    =# Blog.all.inspect

@@ -5,13 +5,13 @@
     - @blogs.each do |blog|
       .tab-container-16
         .tab-box-top
-          = blog.name
+          %h2= link_to blog.name, blog_path(blog)
           = "(posted on: #{blog.created_at})"
         .tab-box-bottom
-          = blog.post[0...1000]
-          - if current_user && current_user.has_role?(:developer, current_beta_test)
+          = markdown(blog.post)[0...1000]
+          - if current_user && (current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin))
             .bubble
-              = link_to 'edit post', edit_blog_path(blog)
+              = link_to 'edit post', edit_path(blog)
             .bubble
               = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
   - else
@@ -19,7 +19,14 @@
       %br
       %h3.color-2 No blogs have been published for this betta test.
 
+  .bubble
+    = link_to "subscribe", feed_url(:atom, :beta_test => current_beta_test)
   - if current_user && current_user.has_role?(:developer, current_beta_test)
-    = link_to 'create a new post', new_blog_path
+    .bubble
+      = link_to 'create a new post', new_blog_path
+    .bubble
+      - if @published
+        = link_to 'show unpublished posts', unpublished_blogs_path
+      - else
+        = link_to 'show published posts', blogs_path
   =paginate @blogs
-

@@ -1,14 +1,14 @@
 .center-bubble
   %h1.color-2= @beta_test.name
-  -if notice
+  - if notice
     .bubble
       %p.notice= @notice
   .tab-box-top
     %h2.color-2= "status: #{ @beta_test.status }"
   .tab-box-bottom
-    -if @beta_test.description
-      =@beta_test.description
-    -else
+    - if @beta_test.description && @beta_test.description != ""
+      = @beta_test.description
+    - else
       No description for this test has been provided.
   - if current_user && (current_user.has_role?(:developer, @beta_test) || current_user.has_role?(:admin))
     .bubble
@@ -16,7 +16,5 @@
   - if current_user && (!current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test))
     .bubble
       %h3= link_to 'join', new_tester_stat_sheet_path(:id => 4, :beta_test => @beta_test.id)
-  %br
-  %br
   .bubble
     %h3= link_to 'back to list', beta_tests_path

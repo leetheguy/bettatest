@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     if current_user
-      @user = current_user
+      @user = User.find current_user
     elsif params[:id]
       @user = User.find params[:id]
     else

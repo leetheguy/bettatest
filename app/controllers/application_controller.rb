@@ -45,7 +45,9 @@ class ApplicationController < ActionController::Base
 
   def current_beta_test
     @current_beta_test = nil
+    session[:beta_test] ||= params[:beta_test] if params[:beta_test]
     @current_beta_test = BetaTest.find(session[:beta_test]) if session[:beta_test]
+    @current_beta_test
   end
 
   def current_forum_topic

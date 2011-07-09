@@ -7,6 +7,9 @@
       = f.text_field :name
     %br
     .bubble
+      %p= f.label :description, 'Description of your project.'
+      = f.text_area :description
+    .bubble
       %p= f.label :link, 'Link to your project.'
       = f.text_field :link
     %br
@@ -17,4 +20,4 @@
     .bubble
       = f.submit "create betta test"
     .bubble
-      = link_to 'back', beta_tests_path
+      = f.submit "cancel"

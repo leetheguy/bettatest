@@ -1,20 +1,42 @@
 class BlogsController < ApplicationController
   skip_before_filter :clear_beta_test
-  before_filter :current_beta_test, :only => [:edit, :update]
 
   access_control do
-    allow all, :to => [:index, :show]
-    allow :developer, :of => :current_beta_test, :to => [:new, :edit, :create, :update, :destroy]
+    allow all, :to => [:index, :show, :feed]
+    allow :developer, :of => :current_beta_test
     allow :admin
+    allow :all
+  end
+
+  def feed
+    @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => false).order(:updated_at)
+    @title = "the blog of the bettatest for #{current_beta_test.name}"
+    # this will be our Feed's update timestamp
+    @updated = @blogs.first.updated_at unless @blogs.empty?
+
+    respond_to do |format|
+      format.atom { render :layout => false }
+      format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+    end
+  end
+
+  def unpublished
+    @published = false
+    redirect_to beta_tests_path if !current_beta_test
+    @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => true).order(:created_at).page(params[:page]).per(10)
+    render :action => :index
   end
 
   # GET /blogs
   def index
+    @published = true
+    redirect_to beta_tests_path if !current_beta_test
     @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => false).order(:created_at).page(params[:page]).per(10)
   end
 
   # GET /blogs/1
   def show
+    redirect_to beta_tests_path if !current_beta_test
     @blog = Blog.find(params[:id])
   end
 
@@ -33,7 +55,16 @@ class BlogsController < ApplicationController
     @blog = Blog.new(params[:blog])
     @blog.beta_test = current_beta_test
 
-    if @blog.save
+    if params[:commit] == "save"
+      @blog.draft = true
+    elsif params[:commit] == "post"
+      @blog.draft = false
+      @blog.created_at = Time.now
+    end
+
+    if params[:commit] == "cancel"
+      redirect_to blogs_path
+    elsif @blog.save
       redirect_to(@blog, :notice => 'Blog was successfully created.')
     else
       render :action => "new"
@@ -43,15 +74,21 @@ class BlogsController < ApplicationController
   # PUT /blogs/1
   def update
     @blog = Blog.find(params[:id])
+    if params[:commit] == "save"
+      @blog.draft = true
+    elsif params[:commit] == "post"
+      @blog.draft = false
+      @blog.created_at = Time.now
+    elsif params[:commit] == "unpost"
+      @blog.draft = true
+    end
 
-    respond_to do |format|
-      if @blog.update_attributes(params[:blog])
-        format.html { redirect_to(@blog, :notice => 'Blog was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @blog.errors, :status => :unprocessable_entity }
-      end
+    if params[:commit] == "cancel"
+      redirect_to blogs_path
+    elsif @blog.update_attributes(params[:blog])
+      redirect_to(@blog, :notice => 'Blog was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
@@ -60,9 +97,6 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @blog.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(blogs_url) }
-      format.xml  { head :ok }
-    end
+    format.html { redirect_to(blogs_url) }
   end
 end

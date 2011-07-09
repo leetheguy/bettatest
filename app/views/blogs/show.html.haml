@@ -1,5 +1,16 @@
-%p #notice= notice
-
-
-= link_to 'Edit', edit_blog_path(@blog) |
-= link_to 'Back', blogs_path
+.center-tab-box-top
+  %h1= @blog.name
+  %br
+  %h3.color-2
+    posted on
+    = @blog.created_at
+  //%p.notice= notice
+.center-tab-box-bottom
+  .plain-text
+    = markdown(@blog.post)
+  .center-tab-box-bubble-box
+    .bubble
+      = link_to 'back to blogs', blogs_path
+    - if current_user && current_user.has_role?(:developer, current_beta_test)
+      .bubble
+        = link_to 'edit', edit_blog_path(@blog)

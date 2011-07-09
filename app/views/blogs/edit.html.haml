@@ -1,6 +1,24 @@
 .center-bubble
-  %h1 editing blog
-  = render 'form'
-
-  = link_to 'show', @blog |
-  = link_to 'back', blogs_path
+  %h1.color-2 edit post
+  %h3.color-2 
+    Markdown is allowed. Learn more about it 
+    %a{:href => 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'} here.
+  = form_for(@blog) do |f|
+    = render 'layouts/errors', :object => @blog
+    .bubble
+      %p= f.label :name, 'Title of this post.'
+      = f.text_field :name
+    %br
+    .bubble
+      %p= f.label :post, 'Post text.'
+      = f.text_area :post
+    %br
+    .bubble
+      = f.submit "save"
+    .bubble
+      - if @blog.draft
+        = f.submit "post"
+      - else
+        = f.submit "unpost"
+    .bubble
+      = f.submit "cancel"

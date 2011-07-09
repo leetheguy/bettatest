@@ -1,4 +1,3 @@
-=render 'layouts/left_nav'
 .center-bubble
   %h1.color-2= @user.name + "'s profile"
   %h3.color-2
@@ -7,16 +6,17 @@
   - if @user.has_role? :developer
     .tab-container-16
       .tab-box-top
-        %h3.color-2
-          my betta tests
+        %h3.color-2 my betta tests
       .tab-box-bottom
-        - @user.beta_tests.each do |test|
-          = link_to test.name, controller => :test, :action => :show, :id => test.id
-          = "#{test[:members].count} members"
+        - @user.my_beta_tests.each do |test|
+          = link_to test.name, test
+          =# "#{test[:members].count} members"
   - else
     %hr
-    %h3.color-2 no betta tests started
-    = link_to 'start one', controller => :betta_test, :action => :new
+    .bubble
+      %h3.color-2 no betta tests started
+    .bubble
+      = link_to 'start one', controller => :betta_test, :action => :new
     %br
     %br
   %hr
@@ -31,11 +31,11 @@
             status:
             = membership[:status]
   - else
-    %h3.color-2 not subscribed to any betta tests
-    = link_to 'find one', controller => :betta_test, :action => :new
-    %br
-    %br
+    .bubble
+      %h3.color-2 not subscribed to any betta tests
+    .bubble
+      = link_to 'find one', controller => :betta_test, :action => :new
   %hr
   - if @user == @current_user || @current_user.has_role?(:admin)
-    = link_to 'preferences', edit_user_path(@user)
-.right
+    .bubble
+      = link_to 'preferences', edit_user_path(@user)

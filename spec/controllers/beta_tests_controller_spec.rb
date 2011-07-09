@@ -80,6 +80,8 @@ describe BetaTestsController do
         post :create, :beta_test => {}
         response.should redirect_to(beta_test_url(mock_beta_test))
       end
+
+      it "redirects to show page if cancel button clicked"
     end
 
     describe "with invalid params" do
@@ -143,10 +145,10 @@ describe BetaTestsController do
 
       it "toggles open state if it recieves the open param" do
         bt = Factory.create :beta_test, :open => false
-        put :update, :id => bt.id, :beta_test => bt.id, :open => true
+        put :update, :id => bt.id, :beta_test => bt.id, :commit => 'make public'
         bt = BetaTest.find bt.id
         bt.open.should be_true
-        put :update, :id => bt.id, :beta_test => bt.id, :open => false
+        put :update, :id => bt.id, :beta_test => bt.id, :commit => 'make private'
         bt = BetaTest.find bt.id
         bt.open.should be_false
         response.should render_template('edit')
@@ -154,13 +156,16 @@ describe BetaTestsController do
 
       it "toggles active state if it recieves the active param" do
         bt = Factory.create :beta_test, :active => false
-        put :update, :id => bt.id, :beta_test => bt.id, :active => true
+        put :update, :id => bt.id, :beta_test => bt.id, :commit => 'activate'
         bt = BetaTest.find bt.id
         bt.active.should be_true
-        put :update, :id => bt.id, :beta_test => bt.id, :active => false
+        put :update, :id => bt.id, :beta_test => bt.id, :commit => 'deactivate'
         bt = BetaTest.find bt.id
         bt.active.should be_false
+        response.should render_template('edit')
       end
+
+      it "redirects to show page if cancel button clicked"
 
       it "redirects to the beta_test"
 #        BetaTest.stub(:find) { mock_beta_test(:update_attributes => true) }

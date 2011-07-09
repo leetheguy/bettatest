@@ -1,4 +1,5 @@
 class BetaTestsController < ApplicationController
+  skip_before_filter :clear_beta_test
   before_filter :load_beta_test, :only => [:edit, :update]
 
   access_control do
@@ -11,6 +12,7 @@ class BetaTestsController < ApplicationController
 
   # GET /beta_tests
   def index
+    session[:beta_test] = nil
     @beta_tests = BetaTest.order(:name).page(params[:page]).per(20)
   end
 
@@ -36,7 +38,9 @@ class BetaTestsController < ApplicationController
   def create
     @beta_test = BetaTest.new(params[:beta_test])
     @beta_test.user = current_user
-    if @beta_test.save
+    if params[:commit] == "cancel"
+      redirect_to beta_test_path(@beta_test)
+    elsif @beta_test.save
       redirect_to(@beta_test, :notice => 'Betta test was successfully created.')
     else
       render :action => "new"
@@ -47,7 +51,10 @@ class BetaTestsController < ApplicationController
   def update
     @beta_test = BetaTest.find(params[:id])
 
-    if params[:commit] == "make public"
+    if params[:commit] == "cancel"
+      redirect_to beta_test_path(@beta_test)
+
+    elsif params[:commit] == "make public"
       @beta_test.open_test
       @beta_test.save!
       render :action => 'edit'

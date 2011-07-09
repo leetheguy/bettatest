@@ -1,5 +1,21 @@
-%h1 new blog
-
-= render 'form'
-
-= link_to 'back', blogs_path
+.center-bubble
+  %h1.color-2 new post
+  %h3.color-2 
+    Markdown is allowed. Learn more about it 
+    %a{:href => 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'} here.
+  = form_for(@blog) do |f|
+    = render 'layouts/errors', :object => @blog
+    .bubble
+      %p= f.label :name, 'Title of this post.'
+      = f.text_field :name
+    %br
+    .bubble
+      %p= f.label :post, 'Post text.'
+      = f.text_area :post
+    %br
+    .bubble
+      = f.submit "save"
+    .bubble
+      = f.submit "post"
+    .bubble
+      = f.submit "cancel"
