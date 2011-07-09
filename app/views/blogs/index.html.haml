@@ -11,7 +11,7 @@
           = markdown(blog.post)[0...1000]
           - if current_user && (current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin))
             .bubble
-              = link_to 'edit post', edit_path(blog)
+              = link_to 'edit post', edit_blog_path(blog)
             .bubble
               = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
   - else
