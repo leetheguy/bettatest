@@ -1,12 +1,11 @@
 class BetaTestsController < ApplicationController
   skip_before_filter :clear_beta_test
-  before_filter :load_beta_test, :only => [:edit, :update]
 
   access_control do
     allow all, :to => [:index, :show]
-    deny  :developer, :to => [:new, :create]
+    deny  :developer, :to => [:new, :create], :unless => :current_user_is_admin
     allow :user, :tester, :subscriber, :to => [:new, :create]
-    allow :developer, :of => :beta_test, :to => [:edit, :update]
+    allow :developer, :of => :current_beta_test, :to => [:edit, :update]
     allow :admin
   end
 
@@ -86,9 +85,5 @@ class BetaTestsController < ApplicationController
     @beta_test = BetaTest.find(params[:id])
     @beta_test.destroy
     redirect_to(beta_tests_url)
-  end
-
-  def load_beta_test
-    @beta_test = BetaTest.find params[:id]
   end
 end

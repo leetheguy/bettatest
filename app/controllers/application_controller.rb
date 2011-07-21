@@ -1,21 +1,20 @@
-#acess helper_methods from tests like: controller.send(:current_user).should == ...
+#access helper_methods from tests like: controller.send(:current_user).should == ...
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
+  #rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
   helper_method :current_user, :current_beta_test, :current_forum_topic, :current_forum_category, :current_survey, :current_ticket_category, :current_action, :current_controller
 
-  before_filter :clear_beta_test
+  before_filter :debug
 
   protected
-  def clear_beta_test
-    session[:beta_test] = nil
-    session[:forum_category] = nil
-    session[:forum_topic] = nil
-    session[:survey] = nil
-    session[:ticket_category] = nil
+
+  def debug
+    puts params.to_s
+    puts current_controller
   end
+
 
   def default_redirect
     if current_user
@@ -35,6 +34,10 @@ class ApplicationController < ActionController::Base
     @current_user = User.find(session[:id]) if session[:id]
   end  
 
+  def current_user_is_admin
+    @current_user.has_role? :admin
+  end  
+
   def current_controller
     controller_name
   end
@@ -45,19 +48,31 @@ class ApplicationController < ActionController::Base
 
   def current_beta_test
     @current_beta_test = nil
-    session[:beta_test] ||= params[:beta_test] if params[:beta_test]
-    @current_beta_test = BetaTest.find(session[:beta_test]) if session[:beta_test]
-    @current_beta_test
+    if current_controller == 'beta_tests' && current_action != 'index' && current_action != 'new'
+      @current_beta_test = BetaTest.find(params[:id])
+    else
+      @current_beta_test = BetaTest.find(params[:beta_test_id]) if params[:beta_test_id]
+    end
   end
 
   def current_forum_topic
     @current_forum_topic = nil
-    @current_forum_topic = ForumTopic.find(session[:forum_topic]) if session[:forum_topic]
+    if current_beta_test && current_forum_category
+      if current_controller == 'forum_posts'
+        @current_forum_topic = ForumTopic.find(params[:forum_topic_id])
+      elsif current_controller = 'forum_topic' && current_action != 'index' && current_action != 'new'
+        @current_forum_topic = ForumTopic.find(params[:id])
+      end
+    end
   end
 
   def current_forum_category
     @current_forum_category = nil
-    @current_forum_category = ForumCategory.find(session[:forum_category]) if session[:forum_category]
+    if current_controller == 'forum_categories' && current_action != 'index' && current_action != 'new'
+      @current_forum_category = ForumCategory.find(params[:id])
+    elsif current_controller == 'forum_topics' || current_controller == 'forum_posts'
+      @current_forum_category = ForumCategory.find(params[:forum_category_id])
+    end
   end
 
   def current_survey

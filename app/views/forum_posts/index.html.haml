@@ -1,0 +1,24 @@
+.center-bubble
+  %h1.color-2= current_beta_test.name
+  %h2.color-2
+    posts for
+    = current_forum_topic.name
+  - if @forum_posts.count == 0
+    %h2.bubble No posts have been created for this topic.
+    %br
+  - @forum_posts.each do |forum_post|
+    .bubble
+      = markdown(forum_post.post)
+      score:
+      = forum_post.score
+      = link_to 'rate up', rate_up_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
+      = link_to 'rate down', rate_down_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
+      %br
+      - if current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin) || forum_post.user == current_user
+        = link_to 'edit', edit_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
+      - if current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin)
+        |
+        = link_to 'destroy', beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post), :confirm => 'Are you sure?', :method => :delete
+    %br
+  .bubble
+    %h3= link_to 'new post', new_beta_test_forum_category_forum_topic_forum_post_path

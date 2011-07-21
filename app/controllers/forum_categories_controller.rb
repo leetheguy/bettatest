@@ -1,9 +1,8 @@
 class ForumCategoriesController < ApplicationController
-  before_filter :current_beta_test
 
   access_control do
-    deny :deactivated, :waiting, :for => :current_beta_test
     allow :tester, :of => :current_beta_test, :to => [:index]
+    deny :deactivated, :waiting, :for => :current_beta_test
     allow :developer, :of => :current_beta_test, :except => [:show]
     allow :admin
   end
@@ -11,13 +10,13 @@ class ForumCategoriesController < ApplicationController
   # GET /forum_categories
   # GET /forum_categories.xml
   def index
-    @forum_categories = ForumCategory.where(:beta_test => :current_beta_test)
+    @forum_categories = current_beta_test.forum_categories
   end
 
   # GET /forum_categories/1
   # GET /forum_categories/1.xml
   def show
-    @forum_category = ForumCategory.find(params[:id])
+    redirect_to beta_test_forum_category_forum_topics_path(current_beta_test, current_forum_category, :notice => 'Forum category was successfully created.')
   end
 
   # GET /forum_categories/new
@@ -35,9 +34,10 @@ class ForumCategoriesController < ApplicationController
   # POST /forum_categories.xml
   def create
     @forum_category = ForumCategory.new(params[:forum_category])
+    @forum_category.beta_test = current_beta_test
 
     if @forum_category.save
-      redirect_to(@forum_category, :notice => 'Forum category was successfully created.')
+      redirect_to beta_test_forum_categories_path(current_beta_test, :notice => 'Forum category was successfully created.')
     else
       render :action => "new"
     end
@@ -49,7 +49,7 @@ class ForumCategoriesController < ApplicationController
     @forum_category = ForumCategory.find(params[:id])
 
     if @forum_category.update_attributes(params[:forum_category])
-      redirect_to(@forum_category, :notice => 'Forum category was successfully updated.')
+      redirect_to beta_test_forum_categories_path(current_beta_test, :notice => 'Forum category was successfully updated.')
     else
       render :action => "edit"
     end

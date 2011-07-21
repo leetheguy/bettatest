@@ -11,16 +11,34 @@ class ForumPostsController < ApplicationController
     allow :admin
   end
 
+  def rate_up
+    ForumPost.find(params[:id]).rate_up!
+    if !current_user.has_role?(:admin) && !current_user.has_role(:developer, :current_beta_test)
+      TesterStatSheet.where(:user_id => current_user).where(:beta_test_id => current_beta_test).first.forum_rate_up!(params[:id])
+    end
+    @forum_posts = current_forum_topic.forum_posts
+    render :index
+  end
+
+  def rate_down
+    ForumPost.find(params[:id]).rate_down!
+    if !current_user.has_role?(:admin) && !current_user.has_role(:developer, :current_beta_test)
+      TesterStatSheet.where(:user_id => current_user).where(:beta_test_id => current_beta_test).first.forum_rate_down!(params[:id])
+    end
+    @forum_posts = current_forum_topic.forum_posts
+    render :index
+  end
+
   # GET /forum_posts
   # GET /forum_posts.xml
   def index
-    @forum_posts = ForumPost.where(:forum_topic => current_forum_topic)
+    @forum_posts = current_forum_topic.forum_posts
   end
 
   # GET /forum_posts/1
   # GET /forum_posts/1.xml
   def show
-    @forum_post = ForumPost.find(params[:id])
+    redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic)
   end
 
   # GET /forum_posts/new
@@ -38,9 +56,11 @@ class ForumPostsController < ApplicationController
   # POST /forum_posts.xml
   def create
     @forum_post = ForumPost.new(params[:forum_post])
+    @forum_post.forum_topic = current_forum_topic
+    @forum_post.user = current_user
 
     if @forum_post.save
-      redirect_to(@forum_post, :notice => 'Forum post was successfully created.')
+      redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic, :notice => 'Forum post was successfully created.')
     else
       render :action => "new"
     end
@@ -52,7 +72,7 @@ class ForumPostsController < ApplicationController
     @forum_post = ForumPost.find(params[:id])
 
     if @forum_post.update_attributes(params[:forum_post])
-      redirect_to(@forum_post, :notice => 'Forum post was successfully updated.')
+      redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic, :notice => 'Forum post was successfully updated.')
     else
       render :action => "edit"
     end
@@ -64,6 +84,6 @@ class ForumPostsController < ApplicationController
     @forum_post = ForumPost.find(params[:id])
     @forum_post.destroy
 
-    redirect_to(forum_posts_url)
+    redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic)
   end
 end

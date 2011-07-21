@@ -1,5 +1,6 @@
 .center-bubble
-  %h1.color-2= @beta_test.name
+  %h1.color-2= current_beta_test.name
+  %h2.color-2 info
   - if notice
     .bubble
       %p.notice= @notice
@@ -15,6 +16,6 @@
       %h3= link_to 'edit', edit_beta_test_path(@beta_test)
   - if current_user && (!current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test))
     .bubble
-      %h3= link_to 'join', new_tester_stat_sheet_path(:id => 4, :beta_test => @beta_test.id)
+      %h3= link_to 'join', new_user_tester_stat_sheet_path(current_user, :beta_test => @beta_test.id)
   .bubble
     %h3= link_to 'back to list', beta_tests_path

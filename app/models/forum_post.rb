@@ -8,12 +8,12 @@ class ForumPost < ActiveRecord::Base
   belongs_to :forum_topic
   belongs_to :user
 
-  def rate_up
+  def rate_up!
     self.score += 1
     self.save!
   end
 
-  def rate_down
+  def rate_down!
     self.score -= 1
     self.save!
   end

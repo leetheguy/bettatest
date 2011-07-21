@@ -1,5 +1,5 @@
 .center-bubble
-  %h1.color-2 listing betta tests
+  %h2.color-2 betta tests listings
   .bubble
     %h3= link_to 'create a betta test', new_beta_test_path
   =paginate @beta_tests
@@ -17,9 +17,9 @@
           %hr
           %p=beta_test.status
           -if beta_test.active
-            =link_to 'join', new_tester_stat_sheet_path(:beta_test => beta_test)
+            =link_to 'join', new_user_tester_stat_sheet_path(:current_user, :beta_test => beta_test)
             &nbsp;|&nbsp;
-          =link_to 'check the blog', blogs_path(:beta_test => beta_test)
+          =link_to 'check the blog', beta_test_blogs_path(beta_test)
           &nbsp;|&nbsp;
           =link_to 'visit', beta_test
       %br

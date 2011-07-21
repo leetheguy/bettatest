@@ -10,7 +10,7 @@
     = markdown(@blog.post)
   .center-tab-box-bubble-box
     .bubble
-      = link_to 'back to blogs', blogs_path
+      = link_to 'back to blogs', beta_test_blogs_path(current_beta_test)
     - if current_user && current_user.has_role?(:developer, current_beta_test)
       .bubble
-        = link_to 'edit', edit_blog_path(@blog)
+        = link_to 'edit', edit_beta_test_blog_path(current_beta_test, @blog)

@@ -16,13 +16,12 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       format.atom { render :layout => false }
-      format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+      format.rss { redirect_to beta_test_feed_path(:format => :atom), :status => :moved_permanently }
     end
   end
 
   def unpublished
     @published = false
-    redirect_to beta_tests_path if !current_beta_test
     @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => true).order(:created_at).page(params[:page]).per(10)
     render :action => :index
   end
@@ -30,13 +29,11 @@ class BlogsController < ApplicationController
   # GET /blogs
   def index
     @published = true
-    redirect_to beta_tests_path if !current_beta_test
     @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => false).order(:created_at).page(params[:page]).per(10)
   end
 
   # GET /blogs/1
   def show
-    redirect_to beta_tests_path if !current_beta_test
     @blog = Blog.find(params[:id])
   end
 
@@ -86,7 +83,7 @@ class BlogsController < ApplicationController
     if params[:commit] == "cancel"
       redirect_to blogs_path
     elsif @blog.update_attributes(params[:blog])
-      redirect_to(@blog, :notice => 'Blog was successfully updated.')
+      redirect_to([current_beta_test, @blog], :notice => 'Blog was successfully updated.')
     else
       render :action => "edit"
     end

@@ -159,4 +159,9 @@ class TesterStatSheet < ActiveRecord::Base
   def involved?
     level == INVOLVED
   end
+
+  def sheet_for_test(user, test)
+    TesterStatSheet.where(:user_id => user).where(:beta_test_id => test).first
+  end
+
 end

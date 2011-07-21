@@ -1,32 +1,32 @@
 .center-bubble
-  %h1.color-2 blogs
+  %h1.color-2= current_beta_test.name
+  %h2.color-2 blog
   =paginate @blogs
   - if @blogs.count > 0
     - @blogs.each do |blog|
       .tab-container-16
         .tab-box-top
-          %h2= link_to blog.name, blog_path(blog)
+          %h2= link_to blog.name, beta_test_blog_path(current_beta_test, blog)
           = "(posted on: #{blog.created_at})"
         .tab-box-bottom
           = markdown(blog.post)[0...1000]
           - if current_user && (current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin))
             .bubble
-              = link_to 'edit post', edit_blog_path(blog)
+              = link_to 'edit post', edit_beta_test_blog_path(current_beta_test, blog)
             .bubble
-              = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
+              = link_to 'destroy post', beta_test_blogs_path(current_beta_test), :confirm => 'Are you sure?', :method => :delete
   - else
-    .buffer
-      %br
-      %h3.color-2 No blogs have been published for this betta test.
+    .bubble
+      %h2.color-2 No blogs have been published for this betta test.
 
   .bubble
-    = link_to "subscribe", feed_url(:atom, :beta_test => current_beta_test)
-  - if current_user && current_user.has_role?(:developer, current_beta_test)
+    = link_to "subscribe", feed_url(:atom, :beta_test_id => current_beta_test)
+  - if developer
     .bubble
-      = link_to 'create a new post', new_blog_path
+      = link_to 'create a new post', new_beta_test_blog_path
     .bubble
       - if @published
-        = link_to 'show unpublished posts', unpublished_blogs_path
+        = link_to 'show unpublished posts', unpublished_beta_test_blogs_path(current_beta_test)
       - else
-        = link_to 'show published posts', blogs_path
+        = link_to 'show published posts', beta_test_blogs_path(current_beta_test)
   =paginate @blogs

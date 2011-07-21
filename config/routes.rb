@@ -1,5 +1,6 @@
 Bettatest::Application.routes.draw do
-  root :to				=> 'static#index'
+
+  root :to	           			=> 'static#index'
   
   match 'betta_tests'       => 'beta_tests#index'
   match 'about'						  => 'static#about'
@@ -11,28 +12,44 @@ Bettatest::Application.routes.draw do
 	match 'sign_up'           => 'users#new', :as => 'sign_up'
 	match 'preferences'       => 'users#edit', :as => 'preferences'
   match 'dashboard'			  	=> 'users#show'
-  match 'leaders'           => 'beta_tests#leaders'
-  match 'unpublished_blogs' => 'blogs#unpublished'
-#  match 'blogs/unpublished' => 'blogs#index'
+  match 'manual_test_list'	=> 'static#manual_test_list'
+  match '/feed'             => 'blogs#feed',
+        :as                 => :feed,
+        :defaults           => { :format => 'atom' }
+  
 #  match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
-  resources :beta_tests, :sessions,
-            :blogs, :referrals, :subscriptions,
-            :forum_categories, :forum_topics, :forum_posts,
-            :surveys, :survey_options,
-            :tester_stat_sheets, :tickets, :ticket_categories
-
-  resources :users do
-    get 'confirm', :on => :member
-  end
+  resources :sessions
 
   resources :beta_tests do
+    resources :blogs do
+      get :unpublished, :on => :collection
+    end
+
+    resources :surveys do
+      resources :survey_options
+    end
+
+    resources :forum_categories do
+      resources :forum_topics do
+        resources :forum_posts do
+          get 'rate_up', :on => :member
+          get 'rate_down', :on => :member
+        end
+      end
+    end
+    
+    resources :ticket_categories do
+      resources :tickets
+    end
+
     get 'leaders', :on => :member
   end
 
-  match '/feed' => 'blogs#feed',
-        :as => :feed,
-        :defaults => { :format => 'atom' }
+  resources :users do
+    resources :tester_stat_sheets, :referrals, :subscriptions
+    get 'confirm', :on => :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

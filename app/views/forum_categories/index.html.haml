@@ -1,0 +1,17 @@
+.center-bubble
+  %h1.color-2= current_beta_test.name
+  %h2.color-2
+    forum categories
+  - @forum_categories.each do |forum_category|
+    .bubble
+      %h3= link_to forum_category.name, beta_test_forum_category_forum_topics_path(current_beta_test, forum_category)
+      = markdown(forum_category.description)
+      - if current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin)
+        %h3
+          = link_to 'edit', edit_beta_test_forum_category_path(current_beta_test, forum_category)
+          |
+          = link_to 'destroy', beta_test_forum_category_path(current_beta_test, forum_category), :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
+    %br
+  - if current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin)
+    .bubble
+      %h3= link_to 'new category', new_beta_test_forum_category_path

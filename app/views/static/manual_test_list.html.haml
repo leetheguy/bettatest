@@ -1,0 +1,132 @@
+.center-bubble
+  %h1.color-2 manual page/routes test list
+  %br
+  = link_to 'root', root_path
+  %br
+  = link_to 'about', about_path
+  %br
+  = link_to 'contact', contact_path
+  %br
+  -bt = BetaTest.first.id
+  %br
+  =link_to 'beta tests', beta_tests_path
+  %br
+  =link_to 'beta test', beta_test_path(bt)
+  %br
+  =link_to 'new beta test', new_beta_test_path
+  %br
+  =link_to 'edit beta test', edit_beta_test_path(bt)
+  %br
+  -blog = Blog.where(:beta_test_id => bt).first.id
+  %br
+  =link_to 'blogs', beta_test_blogs_path(bt)
+  %br
+  =link_to 'blog', beta_test_blog_path(bt, blog)
+  %br
+  =link_to 'new blog', new_beta_test_blog_path(bt)
+  %br
+  =link_to 'edit blog', edit_beta_test_blog_path(bt, blog)
+  %br
+  -fc = ForumCategory.where(:beta_test_id => bt).first.id
+  %br
+  =link_to 'forum categories', beta_test_forum_categories_path(bt)
+  %br
+  =link_to 'forum category', beta_test_forum_category_path(bt, fc)
+  %br
+  =link_to 'new forum category', new_beta_test_forum_category_path(bt)
+  %br
+  =link_to 'edit forum category', edit_beta_test_forum_category_path(bt, fc)
+  %br
+  -ft = ForumTopic.where(:forum_category_id => fc).first.id
+  =link_to 'forum topics', beta_test_forum_category_forum_topics_path(bt, fc)
+  %br
+  =link_to 'forum topic', beta_test_forum_category_forum_topic_path(bt, fc, ft)
+  %br
+  =link_to 'new forum topic', new_beta_test_forum_category_forum_topic_path(bt, fc)
+  %br
+  =link_to 'edit forum topic', edit_beta_test_forum_category_forum_topic_path(bt, fc, ft)
+  %br
+  -fp = ForumPost.where(:forum_topic_id => ft).first.id
+  =link_to 'forum posts', beta_test_forum_category_forum_topic_forum_posts_path(bt, fc, ft)
+  %br
+  =link_to 'forum post', beta_test_forum_category_forum_topic_forum_post_path(bt, fc, ft, fp)
+  %br
+  =link_to 'new forum post', new_beta_test_forum_category_forum_topic_forum_post_path(bt, fc, ft)
+  %br
+  =link_to 'edit forum post', edit_beta_test_forum_category_forum_topic_forum_post_path(bt, fc, ft, fp)
+  %br
+  -sur = Survey.where(:beta_test_id => bt).first.id
+  %br
+  =link_to 'surveys', beta_test_surveys_path(bt)
+  %br
+  =link_to 'survey', beta_test_survey_path(bt, sur)
+  %br
+  =link_to 'new survey', new_beta_test_survey_path(bt)
+  %br
+  =link_to 'edit survey', edit_beta_test_survey_path(bt, sur)
+  %br
+  -so = SurveyOption.where(:survey_id => sur)
+  =link_to 'survey options', beta_test_survey_survey_options_path(bt, sur)
+  %br
+  =link_to 'survey option', beta_test_survey_survey_options_path(bt, sur, so)
+  %br
+  =link_to 'new survey option', new_beta_test_survey_survey_option_path(bt, sur)
+  %br
+  =link_to 'edit survey option', edit_beta_test_survey_survey_option_path(bt, sur, so)
+  %br
+  -tc = TicketCategory.where(:beta_test_id => bt).first.id
+  %br
+  =link_to 'ticket categories', beta_test_ticket_categories_path(bt)
+  %br
+  =link_to 'ticket category', beta_test_ticket_categories_path(bt, tc)
+  %br
+  =link_to 'new ticket category', new_beta_test_ticket_category_path(bt)
+  %br
+  =link_to 'edit ticket category', edit_beta_test_ticket_category_path(bt, tc)
+  %br
+  -tk = Ticket.where(:ticket_category_id => tc).first.id
+  =link_to 'tickets', beta_test_ticket_category_tickets_path(bt, tc)
+  %br
+  =link_to 'ticket', beta_test_ticket_category_tickets_path(bt, tc, tk)
+  %br
+  =link_to 'new ticket', new_beta_test_ticket_category_ticket_path(bt, tc)
+  %br
+  =link_to 'edit ticket', edit_beta_test_ticket_category_ticket_path(bt, tc, tk)
+  %br
+  -user = User.first.id
+  %br
+  =link_to 'users', users_path
+  %br
+  =link_to 'user', user_path(user)
+  %br
+  =link_to 'new user', new_user_path
+  %br
+  =link_to 'edit user', edit_user_path(user)
+  %br
+  -tss = TesterStatSheet.where(:user_id => user).first.id
+  =link_to 'tester stat sheets', user_tester_stat_sheets_path(user)
+  %br
+  =link_to 'tester stat sheet', user_tester_stat_sheet_path(user, tss)
+  %br
+  =link_to 'new tester stat sheet', new_user_tester_stat_sheet_path(user)
+  %br
+  =link_to 'edit tester stat sheet', edit_user_tester_stat_sheet_path(user, tss)
+  %br
+  - sub = Subscription.first
+  =link_to 'subscriptions', user_subscriptions_path(user)
+  %br
+  =link_to 'subscription', user_subscription_path(user, sub)
+  %br
+  =link_to 'new subscription', new_user_subscription_path(user)
+  %br
+  =link_to 'edit subscription', edit_user_subscription_path(user, sub)
+  %br
+  -ref = Referral.first
+  %br
+  =link_to 'referrals', user_referrals_path(user)
+  %br
+  =link_to 'referral', user_referral_path(user, ref)
+  %br
+  =link_to 'new referral', new_user_referral_path(user)
+  %br
+  =link_to 'edit referral', edit_user_referral_path(user, ref)
