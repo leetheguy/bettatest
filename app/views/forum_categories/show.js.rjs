@@ -1,0 +1,7 @@
+@forum_categories.each do |forum_category|
+  if forum_category.id == @forum_category.id
+    page.replace_html("category_#{forum_category.id}", render(:partial => "forum_topics", :object => @forum_topics))
+  else
+    page.replace_html("category_#{forum_category.id}", render(:partial => "description", :object => forum_category.description))
+  end
+end

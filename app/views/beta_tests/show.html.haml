@@ -1,21 +1,2 @@
-.center-bubble
-  %h1.color-2= current_beta_test.name
-  %h2.color-2 info
-  - if notice
-    .bubble
-      %p.notice= @notice
-  .tab-box-top
-    %h2.color-2= "status: #{ @beta_test.status }"
-  .tab-box-bottom
-    - if @beta_test.description && @beta_test.description != ""
-      = @beta_test.description
-    - else
-      No description for this test has been provided.
-  - if current_user && (current_user.has_role?(:developer, @beta_test) || current_user.has_role?(:admin))
-    .bubble
-      %h3= link_to 'edit', edit_beta_test_path(@beta_test)
-  - if current_user && (!current_user.has_role?(:developer, @beta_test) && !current_user.has_role?(:tester, @beta_test))
-    .bubble
-      %h3= link_to 'join', new_user_tester_stat_sheet_path(current_user, :beta_test => @beta_test.id)
-  .bubble
-    %h3= link_to 'back to list', beta_tests_path
+%table
+  =render @beta_test

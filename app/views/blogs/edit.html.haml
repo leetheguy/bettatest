@@ -1,24 +1,23 @@
-.center-bubble
-  %h1.color-2 edit post
-  %h3.color-2 
-    Markdown is allowed. Learn more about it 
-    %a{:href => 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'} here.
-  = form_for([current_beta_test, @blog]) do |f|
-    = render 'layouts/errors', :object => @blog
-    .bubble
-      %p= f.label :name, 'Title of this post.'
-      = f.text_field :name
-    %br
-    .bubble
-      %p= f.label :post, 'Post text.'
-      = f.text_area :post
-    %br
-    .bubble
-      = f.submit "save"
-    .bubble
-      - if @blog.draft
-        = f.submit "post"
-      - else
-        = f.submit "unpost"
-    .bubble
-      = button_to "cancel", beta_test_blog_path(current_beta_test), :method => :get
+Markdown is allowed. Learn more about it 
+=link_to 'here.', 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'
+%br
+= form_for([current_beta_test, @blog]) do |f|
+  = render 'layouts/errors', :object => @blog
+  %table
+    %tr
+      %td= f.label :name, 'post title'
+    %tr
+      %td= f.text_field :name
+    %tr
+      %td= f.label :post, 'post text'
+    %tr
+      %td= f.text_area :post
+  .buttle-medium
+    = f.submit "save"
+  .buttle-medium
+    - if @blog.draft
+      = f.submit "post"
+    - else
+      = f.submit "unpost"
+  .buttle-medium
+    = button_to "cancel", beta_test_blog_path(current_beta_test), :method => :get

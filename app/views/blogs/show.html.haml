@@ -1,16 +1,11 @@
-.center-tab-box-top
-  %h1= @blog.name
-  %br
-  %h3.color-2
-    posted on
-    = @blog.created_at
-  //%p.notice= notice
-.center-tab-box-bottom
-  .plain-text
-    = markdown(@blog.post)
-  .center-tab-box-bubble-box
-    .bubble
-      = link_to 'back to blogs', beta_test_blogs_path(current_beta_test)
-    - if current_user && current_user.has_role?(:developer, current_beta_test)
-      .bubble
-        = link_to 'edit', edit_beta_test_blog_path(current_beta_test, @blog)
+= render 'common_buttons'
+.buttle-medium
+  = link_to 'back to blogs', beta_test_blogs_path(current_beta_test)
+%hr
+
+%table
+  = render @blog
+
+= render 'common_buttons'
+.buttle-medium
+  = link_to 'back to blogs', beta_test_blogs_path(current_beta_test)

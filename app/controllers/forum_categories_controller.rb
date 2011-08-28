@@ -16,7 +16,12 @@ class ForumCategoriesController < ApplicationController
   # GET /forum_categories/1
   # GET /forum_categories/1.xml
   def show
-    redirect_to beta_test_forum_category_forum_topics_path(current_beta_test, current_forum_category, :notice => 'Forum category was successfully created.')
+    @forum_categories = current_beta_test.forum_categories
+    @forum_category = current_forum_category
+    @forum_topics = current_forum_category.forum_topics
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /forum_categories/new
@@ -35,8 +40,9 @@ class ForumCategoriesController < ApplicationController
   def create
     @forum_category = ForumCategory.new(params[:forum_category])
     @forum_category.beta_test = current_beta_test
-
-    if @forum_category.save
+    if params[:commit] == "cancel"
+      redirect_to beta_test_forum_categories_path(current_beta_test)
+    elsif @forum_category.save
       redirect_to beta_test_forum_categories_path(current_beta_test, :notice => 'Forum category was successfully created.')
     else
       render :action => "new"
@@ -61,6 +67,6 @@ class ForumCategoriesController < ApplicationController
     @forum_category = ForumCategory.find(params[:id])
     @forum_category.destroy
 
-    redirect_to(forum_categories_url)
+    redirect_to(beta_test_forum_categories_path)
   end
 end

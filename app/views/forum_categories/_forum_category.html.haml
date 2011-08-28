@@ -1,0 +1,10 @@
+%tr
+  %td{:width => '70%'}
+    %h3= link_to forum_category.name, beta_test_forum_category_path(current_beta_test, forum_category), :remote => true
+  - if developer || admin
+    %td.align-right
+      .buttle-small= link_to 'edit', edit_beta_test_forum_category_path(current_beta_test, forum_category)
+      .buttle-small= link_to 'destroy', beta_test_forum_category_path(current_beta_test, forum_category), :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
+%tr
+  %td{:colspan => '2', :id => ["category", forum_category.id]}
+    =render :partial => "description", :object => forum_category.description

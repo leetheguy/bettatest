@@ -38,7 +38,7 @@ class BetaTestsController < ApplicationController
     @beta_test = BetaTest.new(params[:beta_test])
     @beta_test.user = current_user
     if params[:commit] == "cancel"
-      redirect_to beta_test_path(@beta_test)
+      redirect_to beta_tests_path
     elsif @beta_test.save
       redirect_to(@beta_test, :notice => 'Betta test was successfully created.')
     else

@@ -15,6 +15,10 @@ class ForumTopicsController < ApplicationController
   # GET /forum_topics.xml
   def index
     @forum_topics = current_forum_category.forum_topics #ForumTopic.where(:forum_category_id => :current_forum_category)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /forum_topics/1

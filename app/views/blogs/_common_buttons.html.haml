@@ -1,0 +1,5 @@
+.buttle-medium
+  = link_to "subscribe", feed_url(:atom, :beta_test_id => current_beta_test)
+- if developer || admin
+  .buttle-medium
+    = link_to 'create a new post', new_beta_test_blog_path

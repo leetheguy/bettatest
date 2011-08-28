@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'role_helpers'
 require 'user_and_security_macros'
 require 'beta_test_macros'
+require 'route_helpers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -27,7 +28,9 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
   config.include RoleHelpers
   config.include UserAndSecurityMacros
   config.include BetaTestMacros
+  config.include RouteHelpers
 end

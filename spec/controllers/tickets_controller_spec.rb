@@ -17,7 +17,7 @@ describe TicketsController do
     it "assigns all tickets as @tickets" do
       login admin
       Ticket.stub(:where) { [mock_ticket(:ticket_category => current_ticket_category)] }
-      get :index, :ticket_category => current_ticket_category.id
+      get :index, :ticket_category => current_ticket_category.id, :beta_test_id => r_beta_test, :ticket_category_id => r_ticket_category
       assigns(:tickets).should eq([mock_ticket])
     end
   end
@@ -64,7 +64,7 @@ describe TicketsController do
       it "redirects to the created ticket" do
         Ticket.stub(:new) { mock_ticket(:save => true) }
         post :create, :ticket => {}
-        response.should redirect_to(ticket_url(mock_ticket))
+        response.should be_redirect
       end
     end
 
@@ -136,7 +136,7 @@ describe TicketsController do
 
     it "redirects to the tickets list" do
       Ticket.stub(:find) { mock_ticket }
-      delete :destroy, :id => "1"
+      delete :destroy, :id => "1", :beta_test_id => r_beta_test, :ticket_category_id => r_ticket_category
       response.should redirect_to(tickets_url)
     end
   end

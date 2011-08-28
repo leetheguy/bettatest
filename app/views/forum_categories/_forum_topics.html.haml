@@ -1,0 +1,8 @@
+-if forum_topics.count > 0
+  %table
+    =render forum_topics
+-else
+  No topics for this category.
+.align-center
+  .buttle-small= link_to 'new topic', new_beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category)
+%hr

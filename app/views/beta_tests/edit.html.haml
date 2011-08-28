@@ -1,44 +1,43 @@
-.center-bubble
-  %h1.color-2 edit betta test
-  =form_for(@beta_test) do |f|
-    -if @beta_test.open
-      .bubble
-        This betta test is<br/>open to the general public.
-        %br
-        =f.submit "make private", :public => false
-    -else
-      .bubble
-        This betta test is<br/>closed to the general public.
-        %br
-        =f.submit "make public", :public => true
-    -if @beta_test.active
-      .bubble
-        This betta test is<br/>active and open to testing.
-        %br
-        =f.submit "deactivate", :active => false
-    -else
-      .bubble
-        This betta test is<br/>inactive and closed to testing.
-        %br
-        =f.submit "activate", :active => true
+=form_for(@beta_test) do |f|
+  %table
     = render 'layouts/errors', :object => @beta_test
-    .bubble
-      %p= f.label :name, 'Name of your project.'
-      = f.text_field :name
-    %br
-    .bubble
-      %p= f.label :description, 'Description of your project.'
-      = f.text_area :description
-    %br
-    .bubble
-      %p= f.label :link, "Link to your project. (Your project's homepage.)"
-      = f.text_field :link
-    %br
-    .bubble
-      %p= f.label :link, 'Password to access your project.'
-      = f.text_field :password
-    %br
-    .bubble
-      = f.submit "update betta test"
-    .bubble
-      = f.submit "cancel"
+    %tr
+      %td.align-center
+        -if @beta_test.open
+          This betta test is open to the general public.
+        -else
+          This betta test is closed to the general public.
+      %td.align-center
+        -if @beta_test.active
+          This betta test is active and open to testing.
+        -else
+          This betta test is inactive and closed to testing.
+    %tr
+      %td.align-center
+        -if @beta_test.open
+          .buttle-medium= f.submit "make private", :public => false
+        -else
+          .buttle-medium= f.submit "make public", :public => true
+      %td.align-center
+        -if @beta_test.active
+          .buttle-medium= f.submit "deactivate", :active => false
+        -else
+          .buttle-medium= f.submit "activate", :active => true
+    %tr
+      %td{:colspan => '2'}= f.label :name, 'project name'
+    %tr
+      %td{:colspan => '2'}= f.text_field :name
+    %tr
+      %td{:colspan => '2'}= f.label :description, 'project description'
+    %tr
+      %td{:colspan => '2'}= f.text_area :description
+    %tr
+      %td{:colspan => '2'}= f.label :link, 'project link'
+    %tr
+      %td{:colspan => '2'}= f.text_field :link
+    %tr
+      %td{:colspan => '2'}= f.label :link, 'project password'
+    %tr
+      %td{:colspan => '2'}= f.text_field :password
+  .buttle-medium= f.submit "update betta test"
+  .buttle-medium= f.submit "cancel"

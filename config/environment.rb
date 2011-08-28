@@ -8,3 +8,5 @@ Bettatest::Application.initialize!
 #  :key    => '_app_session',
 #  :secret => 'wruFrAt2c?eDrepREBadRE_eYubaCRed'
 #}
+
+#Time::DATE_FORMATS[:just_date] = "due on %B %d at %I:%M %p"

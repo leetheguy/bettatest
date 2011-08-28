@@ -1,37 +1,31 @@
 .top-container
-  .top-container-left
-    &nbsp;
-  .top-container-center
-    .top-nav-tabs
-      .top-nav-tab
-        -if current_controller == 'beta_tests'
-          info
-        -else
-          =link_to 'info', current_beta_test
-      .top-nav-tab
-        -if current_controller == 'blogs'
-          blog
-        -else
-          =link_to 'blog', beta_test_blogs_path(current_beta_test)
-      .top-nav-tab
-        -if current_controller == 'forums' || current_controller == 'forum_topics' || current_controller == 'forum_posts'
-          forums
-        -else
-          =link_to 'forums', beta_test_forum_categories_path(current_beta_test)
-      .top-nav-tab
-        -if current_controller == 'surveys'
-          surveys
-        -else
-          =link_to 'surveys', beta_test_surveys_path(current_beta_test)
-      .top-nav-tab
-        -if current_controller == 'leaders'
-          leaders
-        -else
-          =link_to 'leaders', leaders_beta_test_path(current_beta_test)
-      .top-nav-tab
-        -if current_controller == 'tickets'
-          tickets
-        -else
-          =link_to 'tickets', beta_test_ticket_categories_path(current_beta_test)
-  .top-container-right
-    &nbsp;
+  %h3
+    -if current_controller == 'beta_tests'
+      info
+    -else
+      =link_to 'info', current_beta_test
+  %h3
+    -if current_controller == 'blogs'
+      blog
+    -else
+      =link_to 'blog', beta_test_blogs_path(current_beta_test)
+  %h3
+    -if current_controller == 'forum_categories' || current_controller == 'forum_topics' || current_controller == 'forum_posts'
+      forums
+    -else
+      =link_to 'forums', beta_test_forum_categories_path(current_beta_test)
+  %h3
+    -if current_controller == 'surveys'
+      surveys
+    -else
+      =link_to 'surveys', beta_test_surveys_path(current_beta_test)
+  %h3
+    -if current_controller == 'leaders'
+      leaders
+    -else
+      =link_to 'leaders', leaders_beta_test_path(current_beta_test)
+  %h3
+    -if current_controller == 'tickets'
+      tickets
+    -else
+      =link_to 'tickets', beta_test_ticket_categories_path(current_beta_test)

@@ -1,5 +1,6 @@
-.center-bubble
-  %h1.color-2 manual page/routes test list
+.bubble-top-large
+  %h1 manual page/routes test list
+.bubble-bottom-large.bg-f
   %br
   = link_to 'root', root_path
   %br
@@ -112,7 +113,7 @@
   %br
   =link_to 'edit tester stat sheet', edit_user_tester_stat_sheet_path(user, tss)
   %br
-  - sub = Subscription.first
+  -sub = Subscription.first
   =link_to 'subscriptions', user_subscriptions_path(user)
   %br
   =link_to 'subscription', user_subscription_path(user, sub)

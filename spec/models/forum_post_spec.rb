@@ -10,12 +10,12 @@ describe ForumPost do
     end
 
     it "adds to score when rated up" do
-      model.rate_up
+      model.rate_up!
       ForumPost.find(model.id).score.should == 1
     end
 
     it "adds to score when rated down" do
-      model.rate_down
+      model.rate_down!
       ForumPost.find(model.id).score.should == -1
     end
   end

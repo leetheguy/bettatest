@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :password, :agreed_to_tos
+  attr_accessor :password
   acts_as_authorization_subject  :association_name => :roles
 
   before_create :generate_email_code, :make_user_unconfirmed

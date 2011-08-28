@@ -1,5 +1,4 @@
 Bettatest::Application.routes.draw do
-
   root :to	           			=> 'static#index'
   
   match 'betta_tests'       => 'beta_tests#index'

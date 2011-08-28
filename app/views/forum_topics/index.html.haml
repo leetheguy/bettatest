@@ -1,20 +1,17 @@
-.center-bubble
-  %h1.color-2= current_beta_test.name
-  %h2.color-2
-    topics for
-    = current_forum_category.name
-  - if @forum_topics.count == 0
-    %h2.bubble No topics have been created for this category.
-    %br
-  - @forum_topics.each do |forum_topic|
-    .bubble
-      %h3= link_to forum_topic.name, beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, forum_topic)
-      = markdown(forum_topic.description)
-      - if current_user.has_role?(:developer, current_beta_test) || current_user.has_role?(:admin)
-        %h3
-          = link_to 'edit', edit_beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic)
-          |
-          = link_to 'destroy', beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic), :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
-    %br
-  .bubble
-    %h3= link_to 'start topic', new_beta_test_forum_category_forum_topic_path
+- if @forum_topics
+  %table
+    - @forum_topics.each do |forum_topic|
+      %tr
+        %td{:width => '70%'}
+          %h3= link_to forum_topic.name, beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, forum_topic)
+        - if developer
+          %td.align-right
+            .buttle-small= link_to 'edit', edit_beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic)
+            .buttle-small= link_to 'destroy', beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic), :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
+      %tr
+        %td{:colspan => '2'}
+          = markdown(forum_topic.description)
+          %hr
+-else
+  %h2 No topics have been created for this category.
+.buttle-medium= link_to 'start new topic', new_beta_test_forum_category_forum_topic_path

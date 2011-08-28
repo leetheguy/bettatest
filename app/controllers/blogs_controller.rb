@@ -60,9 +60,9 @@ class BlogsController < ApplicationController
     end
 
     if params[:commit] == "cancel"
-      redirect_to blogs_path
+      redirect_to beta_test_blogs_path(current_beta_test)
     elsif @blog.save
-      redirect_to(@blog, :notice => 'Blog was successfully created.')
+      redirect_to([current_beta_test, @blog], :notice => 'Blog was successfully created.')
     else
       render :action => "new"
     end
@@ -81,7 +81,7 @@ class BlogsController < ApplicationController
     end
 
     if params[:commit] == "cancel"
-      redirect_to blogs_path
+      redirect_to beta_test_blogs_path(current_beta_test)
     elsif @blog.update_attributes(params[:blog])
       redirect_to([current_beta_test, @blog], :notice => 'Blog was successfully updated.')
     else
@@ -94,6 +94,6 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @blog.destroy
 
-    format.html { redirect_to(blogs_url) }
+    redirect_to beta_test_blogs_url(current_beta_test)
   end
 end

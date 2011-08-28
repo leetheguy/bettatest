@@ -31,10 +31,12 @@ class BetaTest < ActiveRecord::Base
   end
 
   def status
-    s  = open   ? "open (public)"   : "closed (private)"
+    #s  = open   ? "open (public)"   : "closed (private)"
+    s  = open   ? "public"   : "private"
     s += ", "
-    s += active ? "active (" : "inactive (not"
-    s += " ready for testers)"
+    #s += active ? "active (" : "inactive (not"
+    s += active ? "active" : "inactive"
+    #s += " ready for testers)"
   end
 
   def open_test

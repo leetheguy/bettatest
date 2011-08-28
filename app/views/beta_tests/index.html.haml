@@ -1,28 +1,13 @@
-.center-bubble
-  %h2.color-2 betta tests listings
-  .bubble
-    %h3= link_to 'create a betta test', new_beta_test_path
-  =paginate @beta_tests
-  %br
-  -if @beta_tests
-    -@beta_tests.each do |beta_test|
-      .tab-container-16
-        .tab-box-top
-          = beta_test.name
-        .tab-box-bottom
-          -if beta_test.description
-            =beta_test.description
-          -else
-            No description for this test has been provided.
-          %hr
-          %p=beta_test.status
-          -if beta_test.active
-            =link_to 'join', new_user_tester_stat_sheet_path(:current_user, :beta_test => beta_test)
-            &nbsp;|&nbsp;
-          =link_to 'check the blog', beta_test_blogs_path(beta_test)
-          &nbsp;|&nbsp;
-          =link_to 'visit', beta_test
-      %br
-  .bubble
-    %h3= link_to 'create a betta test', new_beta_test_path
-  =paginate @beta_tests
+.bubble-top-large
+  %h1 betta tests
+.content
+  .align-center
+    .buttle-medium= link_to 'create a betta test', new_beta_test_path
+    .buttle-medium= paginate @beta_tests
+    %hr
+    -if @beta_tests
+      %table
+        =render @beta_tests
+  .align-center
+    .buttle-medium= link_to 'create a betta test', new_beta_test_path
+    .buttle-medium= paginate @beta_tests

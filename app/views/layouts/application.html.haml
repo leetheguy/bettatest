@@ -5,20 +5,29 @@
     = auto_discovery_link_tag :rss, "/feed.rss"
     = csrf_meta_tag
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
-    %title Bettatest
+    %title betta test
     = javascript_include_tag :defaults
     = stylesheet_link_tag "screen"
     = stylesheet_link_tag "print", :media => "print"
     / [if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]
     = stylesheet_link_tag "betta"
-  %body.blueprint.static
+  %body.blueprint.betta
     = render "layouts/betta_header"
     -if current_beta_test
       = render "layouts/top_nav"
-    .content
-      =render 'layouts/left_nav'
-      = yield
-      =render 'layouts/right_default'
+      .container
+        =render 'layouts/left_nav'
+        .center
+          .bubble-top-large
+            %h1= current_beta_test.name
+          .content
+            = yield
+    -else
+      .container
+        =render "layouts/left_nav"
+        .center
+          = yield
+    = render 'layouts/right_default'
     = render "layouts/betta_footer"
     = render "layouts/stat_counter"
     =# debug current_user

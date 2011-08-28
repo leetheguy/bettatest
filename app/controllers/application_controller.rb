@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
+  rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
   helper_method :current_user, :current_beta_test, :current_forum_topic, :current_forum_category, :current_survey, :current_ticket_category, :current_action, :current_controller
 

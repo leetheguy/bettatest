@@ -1,23 +1,34 @@
-.center-bubble
+.bubble-top-large
   %h1 new betta test
+.content
   =form_for(@beta_test) do |f|
     = render 'layouts/errors', :object => @beta_test
-    .bubble
-      %p= f.label :name, 'Name of your project.'
-      = f.text_field :name
-    %br
-    .bubble
-      %p= f.label :description, 'Description of your project.'
-      = f.text_area :description
-    .bubble
-      %p= f.label :link, 'Link to your project.'
-      = f.text_field :link
-    %br
-    .bubble
-      %p= f.label :link, 'Password to access your project.'
-      = f.text_field :password
-    %br
-    .bubble
+    %table
+      %tr
+        %td
+          = f.label :name, 'project name'
+      %tr
+        %td
+          = f.text_field :name
+      %tr
+        %td
+          = f.label :description, 'project description'
+      %tr
+        %td
+          = f.text_area :description
+      %tr
+        %td
+          = f.label :link, 'project link'
+      %tr
+        %td
+          = f.text_field :link
+      %tr
+        %td
+          = f.label :link, 'project password'
+      %tr
+        %td
+          = f.text_field :password
+    .buttle-medium
       = f.submit "create betta test"
-    .bubble
+    .buttle-medium
       = f.submit "cancel"

@@ -58,7 +58,7 @@ describe User do
   describe "validations" do
     let(:model) { Factory.build :user }
 
-    it "it won't accept spaces in the password" do
+    it "won't accept spaces in the password" do
       model.password = 'password space'
       model.should be_invalid
     end
