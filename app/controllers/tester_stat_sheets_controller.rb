@@ -1,7 +1,7 @@
 class TesterStatSheetsController < ApplicationController
   access_control do
     allow :user
-    deny  :developer, :of => current_beta_test, :only => [:create]
+    deny  :developer, :of => :current_beta_test, :only => [:create]
     allow :admin
   end
 
