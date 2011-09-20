@@ -81,6 +81,7 @@ module UserAndSecurityMacros
 
   def cannot_has_access?(luser = nil)
     login luser if luser
-    yield.should be_redirect
+    lambda{ yield }.should_not raise_error(Acl9::AccessDenied)
+    #yield.should be_redirect
   end
 end

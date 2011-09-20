@@ -7,15 +7,15 @@ module BetaTestMacros
   end
 
   def navigate(session_hash)
-    session[:beta_test] ||= session_hash[:beta_test] || nil
-    session[:forum_category] ||= session_hash[:forum_category] || nil
-    session[:forum_topic] ||= session_hash[:forum_topic] || nil
-    session[:survey] ||= session_hash[:survey] || nil
-    session[:ticket_category] ||= session_hash[:ticket_category] || nil
+    #session[:bt_id] ||= session_hash[:beta_test] || nil
+    #session[:forum_category] ||= session_hash[:forum_category] || nil
+    #session[:forum_topic] ||= session_hash[:forum_topic] || nil
+    #session[:survey] ||= session_hash[:survey] || nil
+    #session[:ticket_category] ||= session_hash[:ticket_category] || nil
   end
 
   def current_beta_test
-    if !@current_beta_test
+     if !@current_beta_test
       @current_beta_test = Factory.create :beta_test
     end
     @current_beta_test

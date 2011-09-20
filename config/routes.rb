@@ -16,37 +16,24 @@ Bettatest::Application.routes.draw do
         :as                 => :feed,
         :defaults           => { :format => 'atom' }
   
-#  match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
+  match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
-  resources :sessions
+  resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions
 
+  resources :forum_posts do
+    get 'rate_up', :on => :member
+    get 'rate_down', :on => :member
+  end
+  
   resources :beta_tests do
-    resources :blogs do
-      get :unpublished, :on => :collection
-    end
-
-    resources :surveys do
-      resources :survey_options
-    end
-
-    resources :forum_categories do
-      resources :forum_topics do
-        resources :forum_posts do
-          get 'rate_up', :on => :member
-          get 'rate_down', :on => :member
-        end
-      end
-    end
-    
-    resources :ticket_categories do
-      resources :tickets
-    end
-
     get 'leaders', :on => :member
   end
 
+  resources :blogs do
+    get :unpublished, :on => :collection
+  end
+
   resources :users do
-    resources :tester_stat_sheets, :referrals, :subscriptions
     get 'confirm', :on => :member
   end
 

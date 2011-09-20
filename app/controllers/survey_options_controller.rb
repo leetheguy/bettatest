@@ -1,32 +1,35 @@
 class SurveyOptionsController < ApplicationController
-  before_filter :current_beta_test, :current_survey
-  before_filter :involved_only, :active_only
-
-  access_control do
-    deny :deactivated, :waiting, :for => :current_beta_test
-    allow :involved, :in => :current_beta_test, :to => [:index, :update], :if => :involved_only
-    allow :involved, :active, :in => :current_beta_test, :to => [:index, :update], :if => :active_only
-    allow :activated, :in => :current_beta_test, :to => [:index, :update], :if => :activated_only
-    allow :developer, :of => :current_beta_test, :except => [:show]
-    allow :admin
-  end
-
   # GET /survey_options
   # GET /survey_options.xml
   def index
-    @survey_options = SurveyOption.where(:survey => current_survey)
+    @survey_options = SurveyOption.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @survey_options }
+    end
   end
 
   # GET /survey_options/1
   # GET /survey_options/1.xml
   def show
     @survey_option = SurveyOption.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @survey_option }
+    end
   end
 
   # GET /survey_options/new
   # GET /survey_options/new.xml
   def new
     @survey_option = SurveyOption.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @survey_option }
+    end
   end
 
   # GET /survey_options/1/edit
@@ -39,10 +42,14 @@ class SurveyOptionsController < ApplicationController
   def create
     @survey_option = SurveyOption.new(params[:survey_option])
 
-    if @survey_option.save
-      redirect_to(@survey_option, :notice => 'Survey option was successfully created.')
-    else
-      render :action => "new"
+    respond_to do |format|
+      if @survey_option.save
+        format.html { redirect_to(@survey_option, :notice => 'Survey option was successfully created.') }
+        format.xml  { render :xml => @survey_option, :status => :created, :location => @survey_option }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @survey_option.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -51,10 +58,14 @@ class SurveyOptionsController < ApplicationController
   def update
     @survey_option = SurveyOption.find(params[:id])
 
-    if @survey_option.update_attributes(params[:survey_option])
-      redirect_to(@survey_option, :notice => 'Survey option was successfully updated.')
-    else
-      render :action => "edit"
+    respond_to do |format|
+      if @survey_option.update_attributes(params[:survey_option])
+        format.html { redirect_to(@survey_option, :notice => 'Survey option was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @survey_option.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -64,6 +75,9 @@ class SurveyOptionsController < ApplicationController
     @survey_option = SurveyOption.find(params[:id])
     @survey_option.destroy
 
-    redirect_to(survey_options_url)
+    respond_to do |format|
+      format.html { redirect_to(survey_options_url) }
+      format.xml  { head :ok }
+    end
   end
 end

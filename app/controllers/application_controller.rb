@@ -1,4 +1,3 @@
-#access helper_methods from tests like: controller.send(:current_user).should == ...
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -6,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_beta_test, :current_forum_topic, :current_forum_category, :current_survey, :current_ticket_category, :current_action, :current_controller
 
-  before_filter :debug
+  before_filter :current_beta_test
 
   protected
 
@@ -47,6 +46,28 @@ class ApplicationController < ActionController::Base
   end
 
   def current_beta_test
-    @current_beta_test = BetaTest.find(params[:bt_id])
+    if current_controller == 'beta_tests'
+      if current_action == 'new'
+        @current_beta_test = nil
+        session[:bt_id] = nil
+      elsif params[:id]
+        @current_beta_test = BetaTest.find(params[:id])
+        session[:bt_id] = params[:id]
+      elsif session[:bt_id]
+        @current_beta_test = BetaTest.find(session[:bt_id])
+      else
+        @current_beta_test = nil
+        session[:bt_id] = nil
+      end
+    elsif params[:beta_test_id]
+      @current_beta_test = BetaTest.find(params[:beta_test_id])
+      session[:bt_id] = params[:beta_test_id]
+    elsif session[:bt_id]
+      @current_beta_test = BetaTest.find(session[:bt_id])
+    else
+      @current_beta_test = nil
+      session[:bt_id] = nil
+    end
+    @current_beta_test
   end
 end

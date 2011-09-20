@@ -1,4 +1,4 @@
-= form_for([current_beta_test, current_forum_category, @forum_topic]) do |f|
+= form_for(@forum_topic) do |f|
   = render 'layouts/errors', :object => @forum_topic
   .bubble
     %p= f.label :name, 'Topic name.'
@@ -8,7 +8,8 @@
     %p= f.label :description, 'Topic description.'
     =f.text_area :description
   %br
+  = f.hidden_field :forum_category_id, { :value => @forum_topic.forum_category_id } 
   .bubble
-    = f.submit
+    = f.submit "save"
   .bubble
-    = button_to 'cancel', beta_test_forum_category_forum_topics_path(current_beta_test, current_forum_category), :method => :get
+    = f.submit "cancel"

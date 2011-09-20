@@ -1,9 +1,9 @@
 = render 'common_buttons'
 .buttle-medium
   - if @published
-    = link_to 'show unpublished posts', unpublished_beta_test_blogs_path(current_beta_test)
+    = link_to 'show unpublished posts', unpublished_blogs_path
   - else
-    = link_to 'show published posts', beta_test_blogs_path(current_beta_test)
+    = link_to 'show published posts', blogs_path
 %hr
 
 - if @blogs.count > 0
@@ -18,6 +18,6 @@
 = render 'common_buttons'
 .buttle-medium
   - if @published
-    = link_to 'show unpublished posts', unpublished_beta_test_blogs_path(current_beta_test)
+    = link_to 'show unpublished posts', unpublished_blogs_path
   - else
-    = link_to 'show published posts', beta_test_blogs_path(current_beta_test)
+    = link_to 'show published posts', blogs_path

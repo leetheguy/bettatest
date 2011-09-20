@@ -1,36 +1,30 @@
 class BetaTestsController < ApplicationController
-  skip_before_filter :clear_beta_test
-
   access_control do
     allow all, :to => [:index, :show]
-    deny  :developer, :to => [:new, :create], :unless => :current_user_is_admin
-    allow :user, :tester, :subscriber, :to => [:new, :create]
+    allow :user, :to => [:new, :create]
     allow :developer, :of => :current_beta_test, :to => [:edit, :update]
     allow :admin
   end
 
   # GET /beta_tests
   def index
-    session[:beta_test] = nil
     @beta_tests = BetaTest.order(:name).page(params[:page]).per(20)
   end
 
   # GET /beta_tests/1
   def show
-    @beta_test = BetaTest.find(params[:id])
-    if @beta_test
-      session[:beta_test] = @beta_test.id
-    end
+    @beta_test = current_beta_test
   end
 
   # GET /beta_tests/new
   def new
+
     @beta_test = BetaTest.new
   end
 
   # GET /beta_tests/1/edit
   def edit
-    @beta_test = BetaTest.find(params[:id])
+    @beta_test = current_beta_test
   end
 
   # POST /beta_tests
@@ -48,7 +42,7 @@ class BetaTestsController < ApplicationController
 
   # PUT /beta_tests/1
   def update
-    @beta_test = BetaTest.find(params[:id])
+    @beta_test = current_beta_test
 
     if params[:commit] == "cancel"
       redirect_to beta_test_path(@beta_test)
@@ -82,8 +76,13 @@ class BetaTestsController < ApplicationController
 
   # DELETE /beta_tests/1
   def destroy
-    @beta_test = BetaTest.find(params[:id])
-    @beta_test.destroy
-    redirect_to(beta_tests_url)
+    current_beta_test.destroy
+    redirect_to beta_tests_path
+  end
+
+  def redirect_unsubscribed_developers
+    if current_user.has_role?(:developer) && !current_user.has_role?(:subscriber) && !current_user.has_role?(:admin)
+      redirect_to subscription_path
+    end
   end
 end

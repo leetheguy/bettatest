@@ -34,4 +34,24 @@ class ForumCategory < ActiveRecord::Base
   def ForumCategory.activated
     1
   end
+
+  def access_level_name
+    if access_level == 1
+      "all members"
+    elsif access_level == 2
+      "active and involved members"
+    elsif access_level == 3
+      "involved members only"
+    end
+  end
+
+  def self.categories_for(user, beta_test)
+    if user.has_role? :admin
+      ForumCategory.where(:beta_test_id => beta_test.id)
+    else
+      level = TesterStatSheet.where(:beta_test_id => beta_test.id, 
+                                    :user_id => user.id).first.level
+      ForumCategory.where('access_level < ?', level)
+    end
+  end
 end

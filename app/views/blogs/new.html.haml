@@ -1,7 +1,7 @@
 Markdown is allowed. Learn more about it 
 =link_to 'here.', 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'
 %br
-= form_for([current_beta_test, @blog]) do |f|
+= form_for(@blog) do |f|
   = render 'layouts/errors', :object => @blog
   %table
     %tr

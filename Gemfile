@@ -6,22 +6,17 @@ gem 'haml'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'app_constants'
 gem 'rails3-generators'
+gem 'haml-rails'
 gem 'acl9'
 gem 'mocha'
 gem 'heroku'
 gem 'kaminari'
 gem 'redcarpet'
 
-group :development do
-  gem 'newrelic_rpm', '2.13.4'
-end
-
-group :test do
-  gem 'webrat', '0.7.3'
-end
-
 group :development, :test do
-  gem 'rspec-rails', '2.5.0'
+  gem 'newrelic_rpm', '2.13.4'
+  gem 'pry'
+  gem 'rspec-rails'
   gem 'faker'
   gem 'factory_girl_rails', :git => 'http://github.com/thoughtbot/factory_girl_rails.git'
   gem 'autotest'

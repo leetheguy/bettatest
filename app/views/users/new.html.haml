@@ -1,36 +1,38 @@
-.center-bubble
+.bubble-top-large
   %h1 sign up
-  .bubble
-    %h3 Everybody values their privacy and bettatest.com respects that. Bettatest.com will never give away your information without your consent. However, your email will be shared with every developer you agree to test for.
+.content
+  %h4 Everybody values their privacy and bettatest.com respects that. Bettatest.com will never give away your information without your consent. However, your email will be shared with every developer you agree to test for.
+  %br
   = form_for @user do |f|
     = render 'layouts/errors', :object => @user
-    .bubble
-      %p= f.label :name, 'Screen name that others will see.'
-      = f.text_field :name
-    %br
-    .bubble
-      %p= f.label :email, 'email'
-      = f.text_field :email
-    %br
-    .bubble
-      %p= f.label :email_confirmation, 'email confirmation'
-      = f.text_field :email_confirmation
-    %br
-    .bubble
-      %p= f.label :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
-      = f.check_box :betta_email_opt_in
-    %br
-    .bubble
-      %p= f.label :password, 'password'
-      = f.password_field :password
-    %br
-    .bubble
-      %p= f.label :password_confirmation, 'password confirmation'
-      = f.password_field :password_confirmation
-    %br
-    .bubble
-      %p= label_tag :agreed_to_tos, 'I agree to the Terms of Service.'
-      = f.check_box :agreed_to_tos
-    %br
-    .bubble
-      %p.button= f.submit
+    %table
+      %tr
+        %td= f.label :name, 'Screen name that others will see.'
+      %tr
+        %td= f.text_field :name
+      %tr
+        %td= f.label :email, 'email'
+      %tr
+        %td= f.text_field :email
+      %tr
+        %td= f.label :email_confirmation, 'email confirmation'
+      %tr
+        %td= f.text_field :email_confirmation
+      %tr
+        %td= f.label :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
+      %tr
+        %td= f.check_box :betta_email_opt_in
+      %tr
+        %td= f.label :password, 'password'
+      %tr
+        %td= f.password_field :password
+      %tr
+        %td= f.label :password_confirmation, 'password confirmation'
+      %tr
+        %td= f.password_field :password_confirmation
+      %tr
+        %td= label_tag :agreed_to_tos, 'I agree to the Terms of Service.'
+      %tr
+        %td= f.check_box :agreed_to_tos
+    .buttle-medium
+      = f.submit 'sign up'

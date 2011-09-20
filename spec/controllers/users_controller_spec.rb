@@ -12,7 +12,7 @@ describe UsersController do
       unconfirmed
       get :confirm, :id => unconfirmed.id, :email_code => unconfirmed.email_code
       user = User.find unconfirmed.id
-      response.should redirect_to users_path(user)
+      response.should redirect_to user_path(user)
       user.should have_role :user
       user.should_not have_role :unconfirmed
     end
@@ -218,13 +218,6 @@ describe UsersController do
       login admin
       delete :destroy, :id => user.id
       lambda {User.find(user.id)}.should raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it "redirects to the users list" do
-      login admin
-      User.stub(:find) { mock_user }
-      delete :destroy, :id => "1"
-      response.should redirect_to(dashboard_path)
     end
   end
 end

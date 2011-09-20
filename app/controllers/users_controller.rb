@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :assign_edited_user, :only => [:edit, :update]
-  before_filter :current_user, :only => [:edit, :update]
 
   access_control do
     allow :developer, :to => [:index]
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     code = params[:email_code]
     @user.confirm(code)
-    redirect_to users_path(@user)
+    redirect_to @user
   end
 
   # GET /users
@@ -37,10 +36,10 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    if current_user
-      @user = User.find current_user
-    elsif params[:id]
+    if params[:id]
       @user = User.find params[:id]
+    elsif current_user
+      @user = User.find current_user
     else
       default_redirect
     end

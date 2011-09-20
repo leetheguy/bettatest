@@ -5,7 +5,6 @@ class BlogsController < ApplicationController
     allow all, :to => [:index, :show, :feed]
     allow :developer, :of => :current_beta_test
     allow :admin
-    allow :all
   end
 
   def feed
@@ -29,7 +28,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   def index
     @published = true
-    @blogs = Blog.where(:beta_test_id => current_beta_test).where(:draft => false).order(:created_at).page(params[:page]).per(10)
+    @blogs = Blog.where(:beta_test_id => current_beta_test.id).where(:draft => false).order(:created_at).page(params[:page]).per(10)
   end
 
   # GET /blogs/1
@@ -60,9 +59,9 @@ class BlogsController < ApplicationController
     end
 
     if params[:commit] == "cancel"
-      redirect_to beta_test_blogs_path(current_beta_test)
+      redirect_to blogs_path
     elsif @blog.save
-      redirect_to([current_beta_test, @blog], :notice => 'Blog was successfully created.')
+      redirect_to(@blog, :notice => 'Blog was successfully created.')
     else
       render :action => "new"
     end
@@ -81,9 +80,9 @@ class BlogsController < ApplicationController
     end
 
     if params[:commit] == "cancel"
-      redirect_to beta_test_blogs_path(current_beta_test)
+      redirect_to blogs_path
     elsif @blog.update_attributes(params[:blog])
-      redirect_to([current_beta_test, @blog], :notice => 'Blog was successfully updated.')
+      redirect_to(@blog, :notice => 'Blog was successfully updated.')
     else
       render :action => "edit"
     end
@@ -94,6 +93,6 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @blog.destroy
 
-    redirect_to beta_test_blogs_url(current_beta_test)
+    redirect_to beta_test_path
   end
 end

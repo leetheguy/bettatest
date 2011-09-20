@@ -66,8 +66,8 @@ describe ForumTopicsController do
     specify { cannot_has_access?(same_developer) { get :show, :id => "42" } }
     it "assigns the requested forum_topic as @forum_topic" do
       ForumTopic.stub(:find).with("37") { mock_forum_topic }
-      get :show, :id => "37"
-      assigns(:forum_topic).should be(mock_forum_topic)
+      get :show, :id => "37", :forum_category_id => "42"
+      assigns(:forum_topic).should eq(mock_forum_topic)
     end
   end
 
@@ -80,7 +80,7 @@ describe ForumTopicsController do
     it "assigns a new forum_topic as @forum_topic" do
       ForumTopic.stub(:new) { mock_forum_topic }
       get :new
-      assigns(:forum_topic).should be(mock_forum_topic)
+      assigns(:forum_topic).should eq(mock_forum_topic)
     end
   end
 
@@ -108,12 +108,6 @@ describe ForumTopicsController do
         ForumTopic.stub(:new).with({'these' => 'params'}) { mock_forum_topic(:save => true) }
         post :create, :forum_topic => {'these' => 'params'}
         assigns(:forum_topic).should be(mock_forum_topic)
-      end
-
-      it "redirects to the created forum_topic" do
-        ForumTopic.stub(:new) { mock_forum_topic(:save => true) }
-        post :create, :forum_topic => {}
-        response.should redirect_to(forum_topic_url(mock_forum_topic))
       end
     end
 
@@ -150,12 +144,6 @@ describe ForumTopicsController do
         put :update, :id => "1"
         assigns(:forum_topic).should be(mock_forum_topic)
       end
-
-      it "redirects to the forum_topic" do
-        ForumTopic.stub(:find) { mock_forum_topic(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(forum_topic_url(mock_forum_topic))
-      end
     end
 
     describe "with invalid params" do
@@ -183,12 +171,6 @@ describe ForumTopicsController do
       ForumTopic.stub(:find).with("37") { mock_forum_topic }
       mock_forum_topic.should_receive(:destroy)
       delete :destroy, :id => "37"
-    end
-
-    it "redirects to the forum_topics list" do
-      ForumTopic.stub(:find) { mock_forum_topic }
-      delete :destroy, :id => "1"
-      response.should redirect_to(forum_topics_url)
     end
   end
 end

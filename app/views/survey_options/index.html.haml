@@ -1,0 +1,17 @@
+%h1 Listing survey_options
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @survey_options.each do |survey_option|
+    %tr
+      %td= link_to 'Show', survey_option
+      %td= link_to 'Edit', edit_survey_option_path(survey_option)
+      %td= link_to 'Destroy', survey_option, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Survey option', new_survey_option_path

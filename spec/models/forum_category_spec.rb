@@ -34,4 +34,6 @@ describe ForumCategory do
       model.should be_invalid
     end
   end
+
+  it "returns categories appropriate for the user"
 end

@@ -4,12 +4,12 @@
     &nbsp;-&nbsp;
     = beta_test.status
   %td.align-right
-    -if beta_test.active && !tester
-      .buttle-small= link_to 'join', new_user_tester_stat_sheet_path(current_user, :beta_test_id => beta_test)
+    -if beta_test.active && !beta_test.open && !tester(beta_test)
+      .buttle-small= link_to 'join', tester_stat_sheets_path(:beta_test_id => beta_test.id), :method => 'post'
     -if developer || admin
       .buttle-small= link_to 'edit', edit_beta_test_path(beta_test)
     - if current_action == 'index'
-      .buttle-small= link_to 'check the blog', beta_test_blogs_path(beta_test)
+      .buttle-small= link_to 'check the blog', blogs_path(:beta_test_id => beta_test.id)
 -if tester || developer || admin
   %tr
     %td

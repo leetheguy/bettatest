@@ -1,20 +1,16 @@
-.center-bubble
+.bubble-top-large
   %h1.color-2 log in
-  -if flash.count > 0
-    .bubble
-      - flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_#{name}"
-    %br
+.content
+  =# render 'layouts/errors', :object => @session
   = form_tag sessions_path do
-    .bubble
-      %p
-        = label_tag :email
-      = text_field_tag :email, params[:email], :size => 5
-    %br
-    .bubble
-      %p
-        = label_tag :password
-      = password_field_tag :password
-    %br
-    .bubble
-      =submit_tag "log in"
+    %table
+      %tr
+        %td= label_tag :email
+      %tr
+        %td= text_field_tag :email, params[:email], :size => 5
+      %tr
+        %td= label_tag :password
+      %tr
+        %td= password_field_tag :password
+    .buttle-medium
+      = submit_tag "log in"

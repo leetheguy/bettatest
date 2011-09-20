@@ -1,28 +1,35 @@
 class TicketsController < ApplicationController
-  before_filter :current_beta_test, :current_ticket_category
-  before_filter :involved_only, :active_only
-
-  access_control do
-    allow :developer, :of => :current_beta_test
-    allow :admin
-  end
-
   # GET /tickets
   # GET /tickets.xml
   def index
-    @tickets = Ticket.where(:ticket_category => :current_ticket_category)
+    @tickets = Ticket.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @tickets }
+    end
   end
 
   # GET /tickets/1
   # GET /tickets/1.xml
   def show
     @ticket = Ticket.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @ticket }
+    end
   end
 
   # GET /tickets/new
   # GET /tickets/new.xml
   def new
     @ticket = Ticket.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @ticket }
+    end
   end
 
   # GET /tickets/1/edit
@@ -35,10 +42,14 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(params[:ticket])
 
-    if @ticket.save
-      redirect_to(@ticket, :notice => 'Ticket was successfully created.')
-    else
-      render :action => "new"
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to(@ticket, :notice => 'Ticket was successfully created.') }
+        format.xml  { render :xml => @ticket, :status => :created, :location => @ticket }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @ticket.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -47,10 +58,14 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
 
-    if @ticket.update_attributes(params[:ticket])
-      redirect_to(@ticket, :notice => 'Ticket was successfully updated.')
-    else
-      render :action => "edit"
+    respond_to do |format|
+      if @ticket.update_attributes(params[:ticket])
+        format.html { redirect_to(@ticket, :notice => 'Ticket was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @ticket.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -60,6 +75,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @ticket.destroy
 
-    redirect_to(tickets_url)
+    respond_to do |format|
+      format.html { redirect_to(tickets_url) }
+      format.xml  { head :ok }
+    end
   end
 end

@@ -13,7 +13,7 @@
     = stylesheet_link_tag "betta"
   %body.blueprint.betta
     = render "layouts/betta_header"
-    -if current_beta_test
+    -if inside_beta_test
       = render "layouts/top_nav"
       .container
         =render 'layouts/left_nav'

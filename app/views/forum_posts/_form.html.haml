@@ -1,10 +1,12 @@
-= form_for([current_beta_test, current_forum_category, current_forum_topic, @forum_post]) do |f|
+= form_for(@forum_post) do |f|
   = render 'layouts/errors', :object => @forum_post
-  .bubble
-    %p= f.label :post, 'What are you trying to say?'
-    =f.text_area :post
-  %br
-  .bubble
-    = f.submit
-  .bubble
-    = button_to 'cancel', beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic), :method => :get
+  %table
+    %tr
+      %td= f.label :post, 'What are you trying to say?'
+    %tr
+      %td= f.text_area :post
+  =f.hidden_field :forum_topic_id, { :value => @forum_post.forum_topic_id } 
+  .buttle-medium
+    = f.submit 'save'
+  .buttle-medium
+    = f.submit 'cancel'

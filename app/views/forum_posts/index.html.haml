@@ -9,14 +9,15 @@
           score:
           = forum_post.score
         %td.align-right
-          .buttle-small= link_to 'rate up', rate_up_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
-          .buttle-small= link_to 'rate down', rate_down_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
+          .buttle-small= link_to 'rate up', rate_up_forum_post_path(:forum_topic_id => forum_post.forum_topic_id)
+          .buttle-small= link_to 'rate down', rate_down_forum_post_path(:forum_topic_id => forum_post.forum_topic_id)
           - if developer
-            .buttle-small= link_to 'edit', edit_beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post)
-            .buttle-small= link_to 'destroy', beta_test_forum_category_forum_topic_forum_post_path(current_beta_test, current_forum_category, current_forum_topic, forum_post), :confirm => 'Are you sure?', :method => :delete
+            .buttle-small= link_to 'edit', edit_forum_post_path(forum_post)
+            .buttle-small= link_to 'destroy', forum_post, :confirm => 'Are you sure?', :method => :delete
       %tr
         %td{:colspan => '2'}
           = markdown(forum_post.post)
 -else
   %h2 No posts have been created for this topic.
-.buttle-medium= link_to 'new post', new_beta_test_forum_category_forum_topic_forum_post_path
+.buttle-medium= link_to 'new post', new_forum_post_path(:forum_topic_id => forum_post.forum_topic_id
+

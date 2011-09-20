@@ -1,28 +1,35 @@
 class TicketCategoriesController < ApplicationController
-  before_filter :current_beta_test, :current_ticket_category
-  before_filter :involved_only, :active_only
-
-  access_control do
-    allow :developer, :of => :current_beta_test
-    allow :admin
-  end
-
   # GET /ticket_categories
   # GET /ticket_categories.xml
   def index
-    @ticket_categories = TicketCategory.where(:beta_test => :current_beta_test)
+    @ticket_categories = TicketCategory.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @ticket_categories }
+    end
   end
 
   # GET /ticket_categories/1
   # GET /ticket_categories/1.xml
   def show
     @ticket_category = TicketCategory.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @ticket_category }
+    end
   end
 
   # GET /ticket_categories/new
   # GET /ticket_categories/new.xml
   def new
     @ticket_category = TicketCategory.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @ticket_category }
+    end
   end
 
   # GET /ticket_categories/1/edit
@@ -35,10 +42,14 @@ class TicketCategoriesController < ApplicationController
   def create
     @ticket_category = TicketCategory.new(params[:ticket_category])
 
-    if @ticket_category.save
-      redirect_to(@ticket_category, :notice => 'Ticket category was successfully created.')
-    else
-      render :action => "new"
+    respond_to do |format|
+      if @ticket_category.save
+        format.html { redirect_to(@ticket_category, :notice => 'Ticket category was successfully created.') }
+        format.xml  { render :xml => @ticket_category, :status => :created, :location => @ticket_category }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @ticket_category.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -47,10 +58,14 @@ class TicketCategoriesController < ApplicationController
   def update
     @ticket_category = TicketCategory.find(params[:id])
 
-    if @ticket_category.update_attributes(params[:ticket_category])
-      redirect_to(@ticket_category, :notice => 'Ticket category was successfully updated.')
-    else
-      render :action => "edit"
+    respond_to do |format|
+      if @ticket_category.update_attributes(params[:ticket_category])
+        format.html { redirect_to(@ticket_category, :notice => 'Ticket category was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @ticket_category.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -60,6 +75,9 @@ class TicketCategoriesController < ApplicationController
     @ticket_category = TicketCategory.find(params[:id])
     @ticket_category.destroy
 
-    redirect_to(ticket_categories_url)
+    respond_to do |format|
+      format.html { redirect_to(ticket_categories_url) }
+      format.xml  { head :ok }
+    end
   end
 end

@@ -1,41 +1,50 @@
-.center-bubble
-  %h1.color-2= @user.name + "'s profile"
-  %h3.color-2
-    member since
-    = @user.created_at.to_date.to_formatted_s(:long_ordinal)
-  - if @user.has_role? :developer
-    .tab-container-16
-      .tab-box-top
-        %h3.color-2 my betta tests
-      .tab-box-bottom
-        - @user.my_beta_tests.each do |test|
-          = link_to test.name, test
-          =# "#{test[:members].count} members"
-  - else
-    %hr
-    .bubble
-      %h3.color-2 no betta tests started
-    .bubble
-      = link_to 'start one', controller => :betta_test, :action => :new
-    %br
-    %br
-  %hr
-  - if @user.has_role? :tester
-    %h3.color-2 betta tests I&#39;m a member of
-    %table
-      - @user.tester_stat_sheets.each do |membership|
-        %tr
-          %td
-            = link_to membership[:test].name, membership
-          %td
-            status:
-            = membership[:status]
-  - else
-    .bubble
-      %h3.color-2 not subscribed to any betta tests
-    .bubble
-      = link_to 'find one', controller => :betta_test, :action => :new
-  %hr
+.bubble-top-large
+  %h1= @user.name
+  %h3
+    member since:
+    = @user.created_at.strftime("%D")
+.content
+  %table
+    %tr
+      %td{:width => '70%', :colspan => '2'}
+    - if @user.has_role? :developer# && @user.my_beta_tests.count > 0
+      %tr
+        %td{:colspan => '2'}
+          %h2 my betta tests:
+          %hr
+      =render @user.my_beta_tests
+    - else
+      %tr
+        %td
+          %h2 no betta tests started
+        %td.align-right
+          -if @user == current_user
+            .buttle-small
+              = link_to 'start one', new_beta_test_path
+          -else
+            &nbsp;
+      %tr
+        %td{:colspan => '2'}
+          %hr
+    - if @user.has_role? :tester# && @user.tester_stat_sheets.count > 0
+      %tr
+        %td{:colspan => '2'}
+          %h2 betta tests I&#39;m a member of:
+          %hr
+      =render @user.beta_tests
+    - else
+      %tr
+        %td
+          %h2 not subscribed to any betta tests
+        %td.align-right
+          -if @user == current_user
+            .buttle-small
+              = link_to 'find one', beta_tests_path
+          -else
+            &nbsp;
+      %tr
+        %td{:colspan => '2'}
+          %hr
   - if @user == @current_user || @current_user.has_role?(:admin)
-    .bubble
+    .buttle-medium
       = link_to 'preferences', edit_user_path(@user)

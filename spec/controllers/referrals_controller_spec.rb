@@ -56,12 +56,6 @@ describe ReferralsController do
         post :create, :referral => {'these' => 'params'}
         assigns(:referral).should be(mock_referral)
       end
-
-      it "redirects to the created referral" do
-        Referral.stub(:new) { mock_referral(:save => true) }
-        post :create, :referral => {}
-        response.should redirect_to(referral_url(mock_referral))
-      end
     end
 
     describe "with invalid params" do
@@ -96,12 +90,6 @@ describe ReferralsController do
         put :update, :id => "1"
         assigns(:referral).should be(mock_referral)
       end
-
-      it "redirects to the referral" do
-        Referral.stub(:find) { mock_referral(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(referral_url(mock_referral))
-      end
     end
 
     describe "with invalid params" do
@@ -128,12 +116,6 @@ describe ReferralsController do
       Referral.stub(:find).with("37") { mock_referral }
       mock_referral.should_receive(:destroy)
       delete :destroy, :id => "37"
-    end
-
-    it "redirects to the referrals list" do
-      Referral.stub(:find) { mock_referral }
-      delete :destroy, :id => "1"
-      response.should redirect_to(referrals_url)
     end
   end
 

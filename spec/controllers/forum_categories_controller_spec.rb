@@ -29,7 +29,7 @@ describe ForumCategoriesController do
     it "assigns all forum categories in current beta test as @forum_categories" do
       login admin
       ForumCategory.stub(:where) { [mock_forum_category(:beta_test => current_beta_test)] }
-      get :index
+      get :index, :bt_id => '1'
       assigns(:forum_categories).should eq([mock_forum_category])
     end
   end
@@ -40,7 +40,7 @@ describe ForumCategoriesController do
     it "assigns the requested forum_category as @forum_category" do
       login admin
       ForumCategory.stub(:find).with("37") { mock_forum_category }
-      get :show, :id => "37"
+      get :show, :id => "37", :bt_id => '1'
       assigns(:forum_category).should be(mock_forum_category)
     end
   end
@@ -49,7 +49,7 @@ describe ForumCategoriesController do
     it "assigns a new forum_category as @forum_category" do
       login admin
       ForumCategory.stub(:new) { mock_forum_category }
-      get :new
+      get :new, :bt_id => '1'
       assigns(:forum_category).should be(mock_forum_category)
     end
   end
@@ -58,7 +58,7 @@ describe ForumCategoriesController do
     it "assigns the requested forum_category as @forum_category" do
       login admin
       ForumCategory.stub(:find).with("37") { mock_forum_category }
-      get :edit, :id => "37"
+      get :edit, :id => "37", :bt_id => '1'
       assigns(:forum_category).should be(mock_forum_category)
     end
   end
@@ -70,28 +70,22 @@ describe ForumCategoriesController do
 
     describe "with valid params" do
       it "assigns a newly created forum_category as @forum_category" do
-        ForumCategory.stub(:new).with({'these' => 'params'}) { mock_forum_category(:save => true) }
-        post :create, :forum_category => {'these' => 'params'}
+        ForumCategory.stub(:new).with({'these' => 'params'}) { mock_forum_category(:save => true)}
+        post :create, :forum_category => {'these' => 'params'}, :bt_id => current_beta_test.id
         assigns(:forum_category).should be(mock_forum_category)
-      end
-
-      it "redirects to the created forum_category" do
-        ForumCategory.stub(:new) { mock_forum_category(:save => true) }
-        post :create, :forum_category => {}
-        response.should redirect_to(forum_category_url(mock_forum_category))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved forum_category as @forum_category" do
-        ForumCategory.stub(:new).with({'these' => 'params'}) { mock_forum_category(:save => false) }
-        post :create, :forum_category => {'these' => 'params'}
+        ForumCategory.stub(:new).with({'these' => 'params'}) { mock_forum_category(:save => false, :beta_test => current_beta_test) }
+        post :create, :forum_category => {'these' => 'params'}, :bt_id => current_beta_test.id
         assigns(:forum_category).should be(mock_forum_category)
       end
 
       it "re-renders the 'new' template" do
         ForumCategory.stub(:new) { mock_forum_category(:save => false) }
-        post :create, :forum_category => {}
+        post :create, :forum_category => {}, :bt_id => '1'
         response.should render_template("new")
       end
     end
@@ -106,32 +100,26 @@ describe ForumCategoriesController do
       it "updates the requested forum_category" do
         ForumCategory.stub(:find).with("37") { mock_forum_category }
         mock_forum_category.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :forum_category => {'these' => 'params'}
+        put :update, :id => "37", :forum_category => {'these' => 'params'}, :bt_id => '1'
       end
 
       it "assigns the requested forum_category as @forum_category" do
         ForumCategory.stub(:find) { mock_forum_category(:update_attributes => true) }
-        put :update, :id => "1"
+        put :update, :id => "1", :bt_id => current_beta_test.id
         assigns(:forum_category).should be(mock_forum_category)
-      end
-
-      it "redirects to the forum_category" do
-        ForumCategory.stub(:find) { mock_forum_category(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(forum_category_url(mock_forum_category))
       end
     end
 
     describe "with invalid params" do
       it "assigns the forum_category as @forum_category" do
         ForumCategory.stub(:find) { mock_forum_category(:update_attributes => false) }
-        put :update, :id => "1"
+        put :update, :id => "1", :bt_id => current_beta_test.id
         assigns(:forum_category).should be(mock_forum_category)
       end
 
       it "re-renders the 'edit' template" do
         ForumCategory.stub(:find) { mock_forum_category(:update_attributes => false) }
-        put :update, :id => "1"
+        put :update, :id => "1", :bt_id => current_beta_test.id
         response.should render_template("edit")
       end
     end
@@ -145,13 +133,7 @@ describe ForumCategoriesController do
     it "destroys the requested forum_category" do
       ForumCategory.stub(:find).with("37") { mock_forum_category }
       mock_forum_category.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "redirects to the forum_categories list" do
-      ForumCategory.stub(:find) { mock_forum_category }
-      delete :destroy, :id => "1"
-      response.should redirect_to(forum_categories_url)
+      delete :destroy, :id => "37", :bt_id => current_beta_test.id
     end
   end
 end

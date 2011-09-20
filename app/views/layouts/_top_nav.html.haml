@@ -8,17 +8,17 @@
     -if current_controller == 'blogs'
       blog
     -else
-      =link_to 'blog', beta_test_blogs_path(current_beta_test)
+      =link_to 'blog', blogs_path
   %h3
-    -if current_controller == 'forum_categories' || current_controller == 'forum_topics' || current_controller == 'forum_posts'
+    -if ['forum_categories', 'forum_topics', 'forum_posts'].index(current_controller)
       forums
     -else
-      =link_to 'forums', beta_test_forum_categories_path(current_beta_test)
+      =link_to 'forums', forum_categories_path
   %h3
     -if current_controller == 'surveys'
       surveys
     -else
-      =link_to 'surveys', beta_test_surveys_path(current_beta_test)
+      =link_to 'surveys', surveys_path
   %h3
     -if current_controller == 'leaders'
       leaders
@@ -28,4 +28,4 @@
     -if current_controller == 'tickets'
       tickets
     -else
-      =link_to 'tickets', beta_test_ticket_categories_path(current_beta_test)
+      =link_to 'tickets', ticket_categories_path

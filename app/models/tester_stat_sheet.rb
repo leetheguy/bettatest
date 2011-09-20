@@ -10,11 +10,11 @@ class TesterStatSheet < ActiveRecord::Base
   before_create :init_sheet
   before_save :adjust_level_and_roles
 
-#	attr_accessible :level, :points, :days_at_level, :level_frozen, :points_frozen, :position
-	
   validates_numericality_of :level, :only_integer => true, :less_than => 4
   validates_numericality_of :points, :only_integer => true
-  
+  validates :user_id, :uniqueness => { :scope => :beta_test_id,
+                                       :message => 'not_unique' }
+ 
   belongs_to :user
   belongs_to :beta_test
 
@@ -23,11 +23,11 @@ class TesterStatSheet < ActiveRecord::Base
     user.has_role! :tester
     user.has_role! :tester, beta_test
 
-    sheets = TesterStatSheet.where("beta_test_id = ?", beta_test.id)
+    sheets = beta_test.tester_stat_sheets
     if sheets.count == 0
       self.position = 1
     else
-      self.position = TesterStatSheet.where(:beta_test_id => beta_test.id).order(:position).last.position + 1
+      self.position = sheets.order(:position).last.position + 1
     end
 
     if position > beta_test.max_testers

@@ -1,14 +1,18 @@
-= form_for([current_beta_test, @forum_category]) do |f|
+= form_for(@forum_category) do |f|
   = render 'layouts/errors', :object => @forum_category
   %table
     %tr
-      %td= f.label :name, 'Category name.'
+      %td= f.label :name, 'category name'
     %tr
       %td= f.text_field :name
     %tr
-      %td= f.label :description, 'Category description.'
+      %td= f.label :description, 'category description'
     %tr
       %td= f.text_area :description
+    %tr
+      %td= f.label :description, 'visible by'
+    %tr
+      %td= f.select :access_level, [['all members', 1], ['active and involved members', 2], ['only involved members', 3]]
   .buttle-medium
     = f.submit "save"
   .buttle-medium

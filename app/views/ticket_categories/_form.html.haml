@@ -1,0 +1,10 @@
+= form_for @ticket_category do |f|
+  -if @ticket_category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ticket_category.errors.count, "error")} prohibited this ticket_category from being saved:"
+      %ul
+        - @ticket_category.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

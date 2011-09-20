@@ -36,7 +36,6 @@ module RouteHelpers
 
   def r_ticket_category
     bt = BetaTest.first.id
-    puts bt
     TicketCategory.where(:beta_test_id => bt).first.id
   end
 

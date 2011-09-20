@@ -3,15 +3,15 @@
     - @forum_topics.each do |forum_topic|
       %tr
         %td{:width => '70%'}
-          %h3= link_to forum_topic.name, beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, forum_topic)
+          %h3= link_to forum_topic.name, forum_topic
         - if developer
           %td.align-right
-            .buttle-small= link_to 'edit', edit_beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic)
-            .buttle-small= link_to 'destroy', beta_test_forum_category_forum_topic_path(current_beta_test, current_forum_category, forum_topic), :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
+            .buttle-small= link_to 'edit', edit_forum_topic_path(forum_topic)
+            .buttle-small= link_to 'destroy', forum_topic, :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
       %tr
         %td{:colspan => '2'}
           = markdown(forum_topic.description)
           %hr
 -else
   %h2 No topics have been created for this category.
-.buttle-medium= link_to 'start new topic', new_beta_test_forum_category_forum_topic_path
+.buttle-medium= link_to 'start new topic', new_forum_topic_path(:forum_category_id => forum_topic.forum_category_id)

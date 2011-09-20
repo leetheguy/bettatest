@@ -1,7 +1,4 @@
 class ForumPostsController < ApplicationController
-  before_filter :current_beta_test, :current_forum_category, :current_forum_topic
-  before_filter :involved_only, :active_only
-
   access_control do
     deny :deactivated, :waiting, :for => :current_beta_test
     allow :involved, :in => :current_beta_test, :to => [:index], :if => :involved_only
@@ -32,19 +29,21 @@ class ForumPostsController < ApplicationController
   # GET /forum_posts
   # GET /forum_posts.xml
   def index
-    @forum_posts = current_forum_topic.forum_posts
+    @forum_posts = ForumPost.where(:forum_topic_id => params[:forum_topic_id])
   end
 
   # GET /forum_posts/1
   # GET /forum_posts/1.xml
   def show
-    redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic)
+    @forum_post = ForumPost.find(params[:id])
+    redirect_to @forum_post
   end
 
   # GET /forum_posts/new
   # GET /forum_posts/new.xml
   def new
     @forum_post = ForumPost.new
+    @forum_post.forum_topic_id = params[:forum_topic_id]
   end
 
   # GET /forum_posts/1/edit
@@ -56,11 +55,13 @@ class ForumPostsController < ApplicationController
   # POST /forum_posts.xml
   def create
     @forum_post = ForumPost.new(params[:forum_post])
-    @forum_post.forum_topic = current_forum_topic
+    @forum_post.forum_topic_id = params[:forum_post][:forum_topic_id]
     @forum_post.user = current_user
 
-    if @forum_post.save
-      redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic, :notice => 'Forum post was successfully created.')
+    if params[:commit] == "cancel"
+      redirect_to forum_topic_path(@forum_post.forum_topic_id)
+    elsif @forum_post.save
+      redirect_to forum_topic_path(@forum_post.forum_topic_id, :notice => 'Post was successfully created.')
     else
       render :action => "new"
     end
@@ -71,8 +72,10 @@ class ForumPostsController < ApplicationController
   def update
     @forum_post = ForumPost.find(params[:id])
 
-    if @forum_post.update_attributes(params[:forum_post])
-      redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic, :notice => 'Forum post was successfully updated.')
+    if params[:commit] == "cancel"
+      redirect_to forum_topic_path(@forum_post.forum_topic_id)
+    elsif @forum_post.update_attributes(params[:forum_post])
+      redirect_to forum_topic_path(@forum_post.forum_topic_id, :notice => 'Post was successfully created.')
     else
       render :action => "edit"
     end
@@ -82,8 +85,9 @@ class ForumPostsController < ApplicationController
   # DELETE /forum_posts/1.xml
   def destroy
     @forum_post = ForumPost.find(params[:id])
+    @forum_topic = @forum_post.forum_topic
     @forum_post.destroy
 
-    redirect_to beta_test_forum_category_forum_topic_forum_posts_path(current_beta_test, current_forum_category, current_forum_topic)
+    redirect_to @forum_topic
   end
 end

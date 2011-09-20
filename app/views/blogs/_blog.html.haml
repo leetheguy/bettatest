@@ -1,14 +1,14 @@
 %tr
   %td{:width => '70%'}
-    %h3= link_to blog.name, beta_test_blog_path(current_beta_test, blog)
+    %h3= link_to blog.name, blog
     &nbsp;-&nbsp;
     = "(posted on: #{blog.created_at.strftime("%D")})"
   %td.align-right
     - if developer || admin
       .buttle-small
-        = link_to 'edit post', edit_beta_test_blog_path(current_beta_test, blog)
+        = link_to 'edit post', edit_blog_path(blog)
       .buttle-small
-        = link_to 'destroy post', beta_test_blog_path(current_beta_test, blog), :confirm => 'Are you sure?', :method => :delete
+        = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
 %tr
   %td{:colspan => '2'}
     - if current_action == 'index' || 'unpublished'

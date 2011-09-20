@@ -1,9 +1,4 @@
 require 'spec_helper'
-require 'role_helpers'
-
-RSpec.configure do |c|
-  c.include RoleHelpers
-end
 
 describe User do
   before do

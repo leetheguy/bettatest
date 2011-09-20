@@ -36,9 +36,10 @@ describe BetaTestsController do
     end
 
     it "assigns the requested beta_test as @beta_test" do
-      BetaTest.stub(:find).with("37") { mock_beta_test }
-      get :show, :id => "37"
-      assigns(:beta_test).should be(mock_beta_test)
+      #BetaTest.stub(:find).with("37") { mock_beta_test }
+      navigate current_beta_test
+      get :show, :id => current_beta_test.id
+      assigns(:beta_test).should == current_beta_test
     end
   end
 
@@ -164,14 +165,6 @@ describe BetaTestsController do
         bt.active.should be_false
         response.should render_template('edit')
       end
-
-      it "redirects to show page if cancel button clicked"
-
-      it "redirects to the beta_test"
-#        BetaTest.stub(:find) { mock_beta_test(:update_attributes => true) }
-#        put :update, :id => "42"
-#        response.should redirect_to(beta_test_url(mock_beta_test))
-#      end
     end
 
     describe "with invalid params" do
@@ -195,15 +188,10 @@ describe BetaTestsController do
     end
 
     it "destroys the requested beta_test" do
-      BetaTest.stub(:find).with("37") { mock_beta_test }
-      mock_beta_test.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "redirects to the beta_tests list" do
-      BetaTest.stub(:find) { mock_beta_test }
-      delete :destroy, :id => "1"
-      response.should redirect_to(beta_tests_url)
+      #BetaTest.stub(:find).with("37") { mock_beta_test }
+      navigate current_beta_test
+      delete :destroy, :id => current_beta_test.id
+      lambda{ BetaTest.find(current_beta_test.id) }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

@@ -1,24 +1,26 @@
-.center-bubble
-  %h1.color-2
+.bubble-top-large
+  %h1
     preferences for 
     = @user.name
-  = render 'layouts/errors', :object => @user
+.content
   = form_tag(@url_for_update, :method => :put) do
-    .bubble
-      %p= label_tag :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
-      = check_box_tag :betta_email_opt_in
-    %br
-    .bubble
-      %p= label_tag :password, 'old password (required to make changes)'
-      = password_field_tag :password
-    %br
-    .bubble
-      %p= label_tag :new_password, 'new password (leave blank to keep current password)'
-      = password_field_tag :new_password
-    %br
-    .bubble
-      %p= label_tag :password_confirmation, 'password confirmation'
-      = password_field_tag :password_confirmation
-    %br
-    .bubble
-      %p.button= submit_tag 'save changes', :confirm => 'Are you sure?'
+    = render 'layouts/errors', :object => @user
+    %table
+      %tr
+        %td= label_tag :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
+      %tr
+        %td= check_box_tag :betta_email_opt_in
+      %tr
+        %td= label_tag :password, 'old password (required to make changes)'
+      %tr
+        %td= password_field_tag :password
+      %tr
+        %td= label_tag :new_password, 'new password (leave blank to keep current password)'
+      %tr
+        %td= password_field_tag :new_password
+      %tr
+        %td= label_tag :password_confirmation, 'password confirmation'
+      %tr
+        %td= password_field_tag :password_confirmation
+    .buttle-medium
+      = submit_tag 'save changes', :confirm => 'Are you sure?'
