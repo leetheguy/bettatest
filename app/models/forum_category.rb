@@ -49,9 +49,11 @@ class ForumCategory < ActiveRecord::Base
     if user.has_role? :admin
       ForumCategory.where(:beta_test_id => beta_test.id)
     else
-      level = TesterStatSheet.where(:beta_test_id => beta_test.id, 
-                                    :user_id => user.id).first.level
-      ForumCategory.where('access_level < ?', level)
+      tss = TesterStatSheet.where(:beta_test_id => beta_test.id, 
+                                    :user_id => user.id).first
+      if tss
+        ForumCategory.where('access_level < ?', tss.level)
+      end
     end
   end
 end
