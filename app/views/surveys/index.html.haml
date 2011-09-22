@@ -1,17 +1,14 @@
-%h1 Listing surveys
+%h1 Surveys coming soon. We promise.
+-#
+  - if developer || admin
+    .buttle-medium= link_to 'new survey', new_survey_path
+  %hr
 
-%table
-  %tr
-    %th
-    %th
-    %th
+  - if @surveys
+    %table
+      =render @surveys
+  - else
+    %h2 No surveys have been created for this betta test.
 
-  - @surveys.each do |survey|
-    %tr
-      %td= link_to 'Show', survey
-      %td= link_to 'Edit', edit_survey_path(survey)
-      %td= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Survey', new_survey_path
+  - if developer || admin
+    .buttle-medium= link_to 'new survey', new_survey_path

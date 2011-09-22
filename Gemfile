@@ -12,6 +12,7 @@ gem 'mocha'
 gem 'heroku'
 gem 'kaminari'
 gem 'redcarpet'
+gem 'activeadmin'
 
 group :development, :test do
   gem 'newrelic_rpm', '2.13.4'

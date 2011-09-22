@@ -1,13 +1,8 @@
 .bubble-top-large
   %h1 betta tests
 .content
-  .align-center
-    .buttle-medium= link_to 'create a betta test', new_beta_test_path
-    .buttle-medium= paginate @beta_tests
-    %hr
-    -if @beta_tests
-      %table
-        =render @beta_tests
-  .align-center
-    .buttle-medium= link_to 'create a betta test', new_beta_test_path
-    .buttle-medium= paginate @beta_tests
+  =render 'buttons'
+  %hr
+  -if @beta_tests
+    %table
+      =render @beta_tests

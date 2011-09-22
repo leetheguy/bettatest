@@ -3,7 +3,7 @@ class BetaTest < ActiveRecord::Base
   after_create :assign_developer
  
   validates_length_of :name, :maximum => 50
-  validates_length_of :description, :maximum => 200
+  validates_length_of :description, :maximum => 2000
   validates_numericality_of :max_testers, :starting_points, :active_min_pts, :involved_min_pts, :daily_drop_pts, :daily_login_pts, :forum_post_pts, :rate_up_lose_pts, :rate_up_give_pts, :rate_down_lose_pts, :rate_down_take_pts, :survey_vote_pts, :tester_days_to_gift, :active_days_to_gift, :involved_days_to_gift, :only_integer => true
   validates_presence_of :name
   validates_uniqueness_of :name

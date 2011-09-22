@@ -1,0 +1,8 @@
+-if survey_options.count > 0
+  %table
+    =render survey_options
+-else
+  No options for this survey.
+.align-center
+  .buttle-small= link_to 'new option', new_survey_option_path( :survey_id => @survey.id)
+%hr

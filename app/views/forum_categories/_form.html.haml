@@ -1,5 +1,5 @@
-= form_for(@forum_category) do |f|
-  = render 'layouts/errors', :object => @forum_category
+= form_for @forum_category do |f|
+  = render 'layouts/errors ', :object => @forum_category
   %table
     %tr
       %td= f.label :name, 'category name'
@@ -10,7 +10,7 @@
     %tr
       %td= f.text_area :description
     %tr
-      %td= f.label :description, 'visible by'
+      %td= f.label :description, 'visible to'
     %tr
       %td= f.select :access_level, [['all members', 1], ['active and involved members', 2], ['only involved members', 3]]
   .buttle-medium

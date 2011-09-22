@@ -1,6 +1,6 @@
 %tr
   %td{:width => '70%'}
-    %h3= link_to forum_category.name, forum_category_path(forum_category), :remote => true
+    %h3= link_to forum_category.name, forum_category, :remote => true
     &nbsp;-&nbsp;
     visible to
     = forum_category.access_level_name

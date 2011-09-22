@@ -9,6 +9,7 @@ class Survey < ActiveRecord::Base
   validates_numericality_of :access_level, :only_integer => true, :greater_than => 0, :less_than => 4
   
   has_many :survey_options, :dependent => :destroy
+  has_many :users, :through => :survey_votes
   belongs_to :beta_test
 
   def involved_only
@@ -33,5 +34,15 @@ class Survey < ActiveRecord::Base
   
   def Survey.activated
     1
+  end
+
+  def self.surveys_for(user, beta_test)
+    if user.has_role? :admin
+      Survey.where(:beta_test_id => beta_test.id)
+    else
+      level = TesterStatSheet.where(:beta_test_id => beta_test.id, 
+                                    :user_id => user.id).first.level
+      Survey.where('access_level < ?', level)
+    end
   end
 end

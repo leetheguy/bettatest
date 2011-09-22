@@ -1,0 +1,12 @@
+%tr
+  %td{:width => '70%'}
+    %h3= link_to survey.name, survey, :remote => true
+    &nbsp;-&nbsp;
+    visible to
+    =survey.access_level
+  - if developer || admin
+    %td.align-right
+      .buttle-small= link_to 'destroy', survey, :confirm => 'Are you sure? This can not be undone!', :method => :delete
+%tr
+  %td{:colspan => '2', :id => ["survey", survey.id]}
+    =render :partial => "description", :object => survey.description

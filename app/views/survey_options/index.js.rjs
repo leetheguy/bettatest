@@ -1,0 +1,1 @@
+page.replace_html("topics_#{@survey.id}", render(@survey_options))

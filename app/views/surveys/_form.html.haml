@@ -1,10 +1,19 @@
 = form_for @survey do |f|
-  -if @survey.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@survey.errors.count, "error")} prohibited this survey from being saved:"
-      %ul
-        - @survey.errors.full_messages.each do |msg|
-          %li= msg
-
-  .actions
-    = f.submit 'Save'
+  = render 'layouts/errors', :object => @survey
+  %table
+    %tr
+      %td= f.label :name, 'survey name'
+    %tr
+      %td= f.text_field :name
+    %tr
+      %td= f.label :description, 'survey description'
+    %tr
+      %td= f.text_area :description
+    %tr
+      %td= f.label :description, 'visible to'
+    %tr
+      %td= f.select :access_level, [['all members', 1], ['active and involved members', 2], ['only involved members', 3]]
+  .buttle-medium
+    = f.submit "save"
+  .buttle-medium
+    = f.submit "cancel"

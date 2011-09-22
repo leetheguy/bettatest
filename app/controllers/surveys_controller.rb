@@ -7,12 +7,19 @@ class SurveysController < ApplicationController
   end
 
   def index
-    @surveys = Survey.where(:beta_test_id => current_beta_test.id)
+    @surveys = Survey.surveys_for(current_user, current_beta_test)
   end
 
   def show
+    @surveys = Survey.surveys_for(current_user, current_beta_test)
     @survey = Survey.find(params[:id])
-    @survey_options = SurveyOption.where(:survey_id => @survey.id)
+    @survey_options = @survey.survey_options
+    respond_to do |format|
+      format.html do
+        redirect_to survey_path
+      end
+      format.js
+    end
   end
 
   def new
@@ -24,10 +31,14 @@ class SurveysController < ApplicationController
   end
 
   def create
+    @surveys = Survey.surveys_for(current_user, current_beta_test)
     @survey = Survey.new(params[:survey])
+    @survey.beta_test = current_beta_test
 
-    if @survey.save
-      redirect_to(@survey, :notice => 'Survey was successfully created.')
+    if params[:commit] == "cancel"
+      redirect_to surveys_path
+    elsif @survey.save
+      redirect_to surveys_path, :notice => 'Survey was successfully created.'
     else
       render :action => "new"
     end
@@ -37,14 +48,17 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
 
     if @survey.update_attributes(params[:survey])
-      redirect_to(@survey, :notice => 'Survey was successfully updated.')
+      redirect_to @survey, :notice => 'Survey was successfully updated.'
     else
       render :action => "edit"
     end
   end
 
   def destroy
-    @survey = Survey.find(params[:id])
-    @survey.destroy
+    @surveys = Survey.surveys_for(current_user, current_beta_test)
+    survey = Survey.find(params[:id])
+    survey.destroy
+    redirect_to surveys_path
+
   end
 end

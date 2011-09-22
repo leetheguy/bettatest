@@ -19,9 +19,10 @@ class User < ActiveRecord::Base
   has_many  :beta_tests, :through => :tester_stat_sheets
   has_many  :forum_posts, :dependent => :destroy
   has_many  :forum_topics, :dependent => :destroy
-  has_one    :referral, :dependent => :destroy
+  has_one   :referral, :dependent => :destroy
   has_many  :referring, :class_name => "Referral", :foreign_key => "referred_by_id"
   has_one   :subscription, :dependent => :destroy
+  has_many  :surveys, :through => :survey_votes
   has_and_belongs_to_many :roles
   
   def fix_tos

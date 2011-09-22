@@ -1,0 +1,7 @@
+@surveys.each do |survey|
+  if survey.id == @survey.id
+    page.replace_html("survey_#{survey.id}", render(:partial => "survey_options", :object => @survey_options))
+  else
+    page.replace_html("survey_#{survey.id}", render(:partial => "description", :object => survey.description))
+  end
+end
