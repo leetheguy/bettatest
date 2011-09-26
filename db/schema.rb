@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921174639) do
+ActiveRecord::Schema.define(:version => 20110922145731) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -199,13 +199,13 @@ ActiveRecord::Schema.define(:version => 20110921174639) do
     t.integer  "level",         :default => 0
     t.integer  "points",        :default => 0
     t.integer  "days_at_level", :default => 0
-    t.integer  "user_id"
     t.integer  "beta_test_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "level_frozen",  :default => false
     t.boolean  "points_frozen", :default => false
     t.integer  "position"
+    t.integer  "user_id"
   end
 
   create_table "ticket_categories", :force => true do |t|

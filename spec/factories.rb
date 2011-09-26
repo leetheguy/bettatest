@@ -8,23 +8,45 @@ FactoryGirl.define do
   factory :beta_test do |f|
     f.sequence(:name) { |n| "#{Faker::Internet.domain_name} No. #{n}" }
     f.description Faker::Company.bs + ", " + Faker::Company.bs + "and " + Faker::Company.bs
-    f.active { [true, false][rand 2] }
-    f.link { Faker::Internet.domain_name }
-    f.password 8.random_characters
+    f.active      { [true, false][rand 2] }
+    f.open        { [true, false][rand 2] }
+    f.link        { Faker::Internet.domain_name }
+    f.password    8.random_characters
     f.association :user, :factory => :developer
+  end
+
+  factory :open_active_beta_test, :parent => :beta_test do
+    open   true
+    active true
+  end
+
+  factory :open_inactive_beta_test, :parent => :beta_test do
+    open   true
+    active false
+  end
+
+  factory :closed_active_beta_test, :parent => :beta_test do
+    open   false
+    active true
+  end
+
+  factory :closed_inactive_beta_test, :parent => :beta_test do
+    open   false
+    active false
   end
 
   factory :blog do
     name Faker::Company.catch_phrase
     post Faker::Lorem.paragraphs 6
     draft { [true, false][rand 2] }
-    beta_test
+    closed_active_beta_test
   end
 
   factory :forum_category do
     name Faker::Company.bs
     description Faker::Lorem.sentence 8
-    beta_test
+    access_level { rand(3)+1 }
+    closed_active_beta_test
   end
 
   factory :standard_forum_category, :parent => :forum_category do
@@ -39,12 +61,6 @@ FactoryGirl.define do
     access_level 3
   end
 
-  factory :forum_post do
-    post Faker::Lorem.paragraphs 6
-    forum_topic
-    user
-  end
-
   factory :forum_topic do
     name Faker::Company.bs
     description Faker::Lorem.sentence 8
@@ -52,26 +68,11 @@ FactoryGirl.define do
     association :forum_category, :factory => :standard_forum_category
   end
 
-  factory :standard_forum_topic, :parent => :forum_topic do
-    name Faker::Company.bs
-    description Faker::Lorem.sentence 8
+  factory :forum_post do
+    post Faker::Lorem.paragraphs 6
+    forum_topic
     user
-    association :forum_category, :factory => :standard_forum_category
   end
-
-  factory :active_forum_topic, :parent => :forum_topic do
-    name Faker::Company.bs
-    description Faker::Lorem.sentence 8
-    user
-    association :forum_category, :factory => :active_forum_category
-  end
-
-  factory :involved_forum_topic, :parent => :forum_topic do
-    name Faker::Company.bs
-    description Faker::Lorem.sentence 8
-    user
-    association :forum_category, :factory => :involved_forum_category
-   end
 
   factory :referral do
     user
@@ -83,15 +84,10 @@ FactoryGirl.define do
     months_left { rand(12)+1 }
   end
 
-  factory :survey_option do
-    name Faker::Company.bs
-    votes { rand(11) }
-    survey
-  end
-
   factory :survey do
     name Faker::Company.bs
     description Faker::Lorem.sentence 8
+    access_level { rand(3)+1 }
     beta_test
   end
 
@@ -114,6 +110,12 @@ FactoryGirl.define do
     description Faker::Lorem.sentence 8
     beta_test
     access_level 3
+  end
+
+  factory :survey_option do
+    name Faker::Company.bs
+    votes { rand(11) }
+    survey
   end
 
   factory :tag do
@@ -153,20 +155,7 @@ FactoryGirl.define do
     security_answer Faker::Name.name
   end
 
-  factory :unconfirmed_user, :parent => :user do
-    email_confirmed false
-  end
-
   factory :naughty_user, :parent => :user do
     inactive_until { rand(15)+7 }
-  end
-
-  factory :tester, :parent => :user do
-  end
-
-  factory :developer, :parent => :user do
-  end
-
-  factory :admin, :parent => :user do
   end
 end

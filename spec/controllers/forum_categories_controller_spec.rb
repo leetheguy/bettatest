@@ -26,19 +26,22 @@ describe ForumCategoriesController do
   specify { can_has_access?(same_developer)                 { get :index } }
 
   describe "GET index" do
+    it "only assigns viewable categories to @forum_categories"
     it "assigns all forum categories in current beta test as @forum_categories" do
       login admin
-      ForumCategory.stub(:where) { [mock_forum_category(:beta_test => current_beta_test)] }
+      ForumCategory.stub(:categories_for) { [mock_forum_category(:beta_test => current_beta_test)] }
       get :index, :bt_id => '1'
       assigns(:forum_categories).should eq([mock_forum_category])
     end
   end
 
   describe "GET show" do
+    it "only assigns viewable categories to @forum_categories"
     specify { cannot_has_access?(same_developer) { get :show, :id => "42" } }
 
     it "assigns the requested forum_category as @forum_category" do
       login admin
+      ForumCategory.stub(:categories_for) { [mock_forum_category(:beta_test => current_beta_test)] }
       ForumCategory.stub(:find).with("37") { mock_forum_category }
       get :show, :id => "37", :bt_id => '1'
       assigns(:forum_category).should be(mock_forum_category)
@@ -126,11 +129,10 @@ describe ForumCategoriesController do
   end
 
   describe "DELETE destroy" do
-    before do
-      login admin
-    end
-
+    it "only assigns viewable categories to @forum_categories"
     it "destroys the requested forum_category" do
+      login admin
+      ForumCategory.stub(:categories_for) { [mock_forum_category(:beta_test => current_beta_test)] }
       ForumCategory.stub(:find).with("37") { mock_forum_category }
       mock_forum_category.should_receive(:destroy)
       delete :destroy, :id => "37", :bt_id => current_beta_test.id

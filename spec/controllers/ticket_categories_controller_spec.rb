@@ -20,138 +20,138 @@ require 'spec_helper'
 
 describe TicketCategoriesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # TicketCategory. As you add validations to TicketCategory, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-
-  describe "GET index" do
-    it "assigns all ticket_categories as @ticket_categories" do
-      ticket_category = TicketCategory.create! valid_attributes
-      get :index
-      assigns(:ticket_categories).should eq([ticket_category])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested ticket_category as @ticket_category" do
-      ticket_category = TicketCategory.create! valid_attributes
-      get :show, :id => ticket_category.id.to_s
-      assigns(:ticket_category).should eq(ticket_category)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new ticket_category as @ticket_category" do
-      get :new
-      assigns(:ticket_category).should be_a_new(TicketCategory)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested ticket_category as @ticket_category" do
-      ticket_category = TicketCategory.create! valid_attributes
-      get :edit, :id => ticket_category.id.to_s
-      assigns(:ticket_category).should eq(ticket_category)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new TicketCategory" do
-        expect {
-          post :create, :ticket_category => valid_attributes
-        }.to change(TicketCategory, :count).by(1)
-      end
-
-      it "assigns a newly created ticket_category as @ticket_category" do
-        post :create, :ticket_category => valid_attributes
-        assigns(:ticket_category).should be_a(TicketCategory)
-        assigns(:ticket_category).should be_persisted
-      end
-
-      it "redirects to the created ticket_category" do
-        post :create, :ticket_category => valid_attributes
-        response.should redirect_to(TicketCategory.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved ticket_category as @ticket_category" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        TicketCategory.any_instance.stub(:save).and_return(false)
-        post :create, :ticket_category => {}
-        assigns(:ticket_category).should be_a_new(TicketCategory)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        TicketCategory.any_instance.stub(:save).and_return(false)
-        post :create, :ticket_category => {}
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested ticket_category" do
-        ticket_category = TicketCategory.create! valid_attributes
-        # Assuming there are no other ticket_categories in the database, this
-        # specifies that the TicketCategory created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        TicketCategory.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => ticket_category.id, :ticket_category => {'these' => 'params'}
-      end
-
-      it "assigns the requested ticket_category as @ticket_category" do
-        ticket_category = TicketCategory.create! valid_attributes
-        put :update, :id => ticket_category.id, :ticket_category => valid_attributes
-        assigns(:ticket_category).should eq(ticket_category)
-      end
-
-      it "redirects to the ticket_category" do
-        ticket_category = TicketCategory.create! valid_attributes
-        put :update, :id => ticket_category.id, :ticket_category => valid_attributes
-        response.should redirect_to(ticket_category)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the ticket_category as @ticket_category" do
-        ticket_category = TicketCategory.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        TicketCategory.any_instance.stub(:save).and_return(false)
-        put :update, :id => ticket_category.id.to_s, :ticket_category => {}
-        assigns(:ticket_category).should eq(ticket_category)
-      end
-
-      it "re-renders the 'edit' template" do
-        ticket_category = TicketCategory.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        TicketCategory.any_instance.stub(:save).and_return(false)
-        put :update, :id => ticket_category.id.to_s, :ticket_category => {}
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested ticket_category" do
-      ticket_category = TicketCategory.create! valid_attributes
-      expect {
-        delete :destroy, :id => ticket_category.id.to_s
-      }.to change(TicketCategory, :count).by(-1)
-    end
-
-    it "redirects to the ticket_categories list" do
-      ticket_category = TicketCategory.create! valid_attributes
-      delete :destroy, :id => ticket_category.id.to_s
-      response.should redirect_to(ticket_categories_url)
-    end
-  end
+#  # This should return the minimal set of attributes required to create a valid
+#  # TicketCategory. As you add validations to TicketCategory, be sure to
+#  # update the return value of this method accordingly.
+#  def valid_attributes
+#    {}
+#  end
+#
+#  describe "GET index" do
+#    it "assigns all ticket_categories as @ticket_categories" do
+#      ticket_category = TicketCategory.create! valid_attributes
+#      get :index
+#      assigns(:ticket_categories).should eq([ticket_category])
+#    end
+#  end
+#
+#  describe "GET show" do
+#    it "assigns the requested ticket_category as @ticket_category" do
+#      ticket_category = TicketCategory.create! valid_attributes
+#      get :show, :id => ticket_category.id.to_s
+#      assigns(:ticket_category).should eq(ticket_category)
+#    end
+#  end
+#
+#  describe "GET new" do
+#    it "assigns a new ticket_category as @ticket_category" do
+#      get :new
+#      assigns(:ticket_category).should be_a_new(TicketCategory)
+#    end
+#  end
+#
+#  describe "GET edit" do
+#    it "assigns the requested ticket_category as @ticket_category" do
+#      ticket_category = TicketCategory.create! valid_attributes
+#      get :edit, :id => ticket_category.id.to_s
+#      assigns(:ticket_category).should eq(ticket_category)
+#    end
+#  end
+#
+#  describe "POST create" do
+#    describe "with valid params" do
+#      it "creates a new TicketCategory" do
+#        expect {
+#          post :create, :ticket_category => valid_attributes
+#        }.to change(TicketCategory, :count).by(1)
+#      end
+#
+#      it "assigns a newly created ticket_category as @ticket_category" do
+#        post :create, :ticket_category => valid_attributes
+#        assigns(:ticket_category).should be_a(TicketCategory)
+#        assigns(:ticket_category).should be_persisted
+#      end
+#
+#      it "redirects to the created ticket_category" do
+#        post :create, :ticket_category => valid_attributes
+#        response.should redirect_to(TicketCategory.last)
+#      end
+#    end
+#
+#    describe "with invalid params" do
+#      it "assigns a newly created but unsaved ticket_category as @ticket_category" do
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        TicketCategory.any_instance.stub(:save).and_return(false)
+#        post :create, :ticket_category => {}
+#        assigns(:ticket_category).should be_a_new(TicketCategory)
+#      end
+#
+#      it "re-renders the 'new' template" do
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        TicketCategory.any_instance.stub(:save).and_return(false)
+#        post :create, :ticket_category => {}
+#        response.should render_template("new")
+#      end
+#    end
+#  end
+#
+#  describe "PUT update" do
+#    describe "with valid params" do
+#      it "updates the requested ticket_category" do
+#        ticket_category = TicketCategory.create! valid_attributes
+#        # Assuming there are no other ticket_categories in the database, this
+#        # specifies that the TicketCategory created on the previous line
+#        # receives the :update_attributes message with whatever params are
+#        # submitted in the request.
+#        TicketCategory.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+#        put :update, :id => ticket_category.id, :ticket_category => {'these' => 'params'}
+#      end
+#
+#      it "assigns the requested ticket_category as @ticket_category" do
+#        ticket_category = TicketCategory.create! valid_attributes
+#        put :update, :id => ticket_category.id, :ticket_category => valid_attributes
+#        assigns(:ticket_category).should eq(ticket_category)
+#      end
+#
+#      it "redirects to the ticket_category" do
+#        ticket_category = TicketCategory.create! valid_attributes
+#        put :update, :id => ticket_category.id, :ticket_category => valid_attributes
+#        response.should redirect_to(ticket_category)
+#      end
+#    end
+#
+#    describe "with invalid params" do
+#      it "assigns the ticket_category as @ticket_category" do
+#        ticket_category = TicketCategory.create! valid_attributes
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        TicketCategory.any_instance.stub(:save).and_return(false)
+#        put :update, :id => ticket_category.id.to_s, :ticket_category => {}
+#        assigns(:ticket_category).should eq(ticket_category)
+#      end
+#
+#      it "re-renders the 'edit' template" do
+#        ticket_category = TicketCategory.create! valid_attributes
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        TicketCategory.any_instance.stub(:save).and_return(false)
+#        put :update, :id => ticket_category.id.to_s, :ticket_category => {}
+#        response.should render_template("edit")
+#      end
+#    end
+#  end
+#
+#  describe "DELETE destroy" do
+#    it "destroys the requested ticket_category" do
+#      ticket_category = TicketCategory.create! valid_attributes
+#      expect {
+#        delete :destroy, :id => ticket_category.id.to_s
+#      }.to change(TicketCategory, :count).by(-1)
+#    end
+#
+#    it "redirects to the ticket_categories list" do
+#      ticket_category = TicketCategory.create! valid_attributes
+#      delete :destroy, :id => ticket_category.id.to_s
+#      response.should redirect_to(ticket_categories_url)
+#    end
+#  end
 
 end

@@ -20,138 +20,138 @@ require 'spec_helper'
 
 describe SurveyOptionsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # SurveyOption. As you add validations to SurveyOption, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-
-  describe "GET index" do
-    it "assigns all survey_options as @survey_options" do
-      survey_option = SurveyOption.create! valid_attributes
-      get :index
-      assigns(:survey_options).should eq([survey_option])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested survey_option as @survey_option" do
-      survey_option = SurveyOption.create! valid_attributes
-      get :show, :id => survey_option.id.to_s
-      assigns(:survey_option).should eq(survey_option)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new survey_option as @survey_option" do
-      get :new
-      assigns(:survey_option).should be_a_new(SurveyOption)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested survey_option as @survey_option" do
-      survey_option = SurveyOption.create! valid_attributes
-      get :edit, :id => survey_option.id.to_s
-      assigns(:survey_option).should eq(survey_option)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new SurveyOption" do
-        expect {
-          post :create, :survey_option => valid_attributes
-        }.to change(SurveyOption, :count).by(1)
-      end
-
-      it "assigns a newly created survey_option as @survey_option" do
-        post :create, :survey_option => valid_attributes
-        assigns(:survey_option).should be_a(SurveyOption)
-        assigns(:survey_option).should be_persisted
-      end
-
-      it "redirects to the created survey_option" do
-        post :create, :survey_option => valid_attributes
-        response.should redirect_to(SurveyOption.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved survey_option as @survey_option" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        SurveyOption.any_instance.stub(:save).and_return(false)
-        post :create, :survey_option => {}
-        assigns(:survey_option).should be_a_new(SurveyOption)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        SurveyOption.any_instance.stub(:save).and_return(false)
-        post :create, :survey_option => {}
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested survey_option" do
-        survey_option = SurveyOption.create! valid_attributes
-        # Assuming there are no other survey_options in the database, this
-        # specifies that the SurveyOption created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        SurveyOption.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => survey_option.id, :survey_option => {'these' => 'params'}
-      end
-
-      it "assigns the requested survey_option as @survey_option" do
-        survey_option = SurveyOption.create! valid_attributes
-        put :update, :id => survey_option.id, :survey_option => valid_attributes
-        assigns(:survey_option).should eq(survey_option)
-      end
-
-      it "redirects to the survey_option" do
-        survey_option = SurveyOption.create! valid_attributes
-        put :update, :id => survey_option.id, :survey_option => valid_attributes
-        response.should redirect_to(survey_option)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the survey_option as @survey_option" do
-        survey_option = SurveyOption.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        SurveyOption.any_instance.stub(:save).and_return(false)
-        put :update, :id => survey_option.id.to_s, :survey_option => {}
-        assigns(:survey_option).should eq(survey_option)
-      end
-
-      it "re-renders the 'edit' template" do
-        survey_option = SurveyOption.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        SurveyOption.any_instance.stub(:save).and_return(false)
-        put :update, :id => survey_option.id.to_s, :survey_option => {}
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested survey_option" do
-      survey_option = SurveyOption.create! valid_attributes
-      expect {
-        delete :destroy, :id => survey_option.id.to_s
-      }.to change(SurveyOption, :count).by(-1)
-    end
-
-    it "redirects to the survey_options list" do
-      survey_option = SurveyOption.create! valid_attributes
-      delete :destroy, :id => survey_option.id.to_s
-      response.should redirect_to(survey_options_url)
-    end
-  end
+#  # This should return the minimal set of attributes required to create a valid
+#  # SurveyOption. As you add validations to SurveyOption, be sure to
+#  # update the return value of this method accordingly.
+#  def valid_attributes
+#    {}
+#  end
+#
+#  describe "GET index" do
+#    it "assigns all survey_options as @survey_options" do
+#      survey_option = SurveyOption.create! valid_attributes
+#      get :index
+#      assigns(:survey_options).should eq([survey_option])
+#    end
+#  end
+#
+#  describe "GET show" do
+#    it "assigns the requested survey_option as @survey_option" do
+#      survey_option = SurveyOption.create! valid_attributes
+#      get :show, :id => survey_option.id.to_s
+#      assigns(:survey_option).should eq(survey_option)
+#    end
+#  end
+#
+#  describe "GET new" do
+#    it "assigns a new survey_option as @survey_option" do
+#      get :new
+#      assigns(:survey_option).should be_a_new(SurveyOption)
+#    end
+#  end
+#
+#  describe "GET edit" do
+#    it "assigns the requested survey_option as @survey_option" do
+#      survey_option = SurveyOption.create! valid_attributes
+#      get :edit, :id => survey_option.id.to_s
+#      assigns(:survey_option).should eq(survey_option)
+#    end
+#  end
+#
+#  describe "POST create" do
+#    describe "with valid params" do
+#      it "creates a new SurveyOption" do
+#        expect {
+#          post :create, :survey_option => valid_attributes
+#        }.to change(SurveyOption, :count).by(1)
+#      end
+#
+#      it "assigns a newly created survey_option as @survey_option" do
+#        post :create, :survey_option => valid_attributes
+#        assigns(:survey_option).should be_a(SurveyOption)
+#        assigns(:survey_option).should be_persisted
+#      end
+#
+#      it "redirects to the created survey_option" do
+#        post :create, :survey_option => valid_attributes
+#        response.should redirect_to(SurveyOption.last)
+#      end
+#    end
+#
+#    describe "with invalid params" do
+#      it "assigns a newly created but unsaved survey_option as @survey_option" do
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        SurveyOption.any_instance.stub(:save).and_return(false)
+#        post :create, :survey_option => {}
+#        assigns(:survey_option).should be_a_new(SurveyOption)
+#      end
+#
+#      it "re-renders the 'new' template" do
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        SurveyOption.any_instance.stub(:save).and_return(false)
+#        post :create, :survey_option => {}
+#        response.should render_template("new")
+#      end
+#    end
+#  end
+#
+#  describe "PUT update" do
+#    describe "with valid params" do
+#      it "updates the requested survey_option" do
+#        survey_option = SurveyOption.create! valid_attributes
+#        # Assuming there are no other survey_options in the database, this
+#        # specifies that the SurveyOption created on the previous line
+#        # receives the :update_attributes message with whatever params are
+#        # submitted in the request.
+#        SurveyOption.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+#        put :update, :id => survey_option.id, :survey_option => {'these' => 'params'}
+#      end
+#
+#      it "assigns the requested survey_option as @survey_option" do
+#        survey_option = SurveyOption.create! valid_attributes
+#        put :update, :id => survey_option.id, :survey_option => valid_attributes
+#        assigns(:survey_option).should eq(survey_option)
+#      end
+#
+#      it "redirects to the survey_option" do
+#        survey_option = SurveyOption.create! valid_attributes
+#        put :update, :id => survey_option.id, :survey_option => valid_attributes
+#        response.should redirect_to(survey_option)
+#      end
+#    end
+#
+#    describe "with invalid params" do
+#      it "assigns the survey_option as @survey_option" do
+#        survey_option = SurveyOption.create! valid_attributes
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        SurveyOption.any_instance.stub(:save).and_return(false)
+#        put :update, :id => survey_option.id.to_s, :survey_option => {}
+#        assigns(:survey_option).should eq(survey_option)
+#      end
+#
+#      it "re-renders the 'edit' template" do
+#        survey_option = SurveyOption.create! valid_attributes
+#        # Trigger the behavior that occurs when invalid params are submitted
+#        SurveyOption.any_instance.stub(:save).and_return(false)
+#        put :update, :id => survey_option.id.to_s, :survey_option => {}
+#        response.should render_template("edit")
+#      end
+#    end
+#  end
+#
+#  describe "DELETE destroy" do
+#    it "destroys the requested survey_option" do
+#      survey_option = SurveyOption.create! valid_attributes
+#      expect {
+#        delete :destroy, :id => survey_option.id.to_s
+#      }.to change(SurveyOption, :count).by(-1)
+#    end
+#
+#    it "redirects to the survey_options list" do
+#      survey_option = SurveyOption.create! valid_attributes
+#      delete :destroy, :id => survey_option.id.to_s
+#      response.should redirect_to(survey_options_url)
+#    end
+#  end
 
 end

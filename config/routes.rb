@@ -1,8 +1,4 @@
 Bettatest::Application.routes.draw do
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   root :to	           			=> 'static#index'
   
   match 'betta_tests'       => 'beta_tests#index'
@@ -22,17 +18,13 @@ Bettatest::Application.routes.draw do
   
   match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
-  resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions
+  resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests
 
   resources :forum_posts do
     get 'rate_up', :on => :member
     get 'rate_down', :on => :member
   end
   
-  resources :beta_tests do
-    get 'leaders', :on => :member
-  end
-
   resources :blogs do
     get :unpublished, :on => :collection
   end

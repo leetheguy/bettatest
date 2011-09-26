@@ -116,12 +116,6 @@ describe ForumPostsController do
         post :create, :forum_post => {'these' => 'params'}
         assigns(:forum_post).should be(mock_forum_post)
       end
-
-      it "redirects to the created forum_post" do
-        ForumPost.stub(:new) { mock_forum_post(:save => true) }
-        post :create, :forum_post => {}
-        response.should redirect_to(forum_post_url(mock_forum_post))
-      end
     end
 
     describe "with invalid params" do
@@ -158,12 +152,6 @@ describe ForumPostsController do
         put :update, :id => "1"
         assigns(:forum_post).should be(mock_forum_post)
       end
-
-      it "redirects to the forum_post" do
-        ForumPost.stub(:find) { mock_forum_post(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(forum_post_url(mock_forum_post))
-      end
     end
 
     describe "with invalid params" do
@@ -192,12 +180,6 @@ describe ForumPostsController do
       ForumPost.stub(:find).with("37") { mock_forum_post }
       mock_forum_post.should_receive(:destroy)
       delete :destroy, :id => "37"
-    end
-
-    it "redirects to the forum_posts list" do
-      ForumPost.stub(:find) { mock_forum_post }
-      delete :destroy, :id => "1"
-      response.should redirect_to(forum_posts_url)
     end
   end
 

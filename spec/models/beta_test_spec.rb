@@ -10,7 +10,7 @@ describe BetaTest do
     end
 
     it "should have a short description" do
-      model.description = 'This is a super duper extra stupid ridiculously long description that was designed with the exclusive and sole porpoise... (Is that how you spell purpose?) of quite simply and dramatically dwarfing the model\'s name. And doing it once and for all. Never to be questioned. All your base are belong to us.'
+      model.description = 3000.random_characters
       model.should be_invalid
     end
 

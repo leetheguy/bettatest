@@ -1,6 +1,12 @@
 require "spec_helper"
 
 describe BetaTestsController do
+  describe "convenience routes" do
+    it "sends betta_tests to #index" do
+      { :get => "/betta_tests" }.should route_to(:controller => "beta_tests", :action => "index")
+    end
+  end
+
   describe "routing" do
 
     it "recognizes and generates #index" do
