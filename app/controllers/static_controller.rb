@@ -11,4 +11,9 @@ class StaticController < ApplicationController
 	end
 	def unconfirmed_user
 	end
+  def resend_confirmation
+    if current_user && current_user.has_role? :unconfirmed
+      UserMailer.registration_confirmation(current_user).deliver
+    end
+  end
 end

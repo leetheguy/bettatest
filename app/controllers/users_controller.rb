@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 			render :new
 		end
 	end
- 
+
   # GET /users/1/edit
   def edit
     @user = User.find params[:id]

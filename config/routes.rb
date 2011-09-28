@@ -1,20 +1,21 @@
 Bettatest::Application.routes.draw do
   root :to	           			=> 'static#index'
   
-  match 'betta_tests'       => 'beta_tests#index'
-  match 'about'						  => 'static#about'
-  match 'contact'					  => 'static#contact'
-  match 'unconfirmed_user'	=> 'static#unconfirmed_user'
-  match 'suspended_user'  	=> 'static#suspended_user'
-  match 'log_out'           => 'sessions#destroy', :as => 'log_out'
-	match 'log_in'            => 'sessions#new', :as => 'log_in'
-	match 'sign_up'           => 'users#new', :as => 'sign_up'
-	match 'preferences'       => 'users#edit', :as => 'preferences'
-  match 'dashboard'			  	=> 'users#show'
-  match 'manual_test_list'	=> 'static#manual_test_list'
-  match '/feed'             => 'blogs#feed',
-        :as                 => :feed,
-        :defaults           => { :format => 'atom' }
+  match 'betta_tests'           => 'beta_tests#index'
+  match 'about'						      => 'static#about'
+  match 'contact'					      => 'static#contact'
+  match 'unconfirmed_user'    	=> 'static#unconfirmed_user'
+  match 'suspended_user'      	=> 'static#suspended_user'
+  match 'resend_confirmation'  	=> 'static#resend_confirmation'
+  match 'log_out'               => 'sessions#destroy', :as => 'log_out'
+	match 'log_in'                => 'sessions#new', :as => 'log_in'
+	match 'sign_up'               => 'users#new', :as => 'sign_up'
+	match 'preferences'           => 'users#edit', :as => 'preferences'
+  match 'dashboard'			      	=> 'users#show'
+  match 'manual_test_list'    	=> 'static#manual_test_list'
+  match '/feed'                 => 'blogs#feed',
+        :as                     => :feed,
+        :defaults               => { :format => 'atom' }
   
   match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
