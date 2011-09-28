@@ -15,5 +15,6 @@ class StaticController < ApplicationController
     if current_user && current_user.has_role(:unconfirmed)
       UserMailer.registration_confirmation(current_user).deliver
     end
+    redirect_to dashboard_path
   end
 end
