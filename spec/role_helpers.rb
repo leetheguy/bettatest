@@ -5,10 +5,10 @@ module RoleHelpers
     @unconfirmed = Factory.create :unconfirmed_user
     @naughty = Factory.create :naughty_user
     @plain = Factory.create :user
-    @tester = Factory.create :tester
-    @developer = Factory.create :developer
-    @subscriber = Factory.create :developer
-    @admin = Factory.create :admin
+    @tester = Factory.create :user
+    @developer = Factory.create :user
+    @subscriber = Factory.create :user
+    @admin = Factory.create :user
 
     @unconfirmed.has_no_roles!
     @unconfirmed.has_role! :unconfirmed

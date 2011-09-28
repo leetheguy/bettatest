@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 'spec_helper'
 
 describe Ticket do
   describe "validations" do

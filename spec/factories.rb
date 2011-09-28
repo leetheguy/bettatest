@@ -9,10 +9,10 @@ FactoryGirl.define do
     f.sequence(:name) { |n| "#{Faker::Internet.domain_name} No. #{n}" }
     f.description Faker::Company.bs + ", " + Faker::Company.bs + "and " + Faker::Company.bs
     f.active      { [true, false][rand 2] }
-    f.open        { [true, false][rand 2] }
-    f.link        { Faker::Internet.domain_name }
+    f.open        false
+    f.link        true
     f.password    8.random_characters
-    f.association :user, :factory => :developer
+    f.association :user, :factory => :user
   end
 
   factory :open_active_beta_test, :parent => :beta_test do
@@ -39,14 +39,14 @@ FactoryGirl.define do
     name Faker::Company.catch_phrase
     post Faker::Lorem.paragraphs 6
     draft { [true, false][rand 2] }
-    closed_active_beta_test
+    beta_test
   end
 
   factory :forum_category do
     name Faker::Company.bs
     description Faker::Lorem.sentence 8
     access_level { rand(3)+1 }
-    closed_active_beta_test
+    beta_test
   end
 
   factory :standard_forum_category, :parent => :forum_category do
@@ -80,7 +80,7 @@ FactoryGirl.define do
   end
 
   factory :subscription do
-    association :user, :factory => :developer
+    association :user, :factory => :user
     months_left { rand(12)+1 }
   end
 
@@ -126,7 +126,7 @@ FactoryGirl.define do
     level { rand(5)-1 }
     points { [0, rand(25), 25+rand(50), 75+rand(50), -1][level] }
     days_at_level { rand 30 }
-    association :user, :factory => :tester
+    association :user, :factory => :user
     beta_test
   end
 
@@ -153,6 +153,10 @@ FactoryGirl.define do
     email_code 20.random_characters
     security_question Faker::Company.bs
     security_answer Faker::Name.name
+  end
+
+  factory :unconfirmed_user, :parent => :user do
+    email_confirmed false
   end
 
   factory :naughty_user, :parent => :user do

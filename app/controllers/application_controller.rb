@@ -30,7 +30,13 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    @current_user = User.find(session[:id]) if session[:id]
+    if session[:id] && User.exists?(session[:id])
+      @current_user = User.find session[:id]
+    else
+      @current_user = nil
+      session[:id] = nil
+    end
+    @current_user
   end  
 
   def current_user_is_admin
@@ -46,6 +52,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_beta_test
+    if !BetaTest.exists?(session[:bt_id])
+      session[:bt_id] = nil
+    end
     if current_controller == 'beta_tests'
       if current_action == 'new'
         @current_beta_test = nil

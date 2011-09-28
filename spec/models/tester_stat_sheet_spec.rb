@@ -7,7 +7,7 @@ describe TesterStatSheet do
   end
 
   describe "validations" do
-    let(:user)      { Factory.create :tester }
+    let(:user)      { Factory.create :user }
     let(:beta_test) { Factory.create :beta_test }
     let(:model)     { Factory.create :tester_stat_sheet , :user => user, :beta_test => beta_test }
 
@@ -29,35 +29,35 @@ describe TesterStatSheet do
 
   describe "logic" do
     def user1
-      @user1 ||= Factory.create :tester
+      @user1 ||= Factory.create :user
       @user1.has_no_roles!
       @user1.has_role! :user
       @user1
     end
 
     def user2
-      @user2 ||= Factory.create :tester
+      @user2 ||= Factory.create :user
       @user2.has_no_roles!
       @user2.has_role! :user
       @user2
     end
 
     def user3
-      @user3 ||= Factory.create :tester
+      @user3 ||= Factory.create :user
       @user3.has_no_roles!
       @user3.has_role! :user
       @user3
     end
 
     def user4
-      @user4 ||= Factory.create :tester
+      @user4 ||= Factory.create :user
       @user4.has_no_roles!
       @user4.has_role! :user
       @user4
     end
 
     def user5
-      @user5 ||= Factory.create :tester
+      @user5 ||= Factory.create :user
       @user5.has_no_roles!
       @user5.has_role! :user
       @user5

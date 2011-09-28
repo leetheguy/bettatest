@@ -86,7 +86,7 @@ module BetaTestMacros
 
   def not_approved_tester
     if !@not_approved_tester
-      @not_approved_tester = Factory.create :tester
+      @not_approved_tester = Factory.create :user
       @not_approved_tester.has_no_roles!
       @not_approved_tester.has_role! :tester
     end
@@ -95,7 +95,7 @@ module BetaTestMacros
 
   def approved_deactivated_tester
     if !@approved_deactivated_tester
-      @approved_deactivated_tester = Factory.create :tester
+      @approved_deactivated_tester = Factory.create :user
       @approved_deactivated_tester.has_no_roles!
       @approved_deactivated_tester.has_role! :tester
       @approved_deactivated_tester.has_role! :tester, current_beta_test
@@ -106,7 +106,7 @@ module BetaTestMacros
 
   def approved_waiting_tester
     if !@approved_waiting_tester
-      @approved_waiting_tester = Factory.create :tester
+      @approved_waiting_tester = Factory.create :user
       @approved_waiting_tester.has_no_roles!
       @approved_waiting_tester.has_role! :tester
       @approved_waiting_tester.has_role! :tester, current_beta_test
@@ -117,7 +117,7 @@ module BetaTestMacros
 
   def approved_activated_tester
     if !@approved_activated_tester
-      @approved_activated_tester = Factory.create :tester
+      @approved_activated_tester = Factory.create :user
       @approved_activated_tester.has_no_roles!
       @approved_activated_tester.has_role! :tester
       @approved_activated_tester.has_role! :tester, current_beta_test
@@ -128,7 +128,7 @@ module BetaTestMacros
 
   def approved_active_tester
     if !@approved_active_tester
-      @approved_active_tester = Factory.create :tester
+      @approved_active_tester = Factory.create :user
       @approved_active_tester.has_no_roles!
       @approved_active_tester.has_role! :tester
       @approved_active_tester.has_role! :tester, current_beta_test
@@ -140,7 +140,7 @@ module BetaTestMacros
 
   def approved_involved_tester
     if !@approved_involved_tester
-      @approved_involved_tester = Factory.create :tester
+      @approved_involved_tester = Factory.create :user
       @approved_involved_tester.has_no_roles!
       @approved_involved_tester.has_role! :tester
       @approved_involved_tester.has_role! :tester, current_beta_test
@@ -152,7 +152,7 @@ module BetaTestMacros
 
   def same_developer
     if !@same_developer
-      @same_developer = Factory.create :developer
+      @same_developer = Factory.create :user
       @same_developer.has_no_roles!
       @same_developer.has_role! :developer
       @same_developer.has_role! :developer, current_beta_test
@@ -162,7 +162,7 @@ module BetaTestMacros
 
   def other_developer
     if !@other_developer
-      @other_developer = Factory.create :developer
+      @other_developer = Factory.create :user
       @other_developer.has_no_roles!
       @other_developer.has_role! :developer
       @other_developer.has_role! :developer, other_beta_test

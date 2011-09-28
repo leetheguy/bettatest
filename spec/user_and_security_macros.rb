@@ -39,7 +39,7 @@ module UserAndSecurityMacros
 
   def tester
     if !@tester
-      @tester = Factory.create :tester
+      @tester = Factory.create :user
       @tester.has_no_roles!
       @tester.has_role! :tester
     end
@@ -48,7 +48,7 @@ module UserAndSecurityMacros
 
   def developer
     if !@developer 
-      @developer = Factory.create :developer
+      @developer = Factory.create :user
       @developer.has_no_roles!
       @developer.has_role! :developer
     end
@@ -57,7 +57,7 @@ module UserAndSecurityMacros
 
   def subscriber
     if !@subscriber
-      @subscriber = Factory.create :developer
+      @subscriber = Factory.create :user
       @subscriber.has_no_roles!
       @subscriber.has_role! :developer
       @subscriber.has_role! :subscriber
@@ -67,7 +67,7 @@ module UserAndSecurityMacros
 
   def admin
     if !@admin
-      @admin = Factory.create :admin
+      @admin = Factory.create :user
       @admin.has_no_roles!
       @admin.has_role! :admin
     end
