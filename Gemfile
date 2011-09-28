@@ -22,9 +22,6 @@ group :development, :test do
   gem 'factory_girl_rails', :git => 'http://github.com/thoughtbot/factory_girl_rails.git'
   gem 'autotest'
   gem 'autotest-rails'
-  gem 'guard-rspec'
-  gem 'spork', '> 0.9.0.rc'
-  gem 'guard-spork'
   gem 'libnotify'
 end
 
