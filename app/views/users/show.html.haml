@@ -18,7 +18,7 @@
         %td
           %h2 no betta tests started
         %td.align-right
-          -if @user == current_user
+          -if current_user && @user == current_user
             .buttle-small
               = link_to 'start one', new_beta_test_path
           -else
@@ -37,7 +37,7 @@
         %td
           %h2 not subscribed to any betta tests
         %td.align-right
-          -if @user == current_user
+          -if current_user && @user == current_user
             .buttle-small
               = link_to 'find one', beta_tests_path
           -else
@@ -45,6 +45,6 @@
       %tr
         %td{:colspan => '2'}
           %hr
-  - if @user == @current_user || @current_user.has_role?(:admin)
+  - if current_user && (@user == @current_user || @current_user.has_role?(:admin))
     .buttle-medium
       = link_to 'preferences', edit_user_path(@user)

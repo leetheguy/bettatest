@@ -1,9 +1,4 @@
 = render 'buttons'
-.buttle-medium
-  - if @published
-    = link_to 'show unpublished posts', unpublished_blogs_path
-  - else
-    = link_to 'show published posts', blogs_path
 %hr
 
 - if @blogs.count > 0
@@ -14,10 +9,4 @@
 - else
   %h2.color-2 No blogs have been published for this betta test.
   %hr
-
 = render 'buttons'
-.buttle-medium
-  - if @published
-    = link_to 'show unpublished posts', unpublished_blogs_path
-  - else
-    = link_to 'show published posts', blogs_path

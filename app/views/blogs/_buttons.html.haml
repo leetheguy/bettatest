@@ -3,3 +3,8 @@
 - if developer || admin
   .buttle-medium
     = link_to 'create a new post', new_blog_path
+  .buttle-medium
+    - if @published
+      = link_to 'show unpublished posts', unpublished_blogs_path
+    - else
+      = link_to 'show published posts', blogs_path

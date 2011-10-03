@@ -5,8 +5,12 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Bettatest"
+  config.site_title = "bettatest.com"
 
+  # Set the link url for the title. For example, to take 
+  # users to your main site. Defaults to no link.
+  #
+  # config.site_title_link = "/"
 
   # == Default Namespace
   #
@@ -25,7 +29,6 @@ ActiveAdmin.setup do |config|
   # Default:
   # config.default_namespace = :admin
 
-
   # == User Authentication
   #
   # Active Admin will automatically call an authentication 
@@ -34,8 +37,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the controller.
-  config.authentication_method = :authenticate_admin_user!
-
+  config.authentication_method = :current_user_is_admin
 
   # == Current User
   #
@@ -44,7 +46,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # to return the currently logged in user.
-  config.current_user_method = :current_admin_user
+  config.current_user_method = :current_user
 
 
   # == Logging Out
@@ -83,7 +85,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources from here. 
   #
-  # config.before_filter :do_something_awesome
+  config.before_filter :redirect_non_admin
 
 
   # == Register Stylesheets & Javascripts

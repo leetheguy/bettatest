@@ -32,11 +32,11 @@ class TesterStatSheet < ActiveRecord::Base
 
     if position > beta_test.max_testers
       self.level  = WAITING
-      self.points = 10
     else
       self.level  = ACTIVATED
-      self.points = 10
+      user.has_role! :activated, beta_test
     end
+    self.points = 10
   end
 
   def activate_user!

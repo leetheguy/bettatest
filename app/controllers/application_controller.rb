@@ -3,17 +3,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
-  helper_method :current_user, :current_beta_test, :current_forum_topic, :current_forum_category, :current_survey, :current_ticket_category, :current_action, :current_controller
+  helper_method :current_user, :current_user_is_admin, :current_beta_test, :current_action, :current_controller, :default_redirect, :redirect_non_admin
 
   before_filter :current_beta_test
 
   protected
-
-  def debug
-    puts params.to_s
-    puts current_controller
-  end
-
 
   def default_redirect
     if current_user
@@ -40,8 +34,14 @@ class ApplicationController < ActionController::Base
   end  
 
   def current_user_is_admin
-    @current_user.has_role? :admin
+    current_user.has_role? :admin
   end  
+
+  def redirect_non_admin
+    if !current_user.has_role? :admin
+      default_redirect
+    end
+  end
 
   def current_controller
     controller_name

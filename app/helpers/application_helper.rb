@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def shorten(text)
     if text.length > 200
-      text+'...'
+      text[0...200]+'...'
     else
       text
     end

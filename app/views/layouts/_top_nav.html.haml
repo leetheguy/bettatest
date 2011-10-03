@@ -23,7 +23,7 @@
     -if current_controller == 'leaders'
       leaders
     -else
-      =link_to 'leaders', leaders_beta_test_path(current_beta_test)
+      =link_to 'leaders', leaders_path(current_beta_test)
   %h3
     -if current_controller == 'tickets'
       tickets
