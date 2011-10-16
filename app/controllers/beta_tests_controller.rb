@@ -4,7 +4,7 @@ class BetaTestsController < ApplicationController
     #allow :user, :to => [:new, :create]
     allow :tester, :of => :official_test, :to => [:new, :create]
     allow :developer, :of => :current_beta_test, :to => [:edit, :update]
-    deny :developer, :to => [:new, :create]
+    deny :developer, :to => [:new, :create], :unless => :current_user_is_admin
     allow :admin
   end
 
