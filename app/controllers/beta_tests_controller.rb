@@ -1,7 +1,8 @@
 class BetaTestsController < ApplicationController
   access_control do
     allow all, :to => [:index, :show]
-    allow :user, :tester, :to => [:new, :create]
+    #allow :user, :to => [:new, :create]
+    allow :tester, :of => :official_test, :to => [:new, :create]
     allow :developer, :of => :current_beta_test, :to => [:edit, :update]
     deny :developer, :to => [:new, :create]
     allow :admin
@@ -87,5 +88,8 @@ class BetaTestsController < ApplicationController
   def destroy
     current_beta_test.destroy
     redirect_to beta_tests_path
+  end
+  def official_test
+    BetaTest.where(:name => "bettatest.com - developer's test")
   end
 end
