@@ -1,15 +1,21 @@
 = form_for(@forum_topic) do |f|
+  = render 'layouts/notice'
   = render 'layouts/errors', :object => @forum_topic
-  .bubble
-    %p= f.label :name, 'Topic name.'
-    = f.text_field :name
-  %br
-  .bubble
-    %p= f.label :description, 'Topic description.'
-    =f.text_area :description
-  %br
+  %table
+    %tr
+      %td
+        = f.label :name, 'topic name'
+    %tr
+      %td
+        = f.text_field :name
+    %tr
+      %td
+        = f.label :description, 'topic description'
+    %tr
+      %td
+        =f.text_area :description
   = f.hidden_field :forum_category_id, { :value => @forum_topic.forum_category_id } 
-  .bubble
-    = f.submit "save"
-  .bubble
-    = f.submit "cancel"
+  .buttle-medium
+    = f.submit 'save'
+  .buttle-medium
+    = f.submit 'cancel'

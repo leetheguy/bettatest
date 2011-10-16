@@ -10,6 +10,7 @@ describe User do
     it "returns suspension time for a positive number"
     it "returns no suspension time for 0"
     it "returns permanent suspension for -1"
+    it "validates that the user name doesn't contain a reserved word"
   end
 
   describe "before create" do

@@ -43,4 +43,27 @@ class BetaTest < ActiveRecord::Base
   def deactivate_test
     self.active = false
   end
+
+  def categories_for(user)
+    categories = ForumCategory.where(:id => -1)
+    if user
+      if user.has_role?(:admin) || user.has_role?(:developer, self) || self.open
+        categories = self.forum_categories.order(:name)
+      else
+        tss = TesterStatSheet.where(:user_id => user, :beta_test_id => self).first
+        if tss
+          categories = self.forum_categories.where('access_level < ?', tss.level+1)
+        end
+      end
+    end
+    categories
+  end
+
+  def stat_sheet_for(user)
+    self.tester_stat_sheets.where(:user_id => user).first
+  end
+
+  def ordered_stat_sheets
+    self.tester_stat_sheets.where(:level => [1,2,3]).order('points DESC')
+  end
 end 

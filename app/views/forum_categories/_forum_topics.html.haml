@@ -2,7 +2,9 @@
   %table
     =render forum_topics
 -else
-  No topics for this category.
+  No topics have been created
+  or are visible for this category.
 .align-center
-  .buttle-small= link_to 'new topic', new_forum_topic_path( :forum_category_id => @forum_category.id)
+  .buttle-small= link_to 'new topic', new_forum_topic_path(:forum_category_id => @forum_category.id)
+  .buttle-small= link_to 'all topics', forum_topics_path(:forum_category_id => @forum_category.id)
 %hr

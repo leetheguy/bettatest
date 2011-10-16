@@ -1,0 +1,21 @@
+- if forum_post.post && forum_post.post.length > 0
+  = markdown(forum_post.post)
+-# if !(current_user.has_role?(:admin) || current_user.has_role?(:developer, current_beta_test)) && current_stat_sheet
+- if true
+  %table.align-center
+    - if !current_beta_test.open && !current_user.has_role?(:developer, current_beta_test) && !current_user.has_role?(:owner, forum_post) && !current_user.has_role?(:admin)
+      %tr
+        %td.align-center
+          .buttle-small
+            = link_to 'rate post up', rate_up_forum_post_path(forum_post)
+        %td.align-center
+          .buttle-small
+            = link_to 'rate post down', rate_down_forum_post_path(forum_post)
+      %tr
+        %td.align-center
+          = "(give #{current_beta_test.rate_up_give_pts} pts.), "
+          = "(lose #{current_beta_test.rate_up_lose_pts} pts.)"
+        %td.align-center
+          = "(take #{current_beta_test.rate_down_take_pts} pts.), "
+          = "(lose #{current_beta_test.rate_down_lose_pts} pts.)"
+%hr

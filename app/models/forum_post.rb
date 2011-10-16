@@ -5,6 +5,8 @@ class ForumPost < ActiveRecord::Base
 	
 	validates_presence_of :post
   
+  after_save :assign_owner
+
   belongs_to :forum_topic
   belongs_to :user
 
@@ -16,5 +18,9 @@ class ForumPost < ActiveRecord::Base
   def rate_down!
     self.score -= 1
     self.save!
+  end
+
+  def assign_owner
+    self.user.has_role!(:owner, self)
   end
 end

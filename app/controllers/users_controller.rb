@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :assign_edited_user, :only => [:edit, :update]
 
   access_control do
-    allow :developer, :to => [:index]
+    #allow :developer, :to => [:index]
     allow all, :to => [:show]
     allow all, :to => [:confirm]
     allow anonymous, :to => [:new, :create]
@@ -21,46 +21,43 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    if current_user.has_role? :admin
-      @unconfirmed_users = User.all_with_role :unconfirmed
-      @naughty_users = User.all_with_role :naughty
-      @users = User.all_with_role :user
-      @testers = User.all_with_role :tester
-      @developers = User.all_with_role :developer
-      @admins = User.all_with_role :admin
-    end
-    if current_user.has_role? :developer
-      @my_beta_tests = current_user.my_beta_tests
-    end
+    redirect_to beta_tests_path
+    #if current_user.has_role? :developer
+    #  @my_beta_tests = current_user.my_beta_tests
+    #end
   end
 
   # GET /users/1
   def show
     if params[:id]
       @user = User.find params[:id]
-    elsif current_user
+    else current_user
       @user = User.find current_user
+    end
+    if @user
+      @beta_tests = @user.my_beta_tests
+      @tester_stat_sheets = @user.tester_stat_sheets
     else
       default_redirect
     end
   end
 
   # GET /users/new
-	def new
-		@user = User.new
-	end
+  def new
+    @user = User.new
+  end
 
   # POST /users
-	def create
-		@user = User.new(params[:user])
-		if @user.save
+  def create
+    @user = User.new(params[:user])
+    if @user.save
       UserMailer.registration_confirmation(@user).deliver
       session[:id] = @user.id
-			redirect_to unconfirmed_user_path, :notice => 'Your account has been created.'
-		else
-			render :new
-		end
-	end
+      redirect_to unconfirmed_user_path, :notice => 'Your account has been successfully created.'
+    else
+      render :new
+    end
+  end
 
   # GET /users/1/edit
   def edit

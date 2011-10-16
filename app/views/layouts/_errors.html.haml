@@ -1,8 +1,9 @@
 -if object.errors.any?
   #error_explanation
-    .tab-box-top
-      %h2= "#{pluralize(object.errors.count, "error")} prevented this from being saved:"
-    .tab-box-bottom.errors
-      -object.errors.full_messages.each do |msg|
-        =msg
-        %br
+    .bubble-top-error
+    .bubble-middle-error.align-left
+      %h3= "#{pluralize(object.errors.count, "error")} prevented this from being saved:"
+      %ul
+        -object.errors.full_messages.each do |msg|
+          %li= msg
+    .bubble-bottom-error

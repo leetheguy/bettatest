@@ -15,6 +15,10 @@ ActiveAdmin.register User do
     column :name, :sortable => :name do |user|
       link_to user.name, admin_user_path(user)
     end
+
+    column :possess do |user|
+      link_to 'possess', possess_path(:user_id => user.id)
+    end
     column :email
     column 'opted in', :sortable => false do |user|
       user.betta_email_opt_in
@@ -38,5 +42,11 @@ ActiveAdmin.register User do
     column :last_login
     column :created_at
     column :updated_at
+  end
+
+  show do
+    div do
+      link_to 'possess', possess_path(:user_id => user.id)
+    end
   end
 end

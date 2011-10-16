@@ -1,22 +1,16 @@
-= form_for(@beta_test) do |f|
-  -if @beta_test.errors.any?
-    #error_explanation
-      %h2= pluralize(@beta_test.errors.count, "error")
-      prohibited this beta_test from being saved:
-      %ul
-      -@beta_test.errors.full_messages.each do |msg|
-        %li= msg
-  .span-11.border
-    %p.right= f.label :name, 'Name of your project'
-  .span-11.left.last
-    = f.text_field :name
-  .span-11.border
-    %p.right= f.label :link, 'Link to your project.'
-  .span-11.left.last
-    = f.text_field :link
-  .span-11.border
-    %p.right= f.label :link, 'Password to access your project.'
-  .span-11.left.last
-    = f.text_field :password
-  .span-22.last
-    %p.button= f.submit
+%tr
+  %td{:colspan => '2'}= f.label :name, 'project name'
+%tr
+  %td{:colspan => '2'}= f.text_field :name
+%tr
+  %td{:colspan => '2'}= f.label :description, 'project description'
+%tr
+  %td{:colspan => '2'}= f.text_area :description
+%tr
+  %td{:colspan => '2'}= f.label :link, 'project link'
+%tr
+  %td{:colspan => '2'}= f.text_field :link
+%tr
+  %td{:colspan => '2'}= f.label :link, 'project password'
+%tr
+  %td{:colspan => '2'}= f.text_field :password

@@ -1,0 +1,18 @@
+%tr
+  %td{:width => '70%'}
+    - if beta_test.active || current_user.has_role?(:developer, beta_test)
+      %h3= link_to beta_test.name, beta_test
+    - else
+      %h3= beta_test.name
+    &nbsp;-&nbsp;
+    hosted by:
+    = link_to beta_test.user.name, beta_test.user
+    &nbsp;-&nbsp;
+    = beta_test.status
+  %td.align-right
+    -if beta_test.active && !beta_test.open && !tester(beta_test)
+      .buttle-small= link_to 'join', tester_stat_sheets_path(:beta_test_id => beta_test.id), :method => 'post'
+    -if developer(beta_test) || admin
+      .buttle-small= link_to 'edit', edit_beta_test_path(beta_test)
+    - if current_action == 'index'
+      .buttle-small= link_to 'check the blog', blogs_path(:beta_test_id => beta_test.id)

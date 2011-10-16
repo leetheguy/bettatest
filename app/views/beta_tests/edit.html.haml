@@ -9,35 +9,17 @@
           This betta test is closed to the general public.
       %td.align-center
         -if @beta_test.active
-          This betta test is active and open to testing.
+          This betta test is active, visible and open to testing.
         -else
-          This betta test is inactive and closed to testing.
+          This betta test is inactive, invisible and closed to testing.
     %tr
       %td.align-center
-        -if @beta_test.open
-          .buttle-medium= f.submit "make private", :public => false
-        -else
-          .buttle-medium= f.submit "make public", :public => true
+        -if !@beta_test.open
+          .buttle-medium= f.submit "make public", :public => true, :confirm => "Are you sure? This can not be undone!"
       %td.align-center
         -if @beta_test.active
           .buttle-medium= f.submit "deactivate", :active => false
         -else
           .buttle-medium= f.submit "activate", :active => true
-    %tr
-      %td{:colspan => '2'}= f.label :name, 'project name'
-    %tr
-      %td{:colspan => '2'}= f.text_field :name
-    %tr
-      %td{:colspan => '2'}= f.label :description, 'project description'
-    %tr
-      %td{:colspan => '2'}= f.text_area :description
-    %tr
-      %td{:colspan => '2'}= f.label :link, 'project link'
-    %tr
-      %td{:colspan => '2'}= f.text_field :link
-    %tr
-      %td{:colspan => '2'}= f.label :link, 'project password'
-    %tr
-      %td{:colspan => '2'}= f.text_field :password
-  .buttle-medium= f.submit "update betta test"
-  .buttle-medium= f.submit "cancel"
+    = render 'form', :f => f
+  = render 'buttons', :f => f

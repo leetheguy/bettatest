@@ -1,33 +1,39 @@
 class ForumCategoriesController < ApplicationController
   access_control do
-    allow :tester, :of => :current_beta_test, :to => [:index]
-    deny :deactivated, :waiting, :for => :current_beta_test
-    allow :developer, :of => :current_beta_test, :except => [:show]
+    allow :tester, :of => :current_beta_test, :to => [:index, :show]
+    deny :deactivated, :waiting, :for => :current_beta_test, :unless => :current_beta_test_is_open
+    allow :developer, :of => :current_beta_test
+    allow :user, :to => [:index, :show], :if => :current_beta_test_is_open
     allow :admin
   end
 
   def index
-    @forum_categories = ForumCategory.categories_for(current_user, current_beta_test)
+    @forum_categories = current_beta_test.categories_for(current_user).page(params[:page]).per(20)
   end
 
   def show
-    @forum_categories = ForumCategory.categories_for(current_user, current_beta_test)
+    @forum_categories = current_beta_test.categories_for(current_user)
     @forum_category = ForumCategory.find(params[:id])
-    @forum_topics = @forum_category.forum_topics
-    respond_to do |format|
-      format.html do
-        redirect_to forum_categories_path
+    if @forum_category.is_visible_to(current_user)
+      respond_to do |format|
+        format.html do
+          redirect_to forum_topics_path(:forum_category_id => @forum_category)
+        end
+        format.js do
+          @forum_topics = ForumTopic.recently_changed(@forum_category)
+        end
       end
-      format.js
+    else
+      redirect_to forum_categories_path
     end
   end
 
   def new
-    @forum_category = ForumCategory.new
+      @forum_category = ForumCategory.new
   end
 
   def edit
-    @forum_category = ForumCategory.find(params[:id])
+      @forum_category = ForumCategory.find(params[:id])
   end
 
   def create
@@ -53,7 +59,7 @@ class ForumCategoriesController < ApplicationController
   end
 
   def destroy
-    @forum_categories = ForumCategory.categories_for(current_user, current_beta_test)
+    @forum_categories = current_beta_test.categories_for(current_user)
     forum_category = ForumCategory.find(params[:id])
     forum_category.destroy
     redirect_to forum_categories_path

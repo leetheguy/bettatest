@@ -1,17 +1,16 @@
-- if @forum_topics
+= render 'buttons'
+= paginate @forum_topics
+= render 'layouts/notice'
+%hr
+- if @forum_topics.count > 0
   %table
-    - @forum_topics.each do |forum_topic|
-      %tr
-        %td{:width => '70%'}
-          %h3= link_to forum_topic.name, forum_topic
-        - if developer
-          %td.align-right
-            .buttle-small= link_to 'edit', edit_forum_topic_path(forum_topic)
-            .buttle-small= link_to 'destroy', forum_topic, :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
-      %tr
-        %td{:colspan => '2'}
-          = markdown(forum_topic.description)
-          %hr
--else
-  %h2 No topics have been created for this category.
-.buttle-medium= link_to 'start new topic', new_forum_topic_path(:forum_category_id => forum_topic.forum_category_id)
+    = render @forum_topics
+  = paginate @forum_topics
+- else
+  %h2 
+    No forum topics have been created
+    %br
+    or are visible for this category.
+  %hr
+= paginate @forum_topics
+= render 'buttons'

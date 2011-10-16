@@ -164,35 +164,10 @@ FactoryGirl.define do
   end
 
   factory :tester_stat_sheet do
-    level { rand(5)-1 }
-    points { [0, rand(25), 25+rand(50), 75+rand(50), -1][level] }
+    #level { rand(5)-1 }
+    #points { [0, rand(25), 25+rand(50), 75+rand(50), -1][level] }
     days_at_level { rand 30 }
     association :user, :factory => :user
     beta_test
-  end
-
-  factory :expired_tester, :parent => :tester_stat_sheet do
-    points -1
-    level -1
-  end
-
-  factory :waiting_tester, :parent => :tester_stat_sheet do
-    points 0
-    level 0
-  end
-
-  factory :activated_tester, :parent => :tester_stat_sheet do
-    points { rand(25) }
-    level 1
-  end
-
-  factory :activate_tester, :parent => :tester_stat_sheet do
-    points { 25+rand(50) }
-    level 2
-  end
-
-  factory :involved_tester, :parent => :tester_stat_sheet do
-    points { 75+rand(50) }
-    level 3
   end
 end

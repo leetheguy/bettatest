@@ -1,7 +1,8 @@
 Markdown is allowed. Learn more about it 
-=link_to 'here.', 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'
+= link_to 'here.', 'http://daringfireball.net/projects/markdown/basics', :target => '_blank'
 %br
 = form_for(@blog) do |f|
+  = render 'layouts/notice'
   = render 'layouts/errors', :object => @blog
   %table
     %tr
@@ -12,9 +13,4 @@ Markdown is allowed. Learn more about it
       %td= f.label :post, 'post text'
     %tr
       %td= f.text_area :post
-  .buttle-medium
-    = f.submit "save"
-  .buttle-medium
-    = f.submit "post"
-  .buttle-medium
-    = f.submit "cancel"
+  = render 'buttons', :f => f, :blog => @blog

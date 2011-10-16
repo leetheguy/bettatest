@@ -19,4 +19,6 @@ describe ForumPost do
       ForumPost.find(model.id).score.should == -1
     end
   end
+
+  it "assigns :owner role to user"
 end

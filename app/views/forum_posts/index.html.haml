@@ -1,23 +1,15 @@
-- if @forum_posts.count == 0
+= render 'buttons'
+= paginate @forum_posts
+= render 'layouts/notice'
+%hr
+- if @forum_posts.count > 0
   %table
-    - @forum_posts.each do |forum_post|
-      %tr
-        %td{:width => '70%'}
-          post by:
-          = forum_post.user.name
-          &nbsp;-&nbsp;
-          score:
-          = forum_post.score
-        %td.align-right
-          .buttle-small= link_to 'rate up', rate_up_forum_post_path(:forum_topic_id => forum_post.forum_topic_id)
-          .buttle-small= link_to 'rate down', rate_down_forum_post_path(:forum_topic_id => forum_post.forum_topic_id)
-          - if developer
-            .buttle-small= link_to 'edit', edit_forum_post_path(forum_post)
-            .buttle-small= link_to 'destroy', forum_post, :confirm => 'Are you sure?', :method => :delete
-      %tr
-        %td{:colspan => '2'}
-          = markdown(forum_post.post)
--else
-  %h2 No posts have been created for this topic.
-.buttle-medium= link_to 'new post', new_forum_post_path(:forum_topic_id => forum_post.forum_topic_id
-
+    = render @forum_posts
+- else
+  %h2
+    No posts have been created
+    %br
+    or are visible for this topic.
+    %hr
+= paginate @forum_posts
+= render 'buttons'

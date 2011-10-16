@@ -1,22 +1,27 @@
 require 'spec_helper'
 
 describe TesterStatSheetsController do
-#  before do
-#    developer.has_role! :developer, current_beta_test
-#  end
-#
-#
-#  def mock_tester_stat_sheet(stubs={})
-#    @mock_tester_stat_sheet ||= mock_model(TesterStatSheet, stubs).as_null_object
-#  end
-#
-#  describe "GET index" do
-#    it "assigns all tester_stat_sheets as @tester_stat_sheets" do
-#      TesterStatSheet.stub(:all) { [mock_tester_stat_sheet] }
+  before do
+    navigate :beta_test => current_beta_test
+  end
+
+  specify { can_has_access?(approved_activated_tester)      { get :index } }
+
+  specify { can_has_access?(same_developer)                 { get :index } }
+
+  specify { can_has_access?(user)                           { post :create } }
+
+  specify { cannot_has_access?(same_developer)              { post :create } }
+
+  specify { cannot_has_access?(approved_activated_tester)   { post :create } }
+
+  describe "GET index" do
+    it "assigns all tester_stat_sheets as @tester_stat_sheets"# do
+#      login admin
 #      get :index
-#      assigns(:tester_stat_sheets).should eq([mock_tester_stat_sheet])
+#      assigns(:tester_stat_sheets).should be_a_kind_of(Array)
 #    end
-#  end
+  end
 #
 #  describe "GET show" do
 #    it "assigns the requested tester_stat_sheet as @tester_stat_sheet" do
@@ -42,35 +47,42 @@ describe TesterStatSheetsController do
 #    end
 #  end
 #
-#  describe "POST create" do
-#    describe "with valid params" do
-#      it "assigns a newly created tester_stat_sheet as @tester_stat_sheet" do
-#        TesterStatSheet.stub(:new).with({'these' => 'params'}) { mock_tester_stat_sheet(:save => true) }
-#        post :create, :tester_stat_sheet => {'these' => 'params'}
-#        assigns(:tester_stat_sheet).should be(mock_tester_stat_sheet)
-#      end
+  describe "POST create" do
+#      it "allows a valid user to join an active betta test" do
+#        login user
+#        post :create, :tester_stat_sheet => { :beta_test_id => current_beta_test.id }
 #
-#      it "redirects to the created tester_stat_sheet" do
-#        TesterStatSheet.stub(:new) { mock_tester_stat_sheet(:save => true) }
-#        post :create, :tester_stat_sheet => {}
-#        response.should redirect_to(tester_stat_sheet_url(mock_tester_stat_sheet))
-#      end
-#    end
 #
-#    describe "with invalid params" do
-#      it "assigns a newly created but unsaved tester_stat_sheet as @tester_stat_sheet" do
-#        TesterStatSheet.stub(:new).with({'these' => 'params'}) { mock_tester_stat_sheet(:save => false) }
-#        post :create, :tester_stat_sheet => {'these' => 'params'}
-#        assigns(:tester_stat_sheet).should be(mock_tester_stat_sheet)
+#        
 #      end
-#
-#      it "re-renders the 'new' template" do
-#        TesterStatSheet.stub(:new) { mock_tester_stat_sheet(:save => false) }
-#        post :create, :tester_stat_sheet => {}
-#        response.should render_template("new")
-#      end
-#    end
-#  end
+
+    it "won't let you join an open beta test" do
+      login user
+      current_beta_test
+      current_beta_test.open = true
+      current_beta_test.save
+      post :create
+      response.should be_redirect
+    end
+
+    it "won't let you join an inactive beta test" do
+      login user
+      current_beta_test
+      current_beta_test.active = false
+      current_beta_test.save
+      post :create
+      response.should be_redirect
+    end
+
+    it "assigns a newly created tester_stat_sheet as @tester_stat_sheet" do
+      login user
+      current_beta_test
+      post :create
+      assigns(:tester_stat_sheet).should be_an_instance_of(TesterStatSheet)
+    end
+
+    it "puts users on waiting list if test is full"
+  end
 #
 #  describe "PUT update" do
 #    describe "with valid params" do

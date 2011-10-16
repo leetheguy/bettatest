@@ -245,11 +245,15 @@ describe TesterStatSheet do
         tss.points.should == points - beta_test.rate_down_take_pts
       end
 
-      it "adds survey_vote_pts on a survey vote" do
-        points = tss1.points
-        tss1.survey_vote
-        tss1.points.should == points + beta_test.survey_vote_pts
-      end
+      it "adds survey_vote_pts on a survey vote"# do
+        #points = tss1.points
+        #tss1.survey_vote
+        #tss1.points.should == points + beta_test.survey_vote_pts
+      #end
+    end
+
+    describe "convenience methods" do
+      it "returns rank"
     end
   end
 end

@@ -1,0 +1,10 @@
+.buttle-medium
+  = link_to 'create a betta test', new_beta_test_path
+.buttle-medium
+  = link_to 'find a betta test', beta_tests_path
+- if current_user && (@user == current_user || current_user.has_role?(:admin))
+  .buttle-medium
+    = link_to 'preferences', edit_user_path(@user)
+- if current_user && current_user.has_role?(:admin)
+  .buttle-medium
+    = link_to 'admin', admin_dashboard_path

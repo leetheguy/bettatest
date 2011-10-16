@@ -14,23 +14,79 @@
   %body.blueprint.betta
     = render "layouts/betta_header"
     -if inside_beta_test
-      = render "layouts/top_nav"
       .container
         =render 'layouts/left_nav'
         .center
           .bubble-top-large
             %h1= current_beta_test.name
+            - if current_stat_sheet
+              %br
+              %h4
+                %table
+                  %tr
+                    = render :partial => 'tester_stat_sheets/stat_line', :locals => { :tester_stat_sheet => current_stat_sheet }
           .content
+            -if !(current_controller == 'beta_tests' && (current_action == 'index' || current_action == 'show'))
+              %p.align-left
+                = link_to current_beta_test.name, beta_test_path(current_beta_test)
+                -if current_controller == 'blogs' && current_action != 'index'
+                  >
+                  = link_to "blogs", blogs_path
+                -if current_controller == 'forum_categories'
+                  -if current_action != 'index'
+                    >
+                    = link_to forum_categories_path
+                    -if @forum_category.name
+                      >
+                      = @forum_category.name
+                  -else
+                    >
+                    categories
+                -if current_controller == 'forum_topics'
+                  -if current_action != 'index'
+                    >
+                    = link_to 'categories', forum_categories_path
+                    >
+                    = link_to @forum_topic.forum_category.name, forum_topics_path(:forum_category_id => @forum_topic.forum_category)
+                    -if @forum_topic.name
+                      >
+                      = @forum_topic.name
+                  -else
+                    >
+                    = link_to 'categories', forum_categories_path
+                    >
+                    = @forum_category.name
+                    >
+                    topics
+                -if current_controller == 'forum_posts'
+                  -if current_action != 'index'
+                    >
+                    = link_to 'categories', forum_categories_path
+                    >
+                    = link_to @forum_post.forum_topic.forum_category.name, forum_topics_path(:forum_category_id => @forum_post.forum_topic.forum_category)
+                    >
+                    = link_to @forum_post.forum_topic.name, @forum_post.forum_topic
+                  -else
+                    >
+                    = link_to 'categories', forum_categories_path
+                    >
+                    = link_to @forum_topic.forum_category.name, forum_topics_path(:forum_category_id => @forum_topic.forum_category)
+                    >
+                    = @forum_topic.name
+                    >
+                    posts
             = yield
+        = render 'layouts/google_ads'
     -else
       .container
         =render "layouts/left_nav"
         .center
           = yield
-    = render 'layouts/right_default'
+        = render 'layouts/right_default'
     = render "layouts/betta_footer"
     = render "layouts/stat_counter"
     =# debug current_user
     =# debug current_beta_test
+    =# debug current_controller
     =# session.inspect
     =# Blog.all.inspect

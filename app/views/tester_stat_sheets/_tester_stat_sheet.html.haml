@@ -1,0 +1,19 @@
+- if current_controller == 'users'
+  - beta_test = tester_stat_sheet.beta_test
+  = render 'beta_tests/top', :beta_test => beta_test
+  %tr
+    %td
+      %table
+        %tr
+          = render :partial => 'tester_stat_sheets/stat_line', :locals => { :tester_stat_sheet => tester_stat_sheet }
+    %td.align-right
+      &nbsp;
+  = render 'beta_tests/bottom', :beta_test => beta_test
+- else
+  %tr
+    %td.align-center
+      = link_to tester_stat_sheet.user.name, tester_stat_sheet.user
+    = render :partial => 'tester_stat_sheets/stat_line', :locals => { :tester_stat_sheet => tester_stat_sheet }
+  %tr
+    %td{ :colspan => '5' }
+      %hr

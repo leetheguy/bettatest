@@ -9,7 +9,7 @@
   = link_to 'contact', contact_path
   %br
   %h3 betta tests
-  -bt = BetaTest.first.id
+  -bt = BetaTest.where(:open => false, :active => true).first.id
   %br
   =link_to 'beta tests', beta_tests_path
   %br
@@ -60,44 +60,44 @@
   =link_to 'edit forum post', edit_forum_post_path(bt, fc, ft, fp)
   %br
   %h3 surveys
-  -sur = Survey.where(:beta_test_id => bt).first.id
+  -#sur = Survey.where(:beta_test_id => bt).first.id
   %br
-  =link_to 'surveys', surveys_path(bt)
+  =#link_to 'surveys', surveys_path(bt)
   %br
-  =link_to 'survey', survey_path(bt, sur)
+  =#link_to 'survey', survey_path(bt, sur)
   %br
-  =link_to 'new survey', new_survey_path(bt)
+  =#link_to 'new survey', new_survey_path(bt)
   %br
-  =link_to 'edit survey', edit_survey_path(bt, sur)
+  =#link_to 'edit survey', edit_survey_path(bt, sur)
   %br
-  -so = SurveyOption.where(:survey_id => sur)
-  =link_to 'survey options', survey_options_path(bt, sur)
+  -#so = SurveyOption.where(:survey_id => sur)
+  =#link_to 'survey options', survey_options_path(bt, sur)
   %br
-  =link_to 'survey option', survey_options_path(bt, sur, so)
+  =#link_to 'survey option', survey_options_path(bt, sur, so)
   %br
-  =link_to 'new survey option', new_survey_option_path(bt, sur)
+  =#link_to 'new survey option', new_survey_option_path(bt, sur)
   %br
-  =link_to 'edit survey option', edit_survey_option_path(bt, sur, so)
+  =#link_to 'edit survey option', edit_survey_option_path(bt, sur, so)
   %br
   %h3 tickets
-  -tc = TicketCategory.where(:beta_test_id => bt).first.id
+  -#tc = TicketCategory.where(:beta_test_id => bt).first.id
   %br
-  =link_to 'ticket categories', ticket_categories_path(bt)
+  =#link_to 'ticket categories', ticket_categories_path(bt)
   %br
-  =link_to 'ticket category', ticket_categories_path(bt, tc)
+  =#link_to 'ticket category', ticket_categories_path(bt, tc)
   %br
-  =link_to 'new ticket category', new_ticket_category_path(bt)
+  =#link_to 'new ticket category', new_ticket_category_path(bt)
   %br
-  =link_to 'edit ticket category', edit_ticket_category_path(bt, tc)
+  =#link_to 'edit ticket category', edit_ticket_category_path(bt, tc)
   %br
-  -tk = Ticket.where(:ticket_category_id => tc).first.id
-  =link_to 'tickets', tickets_path(bt, tc)
+  -#tk = Ticket.where(:ticket_category_id => tc).first.id
+  =#link_to 'tickets', tickets_path(bt, tc)
   %br
-  =link_to 'ticket', tickets_path(bt, tc, tk)
+  =#link_to 'ticket', tickets_path(bt, tc, tk)
   %br
-  =link_to 'new ticket', new_ticket_path(bt, tc)
+  =#link_to 'new ticket', new_ticket_path(bt, tc)
   %br
-  =link_to 'edit ticket', edit_ticket_path(bt, tc, tk)
+  =#link_to 'edit ticket', edit_ticket_path(bt, tc, tk)
   %br
   %h3 users
   -user = User.first.id
@@ -110,7 +110,7 @@
   %br
   =link_to 'edit user', edit_user_path(user)
   %br
-  -tss = TesterStatSheet.where(:user_id => user).first.id
+  -tss = BetaTest.find(bt).tester_stat_sheets.first.id
   =link_to 'tester stat sheets', tester_stat_sheets_path(user)
   %br
   =link_to 'tester stat sheet', tester_stat_sheet_path(user, tss)
@@ -119,21 +119,21 @@
   %br
   =link_to 'edit tester stat sheet', edit_tester_stat_sheet_path(user, tss)
   %br
-  -sub = Subscription.first
-  =link_to 'subscriptions', subscriptions_path(user)
+  -#sub = Subscription.first
+  =#link_to 'subscriptions', subscriptions_path(user)
   %br
-  =link_to 'subscription', subscription_path(user, sub)
+  =#link_to 'subscription', subscription_path(user, sub)
   %br
-  =link_to 'new subscription', new_subscription_path(user)
+  =#link_to 'new subscription', new_subscription_path(user)
   %br
-  =link_to 'edit subscription', edit_subscription_path(user, sub)
+  =#link_to 'edit subscription', edit_subscription_path(user, sub)
   %br
-  -ref = Referral.first
+  -#ref = Referral.first
   %br
-  =link_to 'referrals', referrals_path(user)
+  =#link_to 'referrals', referrals_path(user)
   %br
-  =link_to 'referral', referral_path(user, ref)
+  =#link_to 'referral', referral_path(user, ref)
   %br
-  =link_to 'new referral', new_referral_path(user)
+  =#link_to 'new referral', new_referral_path(user)
   %br
-  =link_to 'edit referral', edit_referral_path(user, ref)
+  =#link_to 'edit referral', edit_referral_path(user, ref)

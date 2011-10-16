@@ -1,0 +1,18 @@
+%html
+  %body
+    = "#{@user.name},"
+    %br
+    %br
+    Conratulations! Your long wait is finally over!
+    %br
+    You are officially invited to join the elite few testers of
+    = link_to @beta_test.name, beta_test_url(@beta_test)
+    %br
+    Remember to visit every day to hold your place in this test.
+    %br
+    Or better yet, get involved with the test and help shape its future.
+    %br
+    %br
+    see you there,
+    %br
+    Gil Fish - the happy email robot

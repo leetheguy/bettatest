@@ -19,4 +19,6 @@ describe ForumTopic do
       model.should be_invalid
     end
   end
+
+  it 'retrieves topics sorted by most recent posts'
 end

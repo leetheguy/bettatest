@@ -1,20 +1,17 @@
 %tr
-  %td{:width => '70%'}
+  %td{:width => '60%'}
     %h3
       posted by
       = link_to forum_post.user.name, forum_post.user
     &nbsp;-&nbsp;
     = "(posted on: #{forum_post.created_at.strftime("%D")})"
   %td.align-right
+    - if developer || admin || current_user.has_role?(:owner, forum_post)
+      .buttle-small
+        = link_to 'edit', edit_forum_post_path(forum_post)
     - if developer || admin
       .buttle-small
-        = link_to 'edit', edit_forum_post_path(forum_post, :forum_topic_id => @forum_topic.id)
-      .buttle-small
         = link_to 'destroy', forum_post, :confirm => 'Are you sure?', :method => :delete
-    - if current_user.has_role?(:owner, forum_post)
-      .buttle-small
-        = link_to 'edit post', edit_forum_post_path(forum_post)
 %tr
-  %td{:colspan => '2'}
-    = markdown(forum_post.post)
-    %hr
+  %td{:colspan => '2', :id => ['post', forum_post.id]}
+    = render :partial => 'forum_posts/description', :locals => { :forum_post => forum_post }

@@ -4,19 +4,19 @@
     member since:
     = @user.created_at.strftime("%D")
 .content
+  = render 'buttons'
+  = render 'layouts/notice'
   %table
-    %tr
-      %td{:width => '70%', :colspan => '2'}
-    - if @user.has_role? :developer# && @user.my_beta_tests.count > 0
+    - if @user.has_role?(:developer, current_beta_test)
       %tr
         %td{:colspan => '2'}
-          %h2 my betta tests:
+          %h2 betta tests I host:
           %hr
-      =render @user.my_beta_tests
+      = render @beta_tests
     - else
       %tr
         %td
-          %h2 no betta tests started
+          %h2 not hosting any betta tests
         %td.align-right
           -if current_user && @user == current_user
             .buttle-small
@@ -26,12 +26,12 @@
       %tr
         %td{:colspan => '2'}
           %hr
-    - if @user.has_role? :tester# && @user.tester_stat_sheets.count > 0
+    - if @tester_stat_sheets.count > 0
       %tr
         %td{:colspan => '2'}
           %h2 betta tests I&#39;m a member of:
           %hr
-      =render @user.beta_tests
+      = render @tester_stat_sheets
     - else
       %tr
         %td
@@ -45,6 +45,4 @@
       %tr
         %td{:colspan => '2'}
           %hr
-  - if current_user && (@user == @current_user || @current_user.has_role?(:admin))
-    .buttle-medium
-      = link_to 'preferences', edit_user_path(@user)
+  = render 'buttons'

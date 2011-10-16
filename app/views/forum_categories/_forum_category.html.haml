@@ -1,5 +1,5 @@
 %tr
-  %td{:width => '70%'}
+  %td{ :width => '70%' }
     %h3= link_to forum_category.name, forum_category, :remote => true
     &nbsp;-&nbsp;
     visible to
@@ -10,4 +10,4 @@
       .buttle-small= link_to 'destroy', forum_category, :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete
 %tr
   %td{:colspan => '2', :id => ["category", forum_category.id]}
-    =render :partial => "description", :object => forum_category.description
+    =render :partial => 'forum_categories/description', :object => forum_category.description

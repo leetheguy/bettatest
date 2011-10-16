@@ -1,0 +1,15 @@
+= render 'buttons'
+%hr
+
+- if @blogs.count > 0
+  =paginate @blogs
+  %table
+    = render @blogs
+  =paginate @blogs
+- else
+  %h2
+    No blogs have been created
+    %br
+    or are visible for this betta test.
+%hr
+= render 'buttons'

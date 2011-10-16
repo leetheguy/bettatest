@@ -1,7 +1,7 @@
 class ForumCategory < ActiveRecord::Base
   acts_as_authorization_object
 
-	attr_accessible :name, :description, :access_level          
+	#attr_accessible :name, :description, :access_level          
 	
 	validates_length_of :name, :maximum => 50
 	validates_length_of :description, :maximum => 200
@@ -45,16 +45,18 @@ class ForumCategory < ActiveRecord::Base
     end
   end
 
-  def self.categories_for(user, beta_test)
-    if user.has_role? :admin
-      categories = beta_test.forum_categories
+  def is_visible_to(user)
+    if self.beta_test.open
+      visible = true
     else
-      tss = TesterStatSheet.where(:beta_test_id => beta_test.id, 
-                                    :user_id => user.id).first
-      if tss
-        ForumCategory.where('access_level < ?', tss.level)
+      visible = false
+      if user.has_role?(:admin) || user.has_role?(:developer, self.beta_test)
+        visible = true
+      else
+        tss = self.beta_test.stat_sheet_for(user)
+        visible = self.access_level <= tss.level 
       end
     end
-    categories
+    visible
   end
 end

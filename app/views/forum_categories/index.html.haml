@@ -1,12 +1,15 @@
-- if developer || admin
-  .buttle-medium= link_to 'new category', new_forum_category_path
+= render 'buttons'
+= paginate @forum_categories
+= render 'layouts/notice'
 %hr
-
-- if @forum_categories
+- if @forum_categories.count > 0
   %table
     =render @forum_categories
 - else
-  %h2 No forum categories have been created for this betta test.
-
-- if developer || admin
-  .buttle-medium= link_to 'new category', new_forum_category_path
+  %h2
+    No forum categories have been created
+    %br
+    or are visible for this betta test.
+    %hr
+= paginate @forum_categories
+= render 'buttons'

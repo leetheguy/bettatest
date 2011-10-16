@@ -1,4 +1,5 @@
 = form_for(@forum_post) do |f|
+  = render 'layouts/notice'
   = render 'layouts/errors', :object => @forum_post
   %table
     %tr

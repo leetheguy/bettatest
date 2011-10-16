@@ -1,0 +1,7 @@
+@forum_topics.each do |forum_topic|
+  if forum_topic.id == @forum_topic.id
+    page.replace_html("topic_#{forum_topic.id}", render(:partial => "forum_posts", :object => @forum_posts))
+  else
+    page.replace_html("topic_#{forum_topic.id}", render(:partial => "description", :object => forum_topic.description))
+  end
+end

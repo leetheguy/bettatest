@@ -1,13 +1,14 @@
-="#{@user.name},"
-%br
-%br
-Thank you for signing up at bettatest.com!
-%br
-All that's left is to confirm your email address by following this link:
-%br
-=confirm_user_url(@user, :email_code => @user.email_code)
-%br
-%br
-Sincerely,
-%br
-Gil Fish - the happy email robot
+%html
+  %body
+    = "dearest #{@user.name},"
+    %br
+    %br
+    Thank you for signing up at bettatest.com!
+    %br
+    All that's left is to confirm your email address by following this
+    = link_to 'link', confirm_user_url(@user, :email_code => @user.email_code)
+    %br
+    %br
+    sincerely,
+    %br
+    Gil Fish - the happy email robot

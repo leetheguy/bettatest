@@ -1,4 +1,5 @@
 class TesterStatSheet < ActiveRecord::Base
+
   acts_as_authorization_object
 
   DEACTIVATED = -1
@@ -19,7 +20,6 @@ class TesterStatSheet < ActiveRecord::Base
   belongs_to :beta_test
 
   def init_sheet
-    user.has_no_role! :user
     user.has_role! :tester
     user.has_role! :tester, beta_test
 
@@ -39,10 +39,15 @@ class TesterStatSheet < ActiveRecord::Base
     self.points = 10
   end
 
-  def activate_user!
+  def activate_user
     strip_roles
     self.level = ACTIVATED
     user.has_role! :activated, beta_test
+    UserMailer.activation_notice(self)
+  end
+
+  def activate_user!
+    activate_user
     self.save!
   end
 
@@ -71,20 +76,23 @@ class TesterStatSheet < ActiveRecord::Base
         deactivate_user
       elsif position <= beta_test.max_testers  
         if !user.has_role?(:activated, beta_test)
-          activate_user!
+          activate_user
     #TODO send email
         end
         if points < beta_test.active_min_pts
           strip_roles
           user.has_role! :activated, beta_test
+          self.level = ACTIVATED
         elsif points < beta_test.involved_min_pts
           strip_roles
           user.has_role! :activated, beta_test
           user.has_role! :active,    beta_test
+          self.level = ACTIVE
         else
           strip_roles
           user.has_role! :activated, beta_test
           user.has_role! :involved,  beta_test
+          self.level = INVOLVED
         end
       end
     rescue
@@ -107,6 +115,7 @@ class TesterStatSheet < ActiveRecord::Base
   end
 
   def forum_rate_up!(forum_post)
+    forum_post.rate_up!
     remove_points! beta_test.rate_up_lose_pts
     other = TesterStatSheet.where("user_id = ? AND beta_test_id = ?", forum_post.user.id, self.beta_test.id).first
     other.add_points! beta_test.rate_up_give_pts
@@ -114,13 +123,14 @@ class TesterStatSheet < ActiveRecord::Base
   end
 
   def forum_rate_down!(forum_post)
+    forum_post.rate_down!
     remove_points! beta_test.rate_down_lose_pts
     other = TesterStatSheet.where("user_id = ? AND beta_test_id = ?", forum_post.user.id, self.beta_test.id).first
     other.remove_points! beta_test.rate_down_take_pts
     self.save!
   end
 
-  def survey_vote
+  def survey_vote!
     add_points! beta_test.survey_vote_pts
     self.save!
   end
@@ -135,8 +145,12 @@ class TesterStatSheet < ActiveRecord::Base
     self.save!
   end
 
-  def promote!
+  def promote
     self.position -= 1
+  end
+
+  def promote!
+    promote
     self.save!
   end
 
@@ -160,8 +174,27 @@ class TesterStatSheet < ActiveRecord::Base
     level == INVOLVED
   end
 
-  def sheet_for_test(user, test)
-    TesterStatSheet.where(:user_id => user).where(:beta_test_id => test).first
+  def sheet_for(user, test)
+    test.tester_stat_sheets.where(:user_id => user).first
   end
 
+  def level_to_name
+    if self.deactivated?
+      "deactivated"
+    elsif self.waiting?
+      "waiting"
+    elsif self.activated?
+      "activated"
+    elsif self.active?
+      "active"
+    elsif self.involved?
+      "involved"
+    else
+      "none, how odd"
+    end
+  end
+
+  def rank
+    self.beta_test.tester_stat_sheets.order('points DESC').index(self)
+  end
 end

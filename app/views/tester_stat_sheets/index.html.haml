@@ -1,0 +1,13 @@
+= render 'buttons'
+= render 'layouts/notice'
+%hr
+-if @tester_stat_sheets.count > 0
+  %table
+    =render @tester_stat_sheets
+-else
+  %h2
+    This test has no testers.
+    %br
+    = link_to 'Be the first!', tester_stat_sheets_path, :method => 'post'
+  %hr
+  = render 'buttons'

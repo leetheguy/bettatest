@@ -1,0 +1,19 @@
+-if tester(beta_test) || developer(beta_test) || admin
+  %tr
+    %td
+      password:
+      -if beta_test.password && beta_test.password.length > 0
+        =beta_test.password
+      -else
+        none
+    %td.align-right
+      -if beta_test.link && beta_test.link.length > 0
+        .buttle-small= link_to 'visit home', proper_url(beta_test.link), :target => '_blank'
+%tr
+  %td{:colspan => '2'}
+    - if beta_test.description && beta_test.description.length != 0
+      = markdown(beta_test.description)
+    - else
+      No description for this test has been provided.
+    - if current_action == 'index' || current_controller == 'users'
+      %hr

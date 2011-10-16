@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
-  helper_method :current_user, :current_user_is_admin, :current_beta_test, :current_action, :current_controller, :default_redirect, :redirect_non_admin
+  helper_method :current_user, :current_user_is_admin, :current_beta_test, :current_action, :current_controller, :default_redirect, :redirect_non_admin, :current_beta_test_is_open, :current_stat_sheet
 
   before_filter :current_beta_test
 
@@ -78,5 +78,18 @@ class ApplicationController < ActionController::Base
       session[:bt_id] = nil
     end
     @current_beta_test
+  end
+
+  def current_beta_test_is_open
+    current_beta_test.open
+  end
+
+  def current_stat_sheet
+    if current_beta_test && current_user
+      @current_stat_sheet = current_beta_test.stat_sheet_for(current_user)
+    else
+      @current_stat_sheet = nil
+    end
+    @current_stat_sheet
   end
 end

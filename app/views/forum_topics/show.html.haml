@@ -1,18 +1,2 @@
-%h2=@forum_topic.name
-.buttle-medium
-  = link_to "back to categories", forum_categories_path
-.buttle-medium
-  = link_to "new post", new_forum_post_path(:forum_topic_id => @forum_topic.id)
-%hr
--if @forum_posts.count > 0
-  =paginate @forum_posts
-  %table
-    =render @forum_posts
-  =paginate @forum_posts
--else
-  %h2.color-2 No posts have been created in this topic yet.
-  %hr
-.buttle-medium
-  = link_to "back to forum categories", forum_categories_path
-.buttle-medium
-  = link_to "new post", new_forum_post_path(:forum_topic_id => @forum_topic.id)
+You shouldn't see this page.
+How did you get here?

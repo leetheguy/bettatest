@@ -13,16 +13,12 @@ module ApplicationHelper
     end
   end
 
-  def developer
+  def developer(beta_test = current_beta_test)
     current_user && current_user.has_role?(:developer, current_beta_test)
   end
 
   def tester(beta_test = current_beta_test)
-    if current_user
-      current_user.has_role?(:tester, beta_test)
-    else
-      true
-    end
+    current_user && current_user.has_role?(:tester, beta_test)
   end
 
   def admin
@@ -34,7 +30,7 @@ module ApplicationHelper
   end
 
   def inside_beta_test
-    if current_beta_test && ['beta_tests', 'blogs', 'forum_categories', 'forum_topics', 'forum_posts', 'surveys', 'survey_options', 'tickets'].index(current_controller)
+    if current_beta_test && ['beta_tests', 'blogs', 'forum_categories', 'forum_topics', 'forum_posts', 'surveys', 'survey_options', 'tickets', 'tester_stat_sheets'].index(current_controller)
       if current_controller == 'beta_tests' && current_action == 'index'
         false
       else

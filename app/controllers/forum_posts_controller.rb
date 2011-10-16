@@ -1,49 +1,59 @@
 class ForumPostsController < ApplicationController
   access_control do
     deny :deactivated, :waiting, :for => :current_beta_test
-    allow :involved, :in => :current_beta_test, :to => [:index], :if => :involved_only
-    allow :involved, :active, :in => :current_beta_test, :to => [:index], :if => :active_only
-    allow :activated, :in => :current_beta_test, :to => [:index], :if => :activated_only
-    allow :developer, :of => :current_beta_test, :except => [:show]
+    allow :tester, :of => :current_beta_test, :to => [:index, :show, :new, :create, :rate_up, :rate_down]
+    allow :developer, :of => :current_beta_test
+    allow :owner, :of => :forum_post, :to => [:edit, :update]
+    allow :user, :to => [:index, :show, :new, :create], :if => :current_beta_test_is_open
     allow :admin
   end
 
   def rate_up
-    ForumPost.find(params[:id]).rate_up!
-    if !current_user.has_role?(:admin) && !current_user.has_role(:developer, :current_beta_test)
-      TesterStatSheet.where(:user_id => current_user).where(:beta_test_id => current_beta_test).first.forum_rate_up!(params[:id])
+    @forum_post = ForumPost.find params[:id]
+    @forum_topic = @forum_post.forum_topic
+    @forum_posts = @forum_topic.forum_posts.page(params[:page]).per(20)
+    if !current_user.has_role?(:admin) && !current_user.has_role?(:developer, current_beta_test) && !current_user.has_role?(:owner, @forum_post)
+      flash[:notice] = 'Thanks for rating!'
+      current_beta_test.stat_sheet_for(current_user).forum_rate_up!(@forum_post)
     end
-    @forum_posts = current_forum_topic.forum_posts
     render :index
   end
 
   def rate_down
-    ForumPost.find(params[:id]).rate_down!
-    if !current_user.has_role?(:admin) && !current_user.has_role(:developer, :current_beta_test)
-      TesterStatSheet.where(:user_id => current_user).where(:beta_test_id => current_beta_test).first.forum_rate_down!(params[:id])
+    @forum_post = ForumPost.find params[:id]
+    @forum_topic = @forum_post.forum_topic
+    @forum_posts = @forum_topic.forum_posts.page(params[:page]).per(20)
+    if !current_user.has_role?(:admin) && !current_user.has_role?(:developer, current_beta_test) && !current_user.has_role?(:owner, @forum_post)
+       flash[:notice] = 'Thanks for rating!'
+      current_beta_test.stat_sheet_for(current_user).forum_rate_down!(@forum_post)
     end
-    @forum_posts = current_forum_topic.forum_posts
     render :index
   end
 
   # GET /forum_posts
   # GET /forum_posts.xml
   def index
-    @forum_posts = ForumPost.where(:forum_topic_id => params[:forum_topic_id])
+    @forum_topic = ForumTopic.find(params[:forum_topic_id])
+    if @forum_topic.forum_category.is_visible_to(current_user)
+      @forum_posts = @forum_topic.forum_posts.order('created_at DESC').page(params[:page]).per(20)
+    else
+      redirect_to forum_categories_path
+    end
   end
 
   # GET /forum_posts/1
   # GET /forum_posts/1.xml
   def show
     @forum_post = ForumPost.find(params[:id])
-    redirect_to @forum_post
+    redirect_to forum_posts_path(:forum_topic_id => @forum_post.forum_topic)
   end
 
   # GET /forum_posts/new
   # GET /forum_posts/new.xml
   def new
+    @forum_topic = ForumTopic.find params[:forum_topic_id]
     @forum_post = ForumPost.new
-    @forum_post.forum_topic_id = params[:forum_topic_id]
+    @forum_post.forum_topic = @forum_topic
   end
 
   # GET /forum_posts/1/edit
@@ -58,24 +68,24 @@ class ForumPostsController < ApplicationController
     @forum_post.forum_topic_id = params[:forum_post][:forum_topic_id]
     @forum_post.user = current_user
 
-    if params[:commit] == "cancel"
-      redirect_to forum_topic_path(@forum_post.forum_topic_id)
+    if params[:commit] == 'cancel'
+      redirect_to forum_posts_path(:forum_topic_id => @forum_post.forum_topic)
     elsif @forum_post.save
-      redirect_to forum_topic_path(@forum_post.forum_topic_id, :notice => 'Post was successfully created.')
+      redirect_to @forum_post.forum_topic, :notice => 'Post was successfully created.'
     else
-      render :action => "new"
+      render :action => 'new'
     end
   end
 
   # PUT /forum_posts/1
   # PUT /forum_posts/1.xml
   def update
-    @forum_post = ForumPost.find(params[:id])
+    @forum_post = forum_post
 
-    if params[:commit] == "cancel"
-      redirect_to forum_topic_path(@forum_post.forum_topic_id)
+    if params[:commit] == 'cancel'
+      redirect_to forum_posts_path(:forum_topic_id => @forum_post.forum_topic.id)
     elsif @forum_post.update_attributes(params[:forum_post])
-      redirect_to forum_topic_path(@forum_post.forum_topic_id, :notice => 'Post was successfully created.')
+      redirect_to forum_posts_path(:forum_topic_id => @forum_post.forum_topic.id), :notice => 'Post was successfully updated.'
     else
       render :action => "edit"
     end
@@ -84,10 +94,16 @@ class ForumPostsController < ApplicationController
   # DELETE /forum_posts/1
   # DELETE /forum_posts/1.xml
   def destroy
-    @forum_post = ForumPost.find(params[:id])
-    @forum_topic = @forum_post.forum_topic
+    @forum_post = forum_post
     @forum_post.destroy
+    redirect_to forum_posts_path(:forum_topic_id => @forum_post.forum_topic.id), :notice => 'Post was successfully destroyed.'
+  end
 
-    redirect_to @forum_topic
+  def forum_post
+    post = nil
+    if params[:id]
+      post = ForumPost.find params[:id]
+    end
+    post
   end
 end

@@ -36,4 +36,5 @@ describe ForumCategory do
   end
 
   it "returns categories appropriate for the user"
+  it "states visibility for specific forum categories for each user"
 end

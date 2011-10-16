@@ -15,6 +15,7 @@ Bettatest::Application.routes.draw do
   match 'resend_confirmation'  	=> 'static#resend_confirmation'
   match 'log_out'               => 'sessions#destroy', :as => 'log_out'
 	match 'log_in'                => 'sessions#new', :as => 'log_in'
+	match 'possess'               => 'sessions#possess', :as => 'possess'
 	match 'sign_up'               => 'users#new', :as => 'sign_up'
 	match 'preferences'           => 'users#edit', :as => 'preferences'
   match 'dashboard'			      	=> 'users#show'

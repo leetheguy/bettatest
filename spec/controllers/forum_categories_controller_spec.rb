@@ -9,6 +9,8 @@ describe ForumCategoriesController do
     navigate :beta_test => current_beta_test
   end
 
+  it "allows anybody to participate in open betta tests"
+
   specify { cannot_has_access?(approved_deactivated_tester) { get :index } }
 
   specify { cannot_has_access?(approved_waiting_tester)     { get :index } }
@@ -27,16 +29,17 @@ describe ForumCategoriesController do
 
   describe "GET index" do
     it "only assigns viewable categories to @forum_categories"
-    it "assigns all forum categories in current beta test as @forum_categories" do
-      login admin
-      ForumCategory.stub(:categories_for) { [mock_forum_category(:beta_test => current_beta_test)] }
-      get :index, :bt_id => '1'
-      assigns(:forum_categories).should eq([mock_forum_category])
-    end
+    it "assigns all forum categories in current beta test as @forum_categories" #do
+#      login admin
+#      ForumCategory.stub(:categories_for) { [mock_forum_category(:beta_test => current_beta_test)] }
+#      get :index, :bt_id => '1'
+#      assigns(:forum_categories).should eq([mock_forum_category])
+#    end
   end
 
   describe "GET show" do
-    it "only assigns viewable categories to @forum_categories"
+    it "only assigns viewable categories to @forum_categories" #test this in the model instead
+    it "redirects disallowed viewers to current_beta_test"
     specify { cannot_has_access?(same_developer) { get :show, :id => "42" } }
 
     it "assigns the requested forum_category as @forum_category" do

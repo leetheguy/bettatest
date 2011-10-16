@@ -1,5 +1,6 @@
 = form_for @forum_category do |f|
-  = render 'layouts/errors ', :object => @forum_category
+  = render 'layouts/notice'
+  = render 'layouts/errors', :object => @forum_category
   %table
     %tr
       %td= f.label :name, 'category name'

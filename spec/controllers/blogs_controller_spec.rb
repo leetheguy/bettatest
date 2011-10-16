@@ -27,6 +27,7 @@ describe BlogsController do
   end
 
   describe "GET show" do
+    it "only shows unpublished posts to developer and admins"
     describe "allows anyone to view any page" do
       specify { can_has_access?(           ) { get :show, :id => "42" } }
       specify { can_has_access?(unconfirmed) { get :show, :id => "42" } }
@@ -37,6 +38,8 @@ describe BlogsController do
     end
 
     it "assigns the requested blog as @blog" do
+      current_beta_test
+      login admin
       Blog.stub(:find).with("37") { mock_blog }
       get :show, :id => "37"
       assigns(:blog).should be(mock_blog)

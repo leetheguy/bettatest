@@ -1,8 +1,18 @@
 .bubble-top-large
   %h1 betta tests
 .content
-  =render 'buttons'
+  = render 'buttons'
+  = paginate @beta_tests
+  = render 'layouts/notice'
   %hr
-  -if @beta_tests
+  - if @beta_tests.count > 0
     %table
       =render @beta_tests
+  - else
+    %h2
+      No betta tests have been created
+      %br
+      or are visible.
+      %hr
+  = paginate @beta_tests
+  = render 'buttons'

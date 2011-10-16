@@ -1,13 +1,10 @@
 class User < ActiveRecord::Base
+  acts_as_authorization_subject  :association_name => :roles
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
-         :recoverable, :rememberable, :trackable, :validatable
-
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessor :password
-  acts_as_authorization_subject  :association_name => :roles
 
   before_create :generate_email_code, :make_user_unconfirmed
   before_save :encrypt_password
@@ -20,6 +17,7 @@ class User < ActiveRecord::Base
   validates_length_of :name, :within => 3..40
   validates_presence_of :email, :password, :name
   validates_uniqueness_of :email, :case_sensitive => false
+  validates_exclusion_of :name, :in => %w(lee admin gil fred administrator betta bettatest bettatest.com fish gilfish gilthefish gil_fish gil_the_fish test tester testing developer bafilius applesquash)
   
   has_many  :my_beta_tests, :dependent => :destroy, :class_name => "BetaTest", :foreign_key => "user_id"
   has_many  :tester_stat_sheets, :dependent => :destroy
@@ -32,10 +30,6 @@ class User < ActiveRecord::Base
   has_many  :surveys, :through => :survey_votes
   has_and_belongs_to_many :roles
   
-  def fix_tos
-    self.agreed_to_tos = true if agreed_to_tos
-  end
-
   def self.authenticate(email, password)
     user = find_by_email(email)
     if user && user.confirm_password(user, password)
@@ -95,9 +89,16 @@ class User < ActiveRecord::Base
   def make_user_confirmed
     self.has_no_roles!
     self.has_role! :user
+    self.email_confirmed = true
+    update
   end
 
   def is_admin?
     self.has_role? :admin
+  end
+
+  def logged_in!
+    self.last_login = Time.now
+    update
   end
 end

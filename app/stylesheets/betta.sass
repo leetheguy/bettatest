@@ -12,6 +12,8 @@ $color-2                        : #0d4553
 $color-3                        : #d0ff00
 $color-4                        : #ffc000
 $color-5                        : #ff6000
+$color-e                        : #ffaaaa
+$color-n                        : #ffffaa
 $bg-image-wave                  : url(../images/wave-matched.png)
 $bg-image-water                 : url(../images/water.png)
 $test-border                    : solid black 1px
@@ -110,8 +112,38 @@ $border-1-thickness             : 1px
   +bubble-small
   +bubble-bottom
 
+.bubble-top-error
+  +bubble-medium
+  +bubble-top
+  background                    : $color-e
+
+.bubble-middle-error
+  +bubble-medium
+  +bubble-middle
+  background                    : $color-e
+
+.bubble-bottom-error
+  +bubble-medium
+  +bubble-bottom
+  background                    : $color-e
+
+.bubble-top-notice
+  +bubble-medium
+  +bubble-top
+  background                    : $color-n
+
+.bubble-middle-notice
+  +bubble-medium
+  +bubble-middle
+  background                    : $color-n
+
+.bubble-bottom-notice
+  +bubble-medium
+  +bubble-bottom
+  background                    : $color-n
+
 //content body header
-.top-container
+//.top-container
   z-index                       : 100
   text-align                    : center
   h3
@@ -166,8 +198,13 @@ $border-1-thickness             : 1px
 
 //right side of content body
 .right
-  margin-top                  : $default-border-radius  
+  z-index                       : 100
+  //left                          : 10px
+
+  margin-top                    : $default-border-radius  
   +column(4, true)
+
+
 
 //body and universal properties
 body.betta
@@ -178,13 +215,18 @@ body.betta
     color                       : $color-1
 
 .header
-  z-index                       : -1
+  //z-index                       : -1
   position                      : relative
   margin-bottom                 : -50px
   background                    :
     image                       : $bg-image-wave
     repeat                      : repeat-x
     position                    : center top
+
+.footer
+  z-index                       : -1
+  position                      : relative
+  text-align                    : center
 
 .container
   +container
@@ -254,6 +296,10 @@ body.betta
 .align-center
   text-align                    : center
 
+.test-border
+  border                        : $test-border
+
+
 //form elements
 form
   text-align                    : center
@@ -269,6 +315,8 @@ h1, h2, h3, h4
   margin                        : 0px
   color                         : $color-2
   text-align                    : center
+  .announcement
+    color                       : $color-5
 
 //a:active
 //a:hover

@@ -11,7 +11,7 @@
         = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
 %tr
   %td{:colspan => '2'}
-    - if current_action == 'index' || current_action == 'unpublished'
+    - if current_action == 'index' || current_action == 'unpublished' || current_controller == 'beta_tests'
       = shorten(markdown(blog.post))
     - else
       = markdown(blog.post)

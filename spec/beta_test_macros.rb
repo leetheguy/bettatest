@@ -7,7 +7,7 @@ module BetaTestMacros
   end
 
   def navigate(session_hash)
-    #session[:bt_id] ||= session_hash[:beta_test] || nil
+    session[:bt_id] ||= session_hash[:beta_test] || nil
     #session[:forum_category] ||= session_hash[:forum_category] || nil
     #session[:forum_topic] ||= session_hash[:forum_topic] || nil
     #session[:survey] ||= session_hash[:survey] || nil
@@ -18,6 +18,7 @@ module BetaTestMacros
      if !@current_beta_test
       @current_beta_test = Factory.create :beta_test
     end
+    session[:bt_id] = @current_beta_test.id
     @current_beta_test
   end
 

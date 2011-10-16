@@ -13,6 +13,7 @@ gem 'heroku'
 gem 'kaminari'
 gem 'redcarpet'
 gem 'activeadmin'
+gem 'draper'
 
 group :development, :test do
   gem 'newrelic_rpm', '2.13.4'
@@ -23,6 +24,7 @@ group :development, :test do
   gem 'autotest'
   gem 'autotest-rails'
   gem 'libnotify'
+  gem 'compass'
 end
 
 # Bundle edge Rails instead:

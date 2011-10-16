@@ -35,6 +35,8 @@ describe BetaTestsController do
       specify { can_has_access?(subscriber ) { get :show, :id => "42" } }
     end
 
+    it "redirects users if the beta test is inactive"
+
     it "assigns the requested beta_test as @beta_test" do
       #BetaTest.stub(:find).with("37") { mock_beta_test }
       navigate current_beta_test
@@ -144,14 +146,11 @@ describe BetaTestsController do
         assigns(:beta_test).should be(mock_beta_test)
       end
 
-      it "toggles open state if it recieves the open param" do
+      it "sets open state if it recieves the open param" do
         bt = Factory.create :beta_test, :open => false
         put :update, :id => bt.id, :beta_test => bt.id, :commit => 'make public'
         bt = BetaTest.find bt.id
         bt.open.should be_true
-        put :update, :id => bt.id, :beta_test => bt.id, :commit => 'make private'
-        bt = BetaTest.find bt.id
-        bt.open.should be_false
         response.should render_template('edit')
       end
 

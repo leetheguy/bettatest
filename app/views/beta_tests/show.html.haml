@@ -1,2 +1,38 @@
+= render 'buttons'
+= render 'layouts/notice'
+%h2 info
 %table
-  =render @beta_test
+  = render @beta_test
+%hr
+%h2= link_to "latest blogs", blogs_path
+-if @blogs.count > 0
+  %table
+    = render @blogs
+-else
+  %h2
+    No blogs have been created
+    %br
+    or are visible for this betta test.
+    %hr
+%h2= link_to "forum categories", forum_categories_path
+-if @forum_categories.count > 0
+  %table
+    = render @forum_categories
+-else
+  %h2
+    No forum categories have been created
+    %br
+    or are visible for this betta test.
+    %hr
+-if !@beta_test.open
+  %h2= link_to "leaders", tester_stat_sheets_path
+  -if @tester_stat_sheets.count > 0
+    %table
+      = render @tester_stat_sheets
+  -else
+    %h2
+      Nobody has joined this test
+      %br
+      or leaders aren't visible.
+    %hr
+=render 'buttons'
