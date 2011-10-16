@@ -31,7 +31,6 @@ class BetaTestsController < ApplicationController
   # GET /beta_tests/new
   def new
     @beta_test = BetaTest.new
-    binding.pry
   end
 
   # GET /beta_tests/1/edit
