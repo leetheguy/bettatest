@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_length_of :name, :within => 3..40
   validates_presence_of :email, :password, :name
   validates_uniqueness_of :email, :case_sensitive => false
-  validates_exclusion_of :name, :in => %w(lee admin gil fred administrator betta bettatest bettatest.com fish gilfish gilthefish gil_fish gil_the_fish test tester testing developer bafilius applesquash)
+#  validates_exclusion_of :name, :in => %w(lee admin gil fred administrator betta bettatest bettatest.com fish gilfish gilthefish gil_fish gil_the_fish test tester testing developer bafilius applesquash)
   
   has_many  :my_beta_tests, :dependent => :destroy, :class_name => "BetaTest", :foreign_key => "user_id"
   has_many  :tester_stat_sheets, :dependent => :destroy
