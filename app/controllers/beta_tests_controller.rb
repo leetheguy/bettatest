@@ -63,19 +63,19 @@ class BetaTestsController < ApplicationController
       @beta_test.open_test
       @beta_test.save!
       flash[:notice] = 'Your betta test is now accessible to the general public.'
-      render :action => 'edit'
+      redirect_to(@beta_test)
 
     elsif params[:commit] == "activate"
       @beta_test.activate_test
       @beta_test.save!
       flash[:notice] = 'Your betta test is now ready for testing.'
-      render :action => 'edit'
+      redirect_to(@beta_test)
 
     elsif params[:commit] == "deactivate"
       @beta_test.deactivate_test
       @beta_test.save!
       flash[:notice] = 'Your betta test is now closed to new testers.'
-      render :action => 'edit'
+      redirect_to(@beta_test)
 
     elsif @beta_test.update_attributes(params[:beta_test])
       redirect_to(@beta_test, :notice => 'Betta test was successfully updated.')
