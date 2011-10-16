@@ -15,3 +15,6 @@ http_path = "/"
 # line_comments = false
 
 preferred_syntax = :sass
+
+css_dir = 'tmp/stylesheets'
+sass_dir = 'app/views/stylesheets'
