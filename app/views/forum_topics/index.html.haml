@@ -5,7 +5,6 @@
 - if @forum_topics.count > 0
   %table
     = render @forum_topics
-  = paginate @forum_topics
 - else
   %h2 
     No forum topics have been created

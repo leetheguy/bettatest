@@ -1,9 +1,7 @@
 - if forum_post.post && forum_post.post.length > 0
   = markdown(forum_post.post)
--# if !(current_user.has_role?(:admin) || current_user.has_role?(:developer, current_beta_test)) && current_stat_sheet
-- if true
-  %table.align-center
-    - if !current_beta_test.open && !current_user.has_role?(:developer, current_beta_test) && !current_user.has_role?(:owner, forum_post) && !current_user.has_role?(:admin)
+  - if (can?(:rate_up, forum_post) || can?(:rate_down, forum_post)) && forum_post.user != current_user
+    %table.align-center
       %tr
         %td.align-center
           .buttle-small

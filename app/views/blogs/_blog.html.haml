@@ -1,12 +1,19 @@
 %tr
   %td{:width => '70%'}
     %h3= link_to blog.name, blog
-    &nbsp;-&nbsp;
+    %br
     = "(posted on: #{blog.created_at.strftime("%D")})"
+    - if can? :manage, blog
+      &nbsp;-&nbsp;
+      - if blog.draft
+        unpublished
+      - else
+        published
   %td.align-right
-    - if developer || admin
+    - if can? :edit, blog
       .buttle-small
         = link_to 'edit post', edit_blog_path(blog)
+    - if can? :destroy, blog
       .buttle-small
         = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
 %tr

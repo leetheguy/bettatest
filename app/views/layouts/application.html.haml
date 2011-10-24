@@ -5,8 +5,16 @@
     = auto_discovery_link_tag :rss, "/feed.rss"
     = csrf_meta_tag
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
+    = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
     %title betta test
     = javascript_include_tag :defaults
+    - if current_controller == 'subscriptions'
+      = javascript_include_tag "https://js.stripe.com/v1/"
+      - if current_action == 'new'
+        = javascript_include_tag 'new_subscription'
+      - else
+        = javascript_include_tag 'edit_subscription'
+    = javascript_include_tag 'application'
     = stylesheet_link_tag "screen"
     = stylesheet_link_tag "print", :media => "print"
     / [if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]
@@ -35,7 +43,7 @@
                 -if current_controller == 'forum_categories'
                   -if current_action != 'index'
                     >
-                    = link_to forum_categories_path
+                    = link_to 'categories', forum_categories_path
                     -if @forum_category.name
                       >
                       = @forum_category.name
@@ -76,8 +84,11 @@
                     >
                     posts
             = yield
-        = render 'layouts/google_ads'
-    -else
+        - if current_beta_test.user.has_role?(:subscriber)
+          = render 'layouts/right_default'
+        - else
+          = render 'layouts/google_ads'
+    - else
       .container
         =render "layouts/left_nav"
         .center

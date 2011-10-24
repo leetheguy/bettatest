@@ -1,2 +1,2 @@
-- if (developer || admin) && (current_action == 'index' || current_action == 'show')
+- if can? :create, ForumCategory
   .buttle-medium= link_to 'new category', new_forum_category_path

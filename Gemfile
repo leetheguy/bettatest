@@ -14,6 +14,12 @@ gem 'kaminari'
 gem 'redcarpet'
 gem 'activeadmin'
 gem 'draper'
+gem 'jquery-rails'
+#gem 'coffee-script', '~> 2.2.0'
+gem 'stripe'
+gem 'cancan'
+gem 'therubyracer', :require => false
+gem 'barista'
 
 group :development, :test do
   gem 'newrelic_rpm', '2.13.4'
@@ -25,6 +31,7 @@ group :development, :test do
   gem 'autotest-rails'
   gem 'libnotify'
   gem 'compass'
+  gem 'rake', '0.8.7'
 end
 
 # Bundle edge Rails instead:

@@ -40,7 +40,12 @@ class User < ActiveRecord::Base
   end
   
   def confirm_password(user, password)
-    user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+    if user.password_hash != BCrypt::Engine.hash_secret(password, user.password_salt)
+      user.errors.add :old_password, 'incorrect.'
+      return false
+    else
+      return true
+    end
   end
   
   def encrypt_password

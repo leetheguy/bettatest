@@ -36,12 +36,20 @@ class BetaTest < ActiveRecord::Base
     self.open = false
   end
 
-  def activate_test
-    self.active = true
+  def activate_test!
+    c = user.my_beta_tests.where(:active => true).count
+    if c < 1 || user.has_role?(:subscriber)
+      self.active = true
+      save!
+    else
+      errors[:base] << "You must be a subscriber to activate more than one betta test at a time."
+      self.active = false
+    end
   end
 
-  def deactivate_test
+  def deactivate_test!
     self.active = false
+    save!
   end
 
   def categories_for(user)

@@ -4,6 +4,7 @@
   %h4 Everybody values their privacy and bettatest.com respects that. Bettatest.com will never give away your information without your consent. However, your email will be shared with every developer you agree to test for.
   %br
   = form_for @user do |f|
+    = render 'layouts/notice'
     = render 'layouts/errors', :object => @user
     %table
       %tr
