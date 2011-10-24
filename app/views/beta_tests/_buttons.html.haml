@@ -1,13 +1,14 @@
+- if current_action == 'new' || current_action == 'edit'
+  .buttle-medium= f.submit "save"
+  .buttle-medium= f.submit "cancel"
+- else
+  - if can? :create, BetaTest
+    .buttle-medium
+      = link_to 'create a betta test', new_beta_test_path
 - if current_action == 'show'
   .buttle-medium
     =link_to 'blog', blogs_path
   .buttle-medium
     =link_to 'forum', forum_categories_path
-  - if !current_beta_test_is_open
-    .buttle-medium
-      =link_to 'leaders', tester_stat_sheets_path
-- if current_action == 'index'
-  .buttle-medium= link_to 'create a betta test', new_beta_test_path
-- if current_action == 'new' || current_action == 'edit'
-  .buttle-medium= f.submit "save"
-  .buttle-medium= f.submit "cancel"
+  .buttle-medium
+    =link_to 'leaders', tester_stat_sheets_path

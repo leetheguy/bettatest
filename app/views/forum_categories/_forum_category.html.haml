@@ -1,10 +1,10 @@
 %tr
   %td{ :width => '70%' }
-    %h3= link_to forum_category.name, forum_category, :remote => true
-    &nbsp;-&nbsp;
+    %h3= link_to forum_category.name, forum_topics_path(:forum_category_id => forum_category.id)
+    %br
     visible to
     = forum_category.access_level_name
-  - if developer || admin
+  - if can? :manage, forum_category
     %td.align-right
       .buttle-small= link_to 'edit', edit_forum_category_path(forum_category)
       .buttle-small= link_to 'destroy', forum_category, :confirm => 'Are you sure? This will delete all topics and posts in this category!', :method => :delete

@@ -1,61 +1,45 @@
 class BetaTestsController < ApplicationController
-  access_control do
-    allow all, :to => [:index, :show]
-    #allow :user, :to => [:new, :create]
-    allow :tester, :of => :official_test, :to => [:new, :create]
-    allow :developer, :of => :current_beta_test, :to => [:edit, :update]
-    deny :developer, :to => [:new, :create], :unless => :current_user_is_admin
-    allow :admin
-  end
+  load_and_authorize_resource
 
   # GET /beta_tests
   def index
-    @beta_tests = BetaTest.where(:active => true).order(:name).page(params[:page]).per(20)
+    @beta_tests = @beta_tests.order(:name).page(params[:page]).per(20)
   end
 
   # GET /beta_tests/1
   def show
-    @beta_test = current_beta_test
-    if @beta_test.active || current_user.has_role?(:admin) || current_user.has_role?(:developer)
-      @blogs = current_beta_test.blogs.where(:draft => false).order('created_at DESC')[0..2]
-      @forum_categories = current_beta_test.categories_for(current_user)
-      if current_user && current_user.has_role?(:tester, current_beta_test)
-        @tester_stat_sheets = current_beta_test.ordered_stat_sheets[0...10]
-      else
-        @tester_stat_sheets = []
-      end
-    else
-      redirect_to beta_tests_path
+    @blogs = Blog.accessible_by(current_ability).order('created_at DESC')[0..2]
+    @forum_categories = ForumCategory.accessible_by(current_ability)
+    if can? :read, TesterStatSheet
+      @tester_stat_sheets = current_beta_test.ordered_stat_sheets[0..10]
     end
   end
 
   # GET /beta_tests/new
   def new
-    @beta_test = BetaTest.new
   end
 
   # GET /beta_tests/1/edit
   def edit
-    @beta_test = current_beta_test
   end
 
   # POST /beta_tests
   def create
-    @beta_test = BetaTest.new(params[:beta_test])
     @beta_test.user = current_user
     if params[:commit] == "cancel"
       redirect_to beta_tests_path
+
     elsif @beta_test.save
       redirect_to(@beta_test, :notice => 'Betta test was successfully created.')
+
     else
       render :action => "new"
+
     end
   end
 
   # PUT /beta_tests/1
   def update
-    @beta_test = current_beta_test
-
     if params[:commit] == "cancel"
       redirect_to beta_test_path(@beta_test)
 
@@ -66,30 +50,30 @@ class BetaTestsController < ApplicationController
       redirect_to(@beta_test)
 
     elsif params[:commit] == "activate"
-      @beta_test.activate_test
-      @beta_test.save!
-      flash[:notice] = 'Your betta test is now ready for testing.'
-      redirect_to(@beta_test)
+      if @beta_test.activate_test!
+        flash[:notice] = 'Your betta test is now ready for testing.'
+        redirect_to(@beta_test)
+      else
+        render :action => "edit"
+      end
 
     elsif params[:commit] == "deactivate"
-      @beta_test.deactivate_test
-      @beta_test.save!
+      @beta_test.deactivate_test!
       flash[:notice] = 'Your betta test is now closed to new testers.'
       redirect_to(@beta_test)
 
     elsif @beta_test.update_attributes(params[:beta_test])
       redirect_to(@beta_test, :notice => 'Betta test was successfully updated.')
+
     else
       render :action => "edit"
+
     end
   end
 
   # DELETE /beta_tests/1
   def destroy
-    current_beta_test.destroy
+    @beta_test.destroy
     redirect_to beta_tests_path
-  end
-  def official_test
-    BetaTest.where(:name => "bettatest.com - developer's test")
   end
 end

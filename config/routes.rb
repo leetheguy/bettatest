@@ -26,7 +26,7 @@ Bettatest::Application.routes.draw do
   
   match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
-  resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests
+  resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests, :subscriptions
 
   resources :forum_posts do
     get 'rate_up', :on => :member

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from Acl9::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
+  rescue_from CanCan::AccessDenied, ActiveRecord::RecordNotFound, :with => :default_redirect
 
   helper_method :current_user, :current_user_is_admin, :current_beta_test, :current_action, :current_controller, :default_redirect, :redirect_non_admin, :current_beta_test_is_open, :current_stat_sheet
 
@@ -91,5 +91,9 @@ class ApplicationController < ActionController::Base
       @current_stat_sheet = nil
     end
     @current_stat_sheet
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, current_beta_test)
   end
 end

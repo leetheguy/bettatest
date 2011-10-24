@@ -27,10 +27,11 @@
       &nbsp;-&nbsp;
       created by
       = link_to forum_topic.user.name, forum_topic.user
-    - if developer || admin
+    - if can? :edit, forum_topic
       %td.align-right
         .buttle-small= link_to 'edit', edit_forum_topic_path(forum_topic)
-        .buttle-small= link_to 'destroy', forum_topic, :confirm => 'Are you sure? This will delete all posts in this topic!', :method => :delete
+        - if can? :destroy, forum_topic
+          .buttle-small= link_to 'destroy', forum_topic, :confirm => 'Are you sure? This will delete all posts in this topic!', :method => :delete
   %tr
     %td{:colspan => '2', :id => ["topic", forum_topic.id]}
       = render :partial => 'forum_topics/description', :object => forum_topic.description

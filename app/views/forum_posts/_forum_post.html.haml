@@ -6,10 +6,10 @@
     &nbsp;-&nbsp;
     = "(posted on: #{forum_post.created_at.strftime("%D")})"
   %td.align-right
-    - if developer || admin || current_user.has_role?(:owner, forum_post)
+    - if can? :update, forum_post
       .buttle-small
         = link_to 'edit', edit_forum_post_path(forum_post)
-    - if developer || admin
+    - if can? :destroy, forum_post
       .buttle-small
         = link_to 'destroy', forum_post, :confirm => 'Are you sure?', :method => :delete
 %tr

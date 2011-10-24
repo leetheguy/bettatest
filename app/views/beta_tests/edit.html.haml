@@ -1,5 +1,6 @@
 =form_for(@beta_test) do |f|
   %table
+    = render 'layouts/notice'
     = render 'layouts/errors', :object => @beta_test
     %tr
       %td.align-center

@@ -23,4 +23,8 @@ class ForumPost < ActiveRecord::Base
   def assign_owner
     self.user.has_role!(:owner, self)
   end
+
+  def mama
+    self.forum_topic.forum_category
+  end
 end

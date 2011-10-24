@@ -1,0 +1,17 @@
+%h1 Listing subscriptions
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @subscriptions.each do |subscription|
+    %tr
+      %td= link_to 'Show', subscription
+      %td= link_to 'Edit', edit_subscription_path(subscription)
+      %td= link_to 'Destroy', subscription, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Subscription', new_subscription_path

@@ -11,9 +11,8 @@
   = render 'beta_tests/bottom', :beta_test => beta_test
 - else
   %tr
-    %td.align-center
-      = link_to tester_stat_sheet.user.name, tester_stat_sheet.user
     = render :partial => 'tester_stat_sheets/stat_line', :locals => { :tester_stat_sheet => tester_stat_sheet }
   %tr
     %td{ :colspan => '5' }
       %hr
+

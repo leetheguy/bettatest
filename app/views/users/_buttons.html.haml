@@ -1,10 +1,17 @@
-.buttle-medium
-  = link_to 'create a betta test', new_beta_test_path
+- if can? :create, BetaTest
+  .buttle-medium
+    = link_to 'create a betta test', new_beta_test_path
 .buttle-medium
   = link_to 'find a betta test', beta_tests_path
-- if current_user && (@user == current_user || current_user.has_role?(:admin))
+- if can? :edit, @user
   .buttle-medium
     = link_to 'preferences', edit_user_path(@user)
+- if can? :create, Subscription
+  .buttle-medium
+    = link_to 'subscribe', new_subscription_path
+- if current_user.subscription && can?(:update, Subscription)
+  .buttle-medium
+    = link_to 'edit subscription', edit_subscription_path(current_user.subscription)
 - if current_user && current_user.has_role?(:admin)
   .buttle-medium
     = link_to 'admin', admin_dashboard_path

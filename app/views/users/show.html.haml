@@ -7,7 +7,7 @@
   = render 'buttons'
   = render 'layouts/notice'
   %table
-    - if @user.has_role?(:developer, current_beta_test)
+    - if @user.has_role?(:developer)
       %tr
         %td{:colspan => '2'}
           %h2 betta tests I host:

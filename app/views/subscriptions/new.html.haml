@@ -1,0 +1,12 @@
+.bubble-top-large
+  %h1 new subscription
+.content
+  %h4.align-left
+    %ul
+      %li Bettatest.com does not keep your credit card information in our systems.
+      %li All transactions are handled securely with #{link_to 'stripe', 'https://stripe.com/', :target => '_blank'}.
+      %li At this time, no pro-rated refunds will be issued.
+      %li All payments are recurring.
+      %li You may cancel at any time.
+      %li We will do whatever it takes to resolve any issues that arise.
+  = render 'form'

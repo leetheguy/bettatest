@@ -4,12 +4,13 @@
     = @user.name
 .content
   = form_tag(@url_for_update, :method => :put) do
+    = render 'layouts/notice'
     = render 'layouts/errors', :object => @user
     %table
       %tr
         %td= label_tag :betta_email_opt_in, 'Recieve occasional promotional emails from bettatest.com?'
       %tr
-        %td= check_box_tag :betta_email_opt_in
+        %td= check_box_tag :betta_email_opt_in, '1', true
       %tr
         %td= label_tag :password, 'old password (required to make changes)'
       %tr

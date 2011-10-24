@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111003074814) do
+ActiveRecord::Schema.define(:version => 20111017191858) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -141,9 +141,8 @@ ActiveRecord::Schema.define(:version => 20111003074814) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",       :default => 39.0
-    t.decimal  "year_price",  :default => 399.0
-    t.integer  "months_left", :default => 0
+    t.string   "name"
+    t.string   "stripe_customer_token"
   end
 
   create_table "survey_options", :force => true do |t|
@@ -222,6 +221,8 @@ ActiveRecord::Schema.define(:version => 20111003074814) do
     t.integer  "inactive_until",     :default => 0
     t.string   "security_question"
     t.string   "security_answer"
+    t.date     "daily_pt_taken"
+    t.date     "daily_pt_given"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,4 +1,4 @@
--if tester(beta_test) || developer(beta_test) || admin
+- if can? :test, beta_test
   %tr
     %td
       password:

@@ -3,32 +3,32 @@ require "spec_helper"
 describe SubscriptionsController do
   describe "routing" do
 
-    it "recognizes and generates #index" do
-      { :get => "/subscriptions" }.should route_to(:controller => "subscriptions", :action => "index")
+    it "routes to #index" do
+      get("/subscriptions").should route_to("subscriptions#index")
     end
 
-    it "recognizes and generates #new" do
-      { :get => "/subscriptions/new" }.should route_to(:controller => "subscriptions", :action => "new")
+    it "routes to #new" do
+      get("/subscriptions/new").should route_to("subscriptions#new")
     end
 
-    it "recognizes and generates #show" do
-      { :get => "/subscriptions/1" }.should route_to(:controller => "subscriptions", :action => "show", :id => "1")
+    it "routes to #show" do
+      get("/subscriptions/1").should route_to("subscriptions#show", :id => "1")
     end
 
-    it "recognizes and generates #edit" do
-      { :get => "/subscriptions/1/edit" }.should route_to(:controller => "subscriptions", :action => "edit", :id => "1")
+    it "routes to #edit" do
+      get("/subscriptions/1/edit").should route_to("subscriptions#edit", :id => "1")
     end
 
-    it "recognizes and generates #create" do
-      { :post => "/subscriptions" }.should route_to(:controller => "subscriptions", :action => "create")
+    it "routes to #create" do
+      post("/subscriptions").should route_to("subscriptions#create")
     end
 
-    it "recognizes and generates #update" do
-      { :put => "/subscriptions/1" }.should route_to(:controller => "subscriptions", :action => "update", :id => "1")
+    it "routes to #update" do
+      put("/subscriptions/1").should route_to("subscriptions#update", :id => "1")
     end
 
-    it "recognizes and generates #destroy" do
-      { :delete => "/subscriptions/1" }.should route_to(:controller => "subscriptions", :action => "destroy", :id => "1")
+    it "routes to #destroy" do
+      delete("/subscriptions/1").should route_to("subscriptions#destroy", :id => "1")
     end
 
   end

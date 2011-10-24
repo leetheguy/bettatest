@@ -1,0 +1,17 @@
+  create_table "beta_tests", :force => true do |t|
+  create_table "beta_tests_tags", :id => false, :force => true do |t|
+  create_table "blogs", :force => true do |t|
+  create_table "forum_categories", :force => true do |t|
+  create_table "forum_posts", :force => true do |t|
+  create_table "forum_topics", :force => true do |t|
+  create_table "referrals", :force => true do |t|
+  create_table "roles_users", :id => false, :force => true do |t|
+  create_table "subscriptions", :force => true do |t|
+  create_table "survey_options", :force => true do |t|
+  create_table "survey_votes", :force => true do |t|
+  create_table "surveys", :force => true do |t|
+  create_table "tags", :force => true do |t|
+  create_table "tester_stat_sheets", :force => true do |t|
+  create_table "ticket_categories", :force => true do |t|
+  create_table "tickets", :force => true do |t|
+  create_table "users", :force => true do |t|

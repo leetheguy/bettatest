@@ -1,0 +1,52 @@
+= form_for @subscription do |f|
+  = render 'layouts/notice'
+  = render 'layouts/errors', :object => @subscription
+  #stripe_error
+    %noscript 
+      .bubble-top-error
+      .bubble-middle-error.align-left
+        %h3 JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+      .bubble-bottom-error
+  %table
+    %tr
+      %td
+        = label_tag :card_number, "credit card number"
+    %tr
+      %td
+        = text_field_tag :card_number, nil, name: nil
+    %tr
+      %td
+        = label_tag :card_code, "security code on card (CVV)"
+    %tr
+      %td
+        = text_field_tag :card_code, nil, name: nil
+    %tr
+      %td
+        = label_tag :card_month, "card expiration"
+    %tr
+      %td
+        = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+        = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+    %tr
+      %td
+        - if current_action == 'edit'
+          Your current subscription plan:
+          %br
+          = Subscription.plans[@subscription.name]
+          %br
+          %br
+          = label_tag :name, "select a new plan"
+        - else
+          = label_tag :name, "select new plan"
+    %tr
+      %td
+        = f.select :name, Subscription.plans.invert.to_a
+  = f.hidden_field :stripe_card_token
+  - if current_action == 'new'
+    .buttle-medium
+      = f.submit 'subscribe'
+  - else
+    .buttle-medium
+      = f.submit 'update'
+    .buttle-medium
+      = f.submit 'unsubscribe'
