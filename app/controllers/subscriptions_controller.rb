@@ -30,7 +30,6 @@ class SubscriptionsController < ApplicationController
 
   # PUT /subscriptions/1
   def update
-    binding.pry
     @subscription.name = params[:subscription][:name]
     @subscription.stripe_card_token = params[:subscription][:stripe_card_token]
     if @subscription.update_with_payment

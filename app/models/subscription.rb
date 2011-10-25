@@ -40,14 +40,12 @@ class Subscription < ActiveRecord::Base
 
   def update_with_payment
     if valid?
-      binding.pry
       customer = Stripe::Customer.retrieve(stripe_customer_token)
       customer.card = stripe_card_token
       customer.email = user.email
       customer.description = user.name
       customer.plan = name
       customer.save
-      binding.pry
       user.has_no_role!(:subscriber)
       save!
     end
