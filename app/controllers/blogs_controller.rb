@@ -2,7 +2,6 @@ class BlogsController < ApplicationController
   load_and_authorize_resource :except => [:feed, :unpublished, :index]
 
   def feed
-    binding.pry
     bt = BetaTest.find(params[:beta_test_id])
     @blogs = bt.blogs.where(:draft => false).order('created_at DESC')
     @title = "the blog of the bettatest for #{bt.name}"
