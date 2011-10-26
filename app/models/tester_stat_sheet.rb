@@ -205,7 +205,7 @@ class TesterStatSheet < ActiveRecord::Base
   end
 
   def self.visit_adjustment(user, test)
-    TesterStatSheet.where(:user => user, :beta_test => test, :daily_pts_given.lt => Date.today).each do |tss|
+    TesterStatSheet.where(:user_id => user, :beta_test => test, :daily_pts_given.lt => Date.today).each do |tss|
       tss.daily_pts_given = Date.today
       tss.add_points! 1
     end
