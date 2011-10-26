@@ -7,7 +7,7 @@ atom_feed :language => 'en-US' do |feed|
       next if blog.updated_at.blank?
 
       feed.entry( blog ) do |entry|
-        entry.url blog_url(:betta_test_id => blog.beta_test.id)
+        entry.url blog_url(:beta_test_id => blog.beta_test.id)
         entry.title blog.name
         entry.content markdown(blog.post), :type => 'html'
 
