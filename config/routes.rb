@@ -20,7 +20,7 @@ Bettatest::Application.routes.draw do
   match 'preferences'           => 'users#edit', :as => 'preferences'
   match 'dashboard'             => 'users#show'
   match 'manual_test_list'      => 'static#manual_test_list'
-  match '/feed'                 => 'blogs#feed',
+  match 'feed'                 => 'blogs#feed',
         :as                     => :feed,
         :defaults               => { :format => 'atom' }
   
