@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017191858) do
+ActiveRecord::Schema.define(:version => 20111025230123) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -177,16 +177,18 @@ ActiveRecord::Schema.define(:version => 20111017191858) do
   end
 
   create_table "tester_stat_sheets", :force => true do |t|
-    t.integer  "level",         :default => 0
-    t.integer  "points",        :default => 0
-    t.integer  "days_at_level", :default => 0
+    t.integer  "level",           :default => 0
+    t.integer  "points",          :default => 0
+    t.integer  "days_at_level",   :default => 0
     t.integer  "beta_test_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "level_frozen",  :default => false
-    t.boolean  "points_frozen", :default => false
+    t.boolean  "level_frozen",    :default => false
+    t.boolean  "points_frozen",   :default => false
     t.integer  "position"
     t.integer  "user_id"
+    t.date     "daily_pts_taken"
+    t.date     "daily_pts_given"
   end
 
   create_table "ticket_categories", :force => true do |t|
@@ -221,8 +223,6 @@ ActiveRecord::Schema.define(:version => 20111017191858) do
     t.integer  "inactive_until",     :default => 0
     t.string   "security_question"
     t.string   "security_answer"
-    t.date     "daily_pt_taken"
-    t.date     "daily_pt_given"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

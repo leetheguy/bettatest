@@ -37,6 +37,8 @@ class TesterStatSheet < ActiveRecord::Base
       user.has_role! :activated, beta_test
     end
     self.points = 10
+    self.daily_pts_taken = Date.today
+    self.daily_pts_given = Date.today
   end
 
   def activate_user
@@ -136,13 +138,17 @@ class TesterStatSheet < ActiveRecord::Base
   end
 
   def add_points!(x)
-    self.points += x
-    self.save!
+    if !points_frozen
+      self.points += x
+      self.save!
+    end
   end
 
   def remove_points!(x)
-    self.points -= x
-    self.save!
+    if !points_frozen
+      self.points -= x
+      self.save!
+    end
   end
 
   def promote
@@ -196,5 +202,19 @@ class TesterStatSheet < ActiveRecord::Base
 
   def rank
     self.beta_test.tester_stat_sheets.order('points DESC').index(self)
+  end
+
+  def self.visit_adjustment(user, test)
+    TesterStatSheet.where(:user => user, :beta_test => test, :daily_pts_given.lt => Date.today).each do |tss|
+      tss.daily_pts_given = Date.today
+      tss.add_points! 1
+    end
+  end
+
+  def self.daily_adjustment
+    TesterStatSheet.where(:daily_pts_taken.lt => Date.today, :level.gt => 0).find_each(:batch_size => 200) do |tss|
+      tss.daily_pts_taken = Date.today
+      tss.remove_points! 1
+    end
   end
 end

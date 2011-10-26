@@ -30,18 +30,22 @@ class SubscriptionsController < ApplicationController
 
   # PUT /subscriptions/1
   def update
-    @subscription.name = params[:subscription][:name]
-    @subscription.stripe_card_token = params[:subscription][:stripe_card_token]
-    if @subscription.update_with_payment
-      redirect_to(current_user, :notice => 'Subscription was successfully updated.')
+    if params[:commit] == 'subscribe'
+      @subscription.name = params[:subscription][:name]
+      @subscription.stripe_card_token = params[:subscription][:stripe_card_token]
+      if @subscription.update_with_payment
+        redirect_to(current_user, :notice => 'Subscription was successfully updated.')
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to subscription_path(@subscription), :method => :delete
     end
   end
 
   # DELETE /subscriptions/1
   def destroy
-    @subscription = Subscription.find(params[:id])
-    redirect_to(current_user)
+    @subscription.delete_payment
+    redirect_to current_user
   end
 end

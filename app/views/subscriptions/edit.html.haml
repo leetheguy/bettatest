@@ -2,3 +2,7 @@
   %h1 change subscription details
 .content
   = render 'form'
+  %br
+  %br
+  .buttle-medium
+    = button_to 'unsubscribe', @subscription, :method => :delete, :confirm => 'Are you sure? This will deactivate all of your betta tests and you will only be able to reactivate one at a time.'

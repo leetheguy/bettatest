@@ -3,7 +3,8 @@ class BlogsController < ApplicationController
 
   def feed
     authorize! :read, Blog
-    @blogs = current_beta_test.blogs.where(:draft => false).order('created_at DESC').page(params[:page]).per(10)
+    bt = BetaTest.find(params[:beta_test_id])
+    @blogs = bt.blogs.where(:draft => false).order('created_at DESC').page(params[:page]).per(10)
     @title = "the blog of the bettatest for #{current_beta_test.name}"
     # this will be our Feed's update timestamp
     @updated = @blogs.first.updated_at unless @blogs.empty?

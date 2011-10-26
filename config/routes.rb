@@ -5,26 +5,26 @@ Bettatest::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  root :to	           			=> 'static#index'
+  root :to                      => 'static#index'
   
   match 'betta_tests'           => 'beta_tests#index'
-  match 'about'						      => 'static#about'
-  match 'contact'					      => 'static#contact'
-  match 'unconfirmed_user'    	=> 'static#unconfirmed_user'
-  match 'suspended_user'      	=> 'static#suspended_user'
-  match 'resend_confirmation'  	=> 'static#resend_confirmation'
+  match 'about'                 => 'static#about'
+  match 'contact'               => 'static#contact'
+  match 'unconfirmed_user'      => 'static#unconfirmed_user'
+  match 'suspended_user'        => 'static#suspended_user'
+  match 'resend_confirmation'   => 'static#resend_confirmation'
   match 'log_out'               => 'sessions#destroy', :as => 'log_out'
-	match 'log_in'                => 'sessions#new', :as => 'log_in'
-	match 'possess'               => 'sessions#possess', :as => 'possess'
-	match 'sign_up'               => 'users#new', :as => 'sign_up'
-	match 'preferences'           => 'users#edit', :as => 'preferences'
-  match 'dashboard'			      	=> 'users#show'
-  match 'manual_test_list'    	=> 'static#manual_test_list'
+  match 'log_in'                => 'sessions#new', :as => 'log_in'
+  match 'possess'               => 'sessions#possess', :as => 'possess'
+  match 'sign_up'               => 'users#new', :as => 'sign_up'
+  match 'preferences'           => 'users#edit', :as => 'preferences'
+  match 'dashboard'             => 'users#show'
+  match 'manual_test_list'      => 'static#manual_test_list'
   match '/feed'                 => 'blogs#feed',
         :as                     => :feed,
         :defaults               => { :format => 'atom' }
   
-  match 'confirm_email'     => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
+  match 'confirm_email'         => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
  
   resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests, :subscriptions
 

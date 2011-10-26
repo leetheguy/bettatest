@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Mon, 24 Oct 2011 22:49:56 GMT from
+/* DO NOT MODIFY. This file was compiled Tue, 25 Oct 2011 00:40:33 GMT from
  * /home/lee/Dropbox/works/rails/bettatest/app/coffeescripts/edit_subscription.coffee
  */
 
@@ -10,7 +10,7 @@
   });
   subscription = {
     setupForm: function() {
-      return $('#edit_subscription').submit(function() {
+      return $('.edit_subscription').submit(function() {
         $('input[type=submit]').attr('disabled', true);
         if ($('#card_number').length) {
           subscription.processCard();
@@ -33,7 +33,7 @@
     handleStripeResponse: function(status, response) {
       if (status === 200) {
         $('#subscription_stripe_card_token').val(response.id);
-        return $('#edit_subscription')[0].submit();
+        return $('.edit_subscription')[0].submit();
       } else {
         $('#stripe_error').text(response.error.message);
         return $('input[type=submit]').attr('disabled', false);

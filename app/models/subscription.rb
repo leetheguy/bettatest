@@ -6,8 +6,8 @@ class Subscription < ActiveRecord::Base
 	
   belongs_to :user
 
-  @@plans = { 'alpmon' => 'alpha release special - $19 per month',
-              'alpyea' => 'alpha release special - $199 per year' } 
+  @@plans = { 'alpmon' => 'alpha release special - $19 per month' }
+#              'alpyea' => 'alpha release special - $199 per year' } 
 
   @@other_plans = { 'betmon' => 'beta release special - $29 per year',
                     'betyea' => 'beta release special - $299 per year',
@@ -44,13 +44,22 @@ class Subscription < ActiveRecord::Base
       customer.card = stripe_card_token
       customer.email = user.email
       customer.description = user.name
-      customer.plan = name
       customer.save
-      user.has_no_role!(:subscriber)
+      customer.update_subscription(:plan => name)
       save!
     end
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while updating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
+    false
+  end
+
+  def delete_payment
+    customer = Stripe::Customer.retrieve(stripe_customer_token)
+    customer.cancel_subscription
+    user.has_no_role!(:subscriber)
+    user.my_beta_tests.all.each do |test|
+      test.deactivate_test!
+    end
   end
 end

@@ -61,6 +61,7 @@ class ApplicationController < ActionController::Base
         session[:bt_id] = nil
       elsif params[:id]
         @current_beta_test = BetaTest.find(params[:id])
+        TesterStatSheet.visit_adjustment current_user, @current_beta_test
         session[:bt_id] = params[:id]
       elsif session[:bt_id]
         @current_beta_test = BetaTest.find(session[:bt_id])
@@ -70,6 +71,7 @@ class ApplicationController < ActionController::Base
       end
     elsif params[:beta_test_id]
       @current_beta_test = BetaTest.find(params[:beta_test_id])
+      TesterStatSheet.visit_adjustment current_user, @current_beta_test
       session[:bt_id] = params[:beta_test_id]
     elsif session[:bt_id]
       @current_beta_test = BetaTest.find(session[:bt_id])

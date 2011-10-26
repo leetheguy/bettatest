@@ -20,6 +20,7 @@ gem 'stripe'
 gem 'cancan'
 gem 'therubyracer', :require => false
 gem 'barista'
+gem 'meta_where'
 
 group :development, :test do
   gem 'newrelic_rpm', '2.13.4'
