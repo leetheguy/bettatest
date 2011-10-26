@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   def feed
     bt = BetaTest.find(params[:beta_test_id])
     @blogs = bt.blogs.where(:draft => false).order('created_at DESC')
-    @title = "the blog of the bettatest for #{current_beta_test.name}"
+    @title = "the blog of the bettatest for #{bt.name}"
     # this will be our Feed's update timestamp
     @updated = @blogs.first.updated_at unless @blogs.empty?
 
