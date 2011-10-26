@@ -1,6 +1,7 @@
 -if current_action == 'index' || current_action == 'show' || current_action == 'unpublished'
-  .buttle-medium
-    = link_to "subscribe", feed_url(:atom, :beta_test_id => current_beta_test)
+  - if can? :read, Blog
+    .buttle-medium
+      = link_to "subscribe", feed_url(:atom, :beta_test_id => current_beta_test)
   - if can? :create, Blog
     .buttle-medium
       = link_to 'create a new post', new_blog_path
