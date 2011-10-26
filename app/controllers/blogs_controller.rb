@@ -2,11 +2,11 @@ class BlogsController < ApplicationController
   load_and_authorize_resource :except => [:feed, :unpublished, :index]
 
   def feed
-    bt = BetaTest.find(params[:beta_test_id])
+    bt = BetaTest.find(params[:id])
     @blogs = bt.blogs.where(:draft => false).order('created_at DESC')
     @title = "the blog of the bettatest for #{bt.name}"
-    # this will be our Feed's update timestamp
     @updated = @blogs.first.updated_at unless @blogs.empty?
+    @author 
 
     respond_to do |format|
       format.atom { render :layout => false }
