@@ -1,6 +1,10 @@
 class SubscriptionsController < ApplicationController
   load_and_authorize_resource
 
+  def stripe_hook
+    binding.pry
+  end
+
   # GET /subscriptions
   def index
   end
