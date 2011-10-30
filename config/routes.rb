@@ -13,6 +13,7 @@ Bettatest::Application.routes.draw do
   match 'unconfirmed_user'      => 'static#unconfirmed_user'
   match 'suspended_user'        => 'static#suspended_user'
   match 'resend_confirmation'   => 'static#resend_confirmation'
+  match 'terms'                 => 'static#terms_of_service'
   match 'log_out'               => 'sessions#destroy', :as => 'log_out'
   match 'log_in'                => 'sessions#new', :as => 'log_in'
   match 'possess'               => 'sessions#possess', :as => 'possess'

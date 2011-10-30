@@ -2,6 +2,8 @@
   %table
     = render 'layouts/notice'
     = render 'layouts/errors', :object => @beta_test
+    %h3
+      = link_to 'Learn more about betta test options here.', about_path(:page => 'developer')
     %tr
       %td.align-center
         -if @beta_test.open
@@ -16,7 +18,7 @@
     %tr
       %td.align-center
         -if !@beta_test.open
-          .buttle-medium= f.submit "make public", :public => true, :confirm => "Are you sure? This can not be undone!"
+          .buttle-medium= f.submit "make public", :public => true, :confirm => "Are you sure? This will turn your beta test into a helpdesk and can not be undone!"
       %td.align-center
         -if @beta_test.active
           .buttle-medium= f.submit "deactivate", :active => false

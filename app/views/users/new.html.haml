@@ -32,7 +32,7 @@
       %tr
         %td= f.password_field :password_confirmation
       %tr
-        %td= label_tag :agreed_to_tos, 'I agree to the Terms of Service.'
+        %td= label_tag :agreed_to_tos, link_to('I agree to the Terms of Service.', terms_path)
       %tr
         %td= f.check_box :agreed_to_tos
     .buttle-medium

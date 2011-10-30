@@ -15,6 +15,8 @@ class StaticController < ApplicationController
     end
 	end
 	def contact
+    beta_test = BetaTest.where(:name => 'bettatest.com - help desk')
+    redirect_to beta_test
 	end
 	def unconfirmed_user
 	end
