@@ -3,6 +3,8 @@ class BetaTestsController < ApplicationController
 
   # GET /beta_tests
   def index
+    @title = 'list of betta tests'
+
     @beta_tests = @beta_tests.order(:name).page(params[:page]).per(20)
   end
 

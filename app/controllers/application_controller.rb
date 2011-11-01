@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_user_is_admin, :current_beta_test, :current_action, :current_controller, :default_redirect, :redirect_non_admin, :current_beta_test_is_open, :current_stat_sheet
 
-  before_filter :current_beta_test
+  before_filter :current_beta_test, :set_title
 
   protected
 
@@ -97,5 +97,13 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Ability.new(current_user, current_beta_test)
+  end
+
+  def set_title
+    @title = 'blogs'   if current_controller == 'blogs'
+    @title = 'forums'  if current_controller == 'forum_categories'
+    @title = 'forums'  if current_controller == 'forum_topics'
+    @title = 'forums'  if current_controller == 'forum_posts'
+    @title = 'leaders' if current_controller == 'tester_stat_sheets'
   end
 end

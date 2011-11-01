@@ -4,9 +4,18 @@
     = auto_discovery_link_tag :atom, "/feed"
     = auto_discovery_link_tag :rss, "/feed.rss"
     = csrf_meta_tag
-    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
+    = tag :meta, 'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'utf-8'
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
-    %title betta test
+
+    - title = 'bettatest.com'
+    - description  = 'bettatest.com is a simple but powerful service that lets software companies and developers run closed, focused, community driven beta tests and open help desks. It also lets people who love new software try it before the public, get involved in shaping the final product and possibly get rewarded for doing so.'
+    - if inside_beta_test
+      - description = current_beta_test.description
+      - title += " - the beta test for #{current_beta_test.name}"
+    - if @title
+      - title += " - #{@title}"
+    %title #{title}
+    = tag :meta, :name => 'description=', :content => description
     = javascript_include_tag :defaults
     - if current_controller == 'subscriptions'
       = javascript_include_tag "https://js.stripe.com/v1/"
