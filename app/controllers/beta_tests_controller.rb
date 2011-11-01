@@ -5,7 +5,11 @@ class BetaTestsController < ApplicationController
   def index
     @title = 'list of betta tests'
 
-    @beta_tests = @beta_tests.order(:name).page(params[:page]).per(20)
+    if params[:all]
+      @beta_tests = @beta_tests.order(:name).page(params[:page]).per(@beta_tests.count)
+    else
+      @beta_tests = @beta_tests.order(:name).page(params[:page]).per(20)
+    end
   end
 
   # GET /beta_tests/1

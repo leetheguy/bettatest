@@ -24,6 +24,7 @@ Bettatest::Application.routes.draw do
   match '/feed'                 => 'blogs#feed',
         :as                     => :feed,
         :defaults               => { :format => 'atom' }
+  match 'sitemap'               => 'sitemap#show'
   match 'stripe_hook'           => 'subscriptions#stripe_hook', :via => :post
   
   match 'confirm_email'         => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
