@@ -28,6 +28,12 @@
     = stylesheet_link_tag "print", :media => "print"
     / [if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]
     = stylesheet_link_tag "betta"
+    <script type="text/javascript">
+    var addthis_config =
+    {
+    ui_use_css: false
+    }
+    </script>
   %body.blueprint.betta
     = render "layouts/betta_header"
     -if inside_beta_test

@@ -57,7 +57,7 @@ a img {
   border: none;
 }
 
-/* line 17, ../../app/stylesheets/screen.sass */
+/* line 17, ../../app/views/stylesheets/screen.sass */
 body.bp {
   line-height: 1.5;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -493,14 +493,14 @@ form.bp form.inline p {
   margin-bottom: 0;
 }
 
-/* line 31, ../../app/stylesheets/screen.sass */
+/* line 31, ../../app/views/stylesheets/screen.sass */
 body.two-col #container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 33, ../../app/stylesheets/screen.sass */
+/* line 33, ../../app/views/stylesheets/screen.sass */
 body.two-col #header, body.two-col #footer {
   display: inline;
   float: left;
@@ -511,7 +511,7 @@ body.two-col #header, body.two-col #footer {
 * html body.two-col #header, * html body.two-col #footer {
   overflow-x: hidden;
 }
-/* line 35, ../../app/stylesheets/screen.sass */
+/* line 35, ../../app/views/stylesheets/screen.sass */
 body.two-col #sidebar {
   display: inline;
   float: left;
@@ -522,7 +522,7 @@ body.two-col #sidebar {
 * html body.two-col #sidebar {
   overflow-x: hidden;
 }
-/* line 39, ../../app/stylesheets/screen.sass */
+/* line 39, ../../app/views/stylesheets/screen.sass */
 body.two-col #content {
   display: inline;
   float: left;
