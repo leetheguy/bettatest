@@ -43,6 +43,9 @@
                   %tr
                     = render :partial => 'tester_stat_sheets/stat_line', :locals => { :tester_stat_sheet => current_stat_sheet }
           .content
+            - if !current_beta_test.user.has_role? :subscriber
+              = render 'layouts/google_ads_top'
+              %br
             -if !(current_controller == 'beta_tests' && (current_action == 'index' || current_action == 'show'))
               %p.align-left
                 = link_to current_beta_test.name, beta_test_path(current_beta_test)
@@ -93,10 +96,11 @@
                     >
                     posts
             = yield
-        - if current_beta_test.user.has_role?(:subscriber)
-          = render 'layouts/right_default'
-        - else
-          = render 'layouts/google_ads'
+            - if !current_beta_test.user.has_role? :subscriber
+              %br
+              %br
+              = render 'layouts/google_ads_bottom'
+        = render 'layouts/right_default'
     - else
       .container
         =render "layouts/left_nav"

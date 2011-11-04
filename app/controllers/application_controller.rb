@@ -100,10 +100,5 @@ class ApplicationController < ActionController::Base
   end
 
   def set_title
-    @title = 'blogs'   if current_controller == 'blogs'
-    @title = 'forums'  if current_controller == 'forum_categories'
-    @title = 'forums'  if current_controller == 'forum_topics'
-    @title = 'forums'  if current_controller == 'forum_posts'
-    @title = 'leaders' if current_controller == 'tester_stat_sheets'
   end
 end
