@@ -8,7 +8,6 @@ Bettatest::Application.routes.draw do
   root :to                      => 'static#index'
   
   match 'betta_tests'           => 'beta_tests#index'
-  match 'about'                 => 'static#about'
   match 'contact'               => 'static#contact'
   match 'unconfirmed_user'      => 'static#unconfirmed_user'
   match 'suspended_user'        => 'static#suspended_user'
@@ -28,6 +27,13 @@ Bettatest::Application.routes.draw do
   match 'stripe_hook'           => 'subscriptions#stripe_hook', :via => :post
   
   match 'confirm_email'         => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
+
+  match 'about'                 => 'static#about'
+  match 'subscription'          => 'static#subscription'
+  match 'overview'              => 'static#overview'
+  match 'game'                  => 'static#game'
+  match 'developer'             => 'static#developer'
+  match 'company'               => 'static#company'
  
   resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests, :subscriptions
 
