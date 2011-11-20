@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_one   :referral, :dependent => :destroy
   has_many  :referring, :class_name => "Referral", :foreign_key => "referred_by_id"
   has_one   :subscription, :dependent => :destroy
-  has_many  :surveys, :through => :survey_votes
+  has_many  :polls, :through => :votes
   has_and_belongs_to_many :roles
   
   def self.authenticate(email, password)

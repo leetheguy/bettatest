@@ -1,7 +1,6 @@
 class StaticController < ApplicationController
 #  skip_before_filter :require_login
 
-
   def index
     @hide_background = true
   end
@@ -35,6 +34,18 @@ class StaticController < ApplicationController
   end
 
   def contact
+  end
+
+  def send_contact
+    if params[:email] == "" ||  params[:subject] == "" || params[:content] == ""
+      flash[:notice] = 'All fields need to be filled in.'
+      render :contact
+    else
+      SiteMailer.send_contact(params[:email], params[:subject], params[:content]).deliver
+      flash[:notice] = "Thanks for contacting us. We'll get back to you as soon as possible."
+      @hide_background = true
+      render :index
+    end
   end
 
   def unconfirmed_user

@@ -92,40 +92,6 @@ FactoryGirl.define do
     months_left { rand(12)+1 }
   end
 
-  factory :survey do
-    name { Faker::Company.bs }
-    description { Faker::Lorem.sentence 8 }
-    access_level { rand(3)+1 }
-    beta_test
-  end
-
-  factory :standard_survey, :parent => :survey do
-    name { Faker::Company.bs }
-    description { Faker::Lorem.sentence 8 }
-    beta_test
-    access_level 1
-  end
-
-  factory :active_survey, :parent => :survey do
-    name { Faker::Company.bs }
-    description { Faker::Lorem.sentence 8 }
-    beta_test
-    access_level 2
-  end
-
-  factory :involved_survey, :parent => :survey do
-    name { Faker::Company.bs }
-    description { Faker::Lorem.sentence 8 }
-    beta_test
-    access_level 3
-  end
-
-  factory :survey_option do
-    name { Faker::Company.bs }
-    votes { rand(11) }
-    survey
-  end
-
   factory :tag do
     name 7.random_characters
   end
@@ -169,5 +135,25 @@ FactoryGirl.define do
     days_at_level { rand 30 }
     association :user, :factory => :user
     beta_test
+  end
+
+  factory :poll do
+    name { Faker::Company.bs }
+    description { Faker::Lorem.paragraphs(3).join }
+    options { (rand(8)+3).times.map { Faker::Lorem.sentence } }
+    access_level { rand(3)+1 }
+    beta_test
+  end
+
+  factory :standard_poll, :parent => :poll do
+    access_level 1
+  end
+
+  factory :active_poll, :parent => :poll do
+    access_level 2
+  end
+
+  factory :involved_poll, :parent => :poll do
+    access_level 3
   end
 end

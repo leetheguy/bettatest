@@ -3,7 +3,29 @@
 .content
   %br
   %h3
-    Please visit the helpdesk for 
+    Before you contact us please visit the helpdesk for 
     =link_to "bettatest.com.", beta_test_path(3)
     %br
+    If you can't find your question or you don't want to sign up to get help go ahead and fill out this form.
+  = render 'layouts/notice'
+  = form_tag send_contact_path do
+    %table
+      %tr
+        %td= label_tag :email
+      %tr
+        %td= text_field_tag :email, params[:email], :size => 5
+      %tr
+        %td= label_tag :subject
+      %tr
+        %td= text_field_tag :subject
+      %tr
+        %td= label_tag :content
+      %tr
+        %td= text_area_tag :content
+    .buttle-medium
+      = submit_tag "submit"
+  %br
+  %br
+  %h3
     Thank you.
+  %br

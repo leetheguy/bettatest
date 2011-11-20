@@ -16,13 +16,13 @@ ForumTopic.all.each do |r| r.delete end
 ForumPost.all.each do |r| r.delete end
 Referral.all.each do |r| r.delete end
 Subscription.all.each do |r| r.delete end
-Survey.all.each do |r| r.delete end
-SurveyOption.all.each do |r| r.delete end
 Tag.all.each do |r| r.delete end
 TicketCategory.all.each do |r| r.delete end
 Ticket.all.each do |r| r.delete end
 User.all.each do |r| r.delete end
 TesterStatSheet.all.each do |r| r.delete end
+Poll.all.each do |r| r.delete end
+Vote.all.each do |r| r.delete end
 
 FactoryGirl.create_list(:open_active_beta_test, 10)
 
@@ -86,6 +86,27 @@ ca_tests.each do |bt|
     topic = FactoryGirl.create_list(:forum_topic, (rand(5)+1), :user => involved.sample.user, :forum_category => fc)
     topic.each do |ft|
       post = FactoryGirl.create_list(:forum_post, (rand(5)+1), :user => involved.sample.user, :forum_topic => ft)
+    end
+  end
+
+  sps = FactoryGirl.create_list(:standard_poll, (rand(5)+1), :beta_test => bt)
+  aps = FactoryGirl.create_list(:active_poll, (rand(5)+1), :beta_test => bt)
+  ips = FactoryGirl.create_list(:involved_poll, (rand(5)+1), :beta_test => bt)
+  sps.each do |p|
+    rand(5)+1.times do
+      Vote.create(:user => activated.sample.user, :poll => p, :option => rand(p.options.count))
+    end
+  end
+
+  aps.each do |p|
+    rand(5)+1.times do
+      Vote.create(:user => activated.sample.user, :poll => p, :option => rand(p.options.count))
+    end
+  end
+
+  ips.each do |p|
+    rand(5)+1.times do
+      Vote.create(:user => activated.sample.user, :poll => p, :option => rand(p.options.count))
     end
   end
 end

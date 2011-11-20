@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025230123) do
+ActiveRecord::Schema.define(:version => 20111114211240) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -99,6 +99,16 @@ ActiveRecord::Schema.define(:version => 20111025230123) do
     t.datetime "updated_at"
   end
 
+  create_table "polls", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "beta_test_id"
+    t.text     "options"
+    t.integer  "access_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "referrals", :force => true do |t|
     t.integer  "reward_at",      :default => 3
     t.integer  "rewards_given",  :default => 0
@@ -143,31 +153,6 @@ ActiveRecord::Schema.define(:version => 20111025230123) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "stripe_customer_token"
-  end
-
-  create_table "survey_options", :force => true do |t|
-    t.string   "name",                      :null => false
-    t.integer  "votes",      :default => 0
-    t.integer  "survey_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "survey_votes", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "survey_id"
-    t.boolean  "voted"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "surveys", :force => true do |t|
-    t.string   "name",                        :null => false
-    t.text     "description"
-    t.integer  "beta_test_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "access_level", :default => 1
   end
 
   create_table "tags", :force => true do |t|
@@ -227,5 +212,11 @@ ActiveRecord::Schema.define(:version => 20111025230123) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.integer "user_id"
+    t.integer "poll_id"
+    t.integer "option"
+  end
 
 end
