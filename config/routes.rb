@@ -26,7 +26,7 @@ Bettatest::Application.routes.draw do
   match 'sitemap'               => 'sitemap#show'
   match 'stripe_hook'           => 'subscriptions#stripe_hook', :via => :post
   
-  match 'confirm'               => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
+  match 'confirm'               => 'users#confirm', :as => 'confirm', :via => 'get'
 
   match 'about'                 => 'static#about'
   match 'subscription'          => 'static#subscription'
