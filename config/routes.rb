@@ -9,7 +9,6 @@ Bettatest::Application.routes.draw do
   
   match 'betta_tests'           => 'beta_tests#index'
   match 'contact'               => 'static#contact'
-  match 'send_contact'          => 'static#send_contact'
   match 'unconfirmed_user'      => 'static#unconfirmed_user'
   match 'suspended_user'        => 'static#suspended_user'
   match 'resend_confirmation'   => 'static#resend_confirmation'
@@ -27,7 +26,7 @@ Bettatest::Application.routes.draw do
   match 'sitemap'               => 'sitemap#show'
   match 'stripe_hook'           => 'subscriptions#stripe_hook', :via => :post
   
-  match 'confirm_email'         => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
+  match 'confirm'               => 'users#confirm_email', :as => 'confirm_email', :via => 'get'
 
   match 'about'                 => 'static#about'
   match 'subscription'          => 'static#subscription'
