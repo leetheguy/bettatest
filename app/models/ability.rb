@@ -115,6 +115,9 @@ class Ability
     if user.has_role?(:admin)
       can :manage, User
     end
+    if !user.email_confirmed
+      can :confirm, user
+    end
 
 # a visitor has no roles
 # unconfirmed and naughty users have the same permissions as visitors

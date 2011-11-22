@@ -1,5 +1,5 @@
 Bettatest::Application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
+#  devise_for :users, ActiveAdmin::Devise.config
 
   ActiveAdmin.routes(self)
 
@@ -26,7 +26,7 @@ Bettatest::Application.routes.draw do
   match 'sitemap'               => 'sitemap#show'
   match 'stripe_hook'           => 'subscriptions#stripe_hook', :via => :post
   
-  match 'confirm'               => 'users#confirm', :as => 'confirm', :via => 'get'
+#  match 'confirm_user'          => 'users#confirm', :as => :confirm, :via => :get
 
   match 'about'                 => 'static#about'
   match 'subscription'          => 'static#subscription'

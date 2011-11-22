@@ -4,8 +4,13 @@ class UsersController < ApplicationController
   def confirm
     @user = User.find params[:id]
     code = params[:email_code]
-    @user.confirm(code)
-    redirect_to @user
+    if @user.confirm(code)
+      flash[:notice] = "You've been confirmed. Thanks!"
+      redirect_to dashboard_path
+    else
+      flash[:notice] = "Something went wrong with your confirmation."
+      redirect_to dashboard_path
+    end
   end
 
   # GET /users
