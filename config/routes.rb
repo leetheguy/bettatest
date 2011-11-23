@@ -35,6 +35,7 @@ Bettatest::Application.routes.draw do
   match 'developer'             => 'static#developer'
   match 'company'               => 'static#company'
  
+  match 'send_contact'          => 'static#send_contact'
   resources :sessions, :surveys, :survey_options, :forum_categories, :forum_topics, :ticket_categories, :tickets, :tester_stat_sheets, :referrals, :subscriptions, :leaders, :beta_tests, :subscriptions
 
   resources :forum_posts do
