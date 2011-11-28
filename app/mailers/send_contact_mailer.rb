@@ -3,7 +3,7 @@ class SendContactMailer < ActionMailer::Base
 
   def send_contact(user, subject, content)
     @user = user
-    mail(:to => "lee lee@bettatest.com", :subject => subject)
+    mail(:to => "lee@bettatest.com", :subject => subject)
   end
 
 end

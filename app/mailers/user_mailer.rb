@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default :from => "bettatest.com"
+  default :from => "no-repyly@bettatest.com"
 
   def registration_confirmation(user)
     @user = user
-    mail(:to => "#{user.name} <#{user.email}>", :subject => "bettatest.com registration confirmation")
+    mail(:to => user.email, :subject => "bettatest.com registration confirmation")
   end
 
   def activation_notice(tester_stat_sheet)
