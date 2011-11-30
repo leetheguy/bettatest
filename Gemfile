@@ -31,7 +31,7 @@ group :development, :test do
   gem 'autotest'
   gem 'autotest-rails'
   gem 'libnotify'
-  gem 'compass'
+  gem 'compass', ">= 0.12.alpha.0"
   gem 'rake', '0.8.7'
 end
 
