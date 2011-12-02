@@ -14,7 +14,7 @@ $color-4                        : #ffc000
 $color-5                        : #ff6000
 $color-e                        : #ffaaaa
 $color-n                        : #ffffaa
-$bg-image-wave                  : url(../images/wave-matched.png)
+$bg-image-wave                  : url(../images/wave.png)
 $bg-image-water                 : url(../images/water.png)
 $test-border                    : solid black 1px
 $default-border-radius          : 40px
@@ -217,17 +217,33 @@ body.betta
 .header
   //z-index                       : -1
   position                      : relative
-  margin-bottom                 : -50px
   background                    :
     image                       : $bg-image-wave
     repeat                      : repeat-x
     position                    : center top
+
+.nav-bar
+  margin                        : 0px
+  color                         : $color-2
+  text-align                    : right
+  a
+    font-weight                 : bold
+    text-decoration             : none
   h3
-    margin                        : 0px
-    color                         : $color-2
-    position                      : absolute
-    top                           : 40px
-    right                         : 10px
+    text-align                  : right
+  margin-top                    : -75px
+  margin-bottom                 : 15px
+
+
+.release-info
+  h3
+    font-weight                 : bold
+    margin-bottom               : 10px
+
+
+//  position                      : absolute
+//  top                           : 40px
+//  right                         : 0px
 
 .footer
   //z-index                       : 100
@@ -339,3 +355,11 @@ table
     h3, h4
       +inline-block
       text-align                : left
+
+//o-slider setup
+.layer-one
+  background                    : url(../images/underwater-selective.jpg)
+.layer-two
+  background                    : url(../images/moody_dots.png)
+.layer-three
+  background                    : url(../images/moody_dots_other.png)
