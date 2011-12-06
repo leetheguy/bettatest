@@ -20,28 +20,12 @@
       %td.fp-left.blog
         %h2
           the latest news
+          %br
+          %h3= link_to blog.name, blog
           - if @blog
+            = "(posted on: #{@blog.created_at.strftime("%D")})"
             %br
-            = "(posted on: #{blog.created_at.strftime("%D")})"
-            - if can? :manage, blog
-              &nbsp;-&nbsp;
-              - if blog.draft
-                unpublished
-              - else
-                published
-          %td.align-right
-            - if can? :edit, blog
-              .buttle-small
-                = link_to 'edit post', edit_blog_path(blog)
-            - if can? :destroy, blog
-              .buttle-small
-                = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
-        %tr
-          %td{:colspan => '2'}
-            - if current_action == 'index' || current_action == 'unpublished' || current_controller == 'beta_tests'
-              = shorten(markdown(blog.post))
-            - else
-              = markdown(blog.post)
+            = shorten(markdown(blog.post))
       %td.fp-right.twitter
         <script src="http://widgets.twimg.com/j/2/widget.js"></script>
         <script>
