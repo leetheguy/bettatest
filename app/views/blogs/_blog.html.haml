@@ -1,25 +1,26 @@
+= if current_controller != static
+  %tr
+    %td{:width => '70%'}
+%h3= link_to blog.name, blog
+%br
+= "(posted on: #{blog.created_at.strftime("%D")})"
+- if can? :manage, blog
+  &nbsp;-&nbsp;
+  - if blog.draft
+    unpublished
+  - else
+    published
+%td.align-right
+- if can? :edit, blog
+  .buttle-small
+    = link_to 'edit post', edit_blog_path(blog)
+- if can? :destroy, blog
+  .buttle-small
+    = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
 %tr
-  %td{:width => '70%'}
-    %h3= link_to blog.name, blog
-    %br
-    = "(posted on: #{blog.created_at.strftime("%D")})"
-    - if can? :manage, blog
-      &nbsp;-&nbsp;
-      - if blog.draft
-        unpublished
-      - else
-        published
-  %td.align-right
-    - if can? :edit, blog
-      .buttle-small
-        = link_to 'edit post', edit_blog_path(blog)
-    - if can? :destroy, blog
-      .buttle-small
-        = link_to 'destroy post', blog, :confirm => 'Are you sure?', :method => :delete
-%tr
-  %td{:colspan => '2'}
-    - if current_action == 'index' || current_action == 'unpublished' || current_controller == 'beta_tests'
-      = shorten(markdown(blog.post))
-    - else
-      = markdown(blog.post)
-    %hr
+%td{:colspan => '2'}
+- if current_action == 'index' || current_action == 'unpublished' || current_controller == 'beta_tests'
+  = shorten(markdown(blog.post))
+- else
+  = markdown(blog.post)
+%hr
