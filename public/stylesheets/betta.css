@@ -2009,7 +2009,15 @@ table td h3, table td h4 {
   *display: inline;
 }
 
-/* line 721, ../../app/stylesheets/betta.sass */
+/* line 717, ../../app/stylesheets/betta.sass */
+hr {
+  color: #0d4553;
+  background-color: #0d4553;
+  height: 1px;
+  border: none;
+}
+
+/* line 733, ../../app/stylesheets/betta.sass */
 .front-page-content {
   margin-top: 25px;
   border: solid #0d4553;
@@ -2023,28 +2031,35 @@ table td h3, table td h4 {
   border-radius: 40px;
   background: white;
 }
-/* line 729, ../../app/stylesheets/betta.sass */
+/* line 735, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-left {
   border-right: 1px solid #0d4553;
   width: 50%;
+  padding: 0px;
 }
-/* line 735, ../../app/stylesheets/betta.sass */
+/* line 743, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-right {
   border-left: 1px solid #a0e0f0;
   width: 50%;
+  padding: 0px;
+}
+/* line 751, ../../app/stylesheets/betta.sass */
+.front-page-content td.twitter {
+  padding-left: 25px;
+  padding-top: 12px;
 }
 
-/* line 743, ../../app/stylesheets/betta.sass */
+/* line 769, ../../app/stylesheets/betta.sass */
 .layer-one {
   background: url(../images/underwater-selective.jpg);
 }
 
-/* line 747, ../../app/stylesheets/betta.sass */
+/* line 773, ../../app/stylesheets/betta.sass */
 .layer-two {
   background: url(../images/moody_dots.png);
 }
 
-/* line 751, ../../app/stylesheets/betta.sass */
+/* line 777, ../../app/stylesheets/betta.sass */
 .layer-three {
   background: url(../images/moody_dots_other.png);
 }

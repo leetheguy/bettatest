@@ -356,18 +356,31 @@ table
       +inline-block
       text-align                : left
 
+hr
+  color                         : $color-2
+  background-color              : $color-2
+  height                        : 1px
+  border                        : none
+
 //front page only elements
 
 .front-page-content
-  margin-top                    : 25px
-  +bubble-large
-  background                    : $color-f
   td.fp-left
     border-right                : 1px solid $color-2
     width                       : 50%
+    padding                     : 0px
   td.fp-right
     border-left                 : 1px solid $color-1
     width                       : 50%
+    padding                     : 0px
+  td.twitter
+    padding-left                : 25px
+    padding-top                 : 12px
+    
+  margin-top                    : 25px
+  +bubble-large
+  background                    : $color-f
+    
 //o-slider setup
 .layer-one
   background                    : url(../images/underwater-selective.jpg)

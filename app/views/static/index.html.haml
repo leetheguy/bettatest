@@ -4,11 +4,51 @@
     %tr
       %td.fp-left
         %h2
-          Bettatest.com is the answer.
+          bettatest.com is the answer
           %br
-          = link_to "Here's the question.", 'http://stackoverflow.com/questions/962488/private-beta-test-communication-and-infrastructure', :target => '_blank'
+          = link_to "here's the question", 'http://stackoverflow.com/questions/962488/private-beta-test-communication-and-infrastructure', :target => '_blank'
       %td.fp-right
         %h2
-          Closed beta testing is the question.
+          closed beta testing is the question
           %br
-          = link_to "Here's the answer.", 'http://stackoverflow.com/questions/3066648/any-benefit-disadvantages-to-open-beta-vs-closed-beta-for-webapp', :target => '_blank'
+          = link_to "here's the answer", 'http://stackoverflow.com/questions/3066648/any-benefit-disadvantages-to-open-beta-vs-closed-beta-for-webapp', :target => '_blank'
+  %hr
+  %h1 what's the word?
+
+  %table
+    %tr
+      %td.fp-left.blog
+        %h2
+          the latest news
+          - if @blog
+            = render @blog
+      %td.fp-right.twitter
+        <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+        <script>
+        new TWTR.Widget({
+        version: 2,
+        type: 'profile',
+        rpp: 3,
+        interval: 30000,
+        width: 420,
+        height: 400,
+        theme: {
+        shell: {
+        background: '#0d4553',
+        color: '#a0e0f0'
+        },
+        tweets: {
+        background: '#a0e0f0',
+        color: '#0d4553',
+        links: '#000000'
+        }
+        },
+        features: {
+        scrollbar: false,
+        loop: false,
+        live: false,
+        behavior: 'all'
+        }
+        }).render().setUser('bettatestdotcom').start();
+        </script>
+

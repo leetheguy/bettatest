@@ -3,6 +3,12 @@ class StaticController < ApplicationController
 
   def index
     @hide_background = true
+    if BetaTest.exists?(3)
+      bt = BetaTest.find(3)
+      if bt.blogs.count > 0
+        @blog = bt.blogs.last
+      else
+    end
   end
 
   def about
