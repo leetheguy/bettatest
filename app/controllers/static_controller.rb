@@ -7,7 +7,7 @@ class StaticController < ApplicationController
       bt = BetaTest.find(3)
       if bt.blogs.count > 0
         @blog = bt.blogs.last
-      else
+      end
     end
   end
 
