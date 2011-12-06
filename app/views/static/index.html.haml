@@ -20,12 +20,13 @@
       %td.fp-left.blog
         %h2
           the latest news
-          %br
-          %h3= link_to @blog.name, @blog
           - if @blog
-            = "(posted on: #{@blog.created_at.strftime("%D")})"
             %br
-            = shorten(markdown(@blog.post), 1000)
+            %h3= link_to @blog.name, @blog
+            - if @blog
+              = "(posted on: #{@blog.created_at.strftime("%D")})"
+              %br
+              = shorten(markdown(@blog.post), 1000)
       %td.fp-right.twitter
         <script src="http://widgets.twimg.com/j/2/widget.js"></script>
         <script>

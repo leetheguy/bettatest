@@ -2019,6 +2019,7 @@ hr {
 
 /* line 733, ../../app/stylesheets/betta.sass */
 .front-page-content {
+  background: url(../images/fade_to_blue.png);
   margin-top: 25px;
   border: solid #0d4553;
   padding: 5px;
@@ -2029,21 +2030,20 @@ hr {
   -ms-border-radius: 40px;
   -khtml-border-radius: 40px;
   border-radius: 40px;
-  background: white;
 }
-/* line 735, ../../app/stylesheets/betta.sass */
+/* line 737, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-left {
   border-right: 1px solid #0d4553;
   width: 50%;
   padding: 0px;
 }
-/* line 743, ../../app/stylesheets/betta.sass */
+/* line 745, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-right {
   border-left: 1px solid #a0e0f0;
   width: 50%;
   padding: 0px;
 }
-/* line 751, ../../app/stylesheets/betta.sass */
+/* line 753, ../../app/stylesheets/betta.sass */
 .front-page-content td.twitter {
   padding-left: 25px;
   padding-top: 12px;
