@@ -5,9 +5,9 @@ module ApplicationHelper
     Redcarpet.new(text, *options).to_html.html_safe
   end
 
-  def shorten(text)
-    if text.length > 200
-      text[0...200]+'...'
+  def shorten(text, length = 200)
+    if text.length > length
+      text[0...length]+'...'
     else
       text
     end
