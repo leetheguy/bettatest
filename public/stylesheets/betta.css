@@ -1755,13 +1755,7 @@ textarea {
 
 /* line 381, ../../app/stylesheets/betta.sass */
 .content {
-  min-height: 185px;
   background: white;
-}
-
-/* line 389, ../../app/stylesheets/betta.sass */
-.content-clear {
-  min-height: 185px;
 }
 
 /* line 399, ../../app/stylesheets/betta.sass */
@@ -2015,17 +2009,42 @@ table td h3, table td h4 {
   *display: inline;
 }
 
-/* line 719, ../../app/stylesheets/betta.sass */
+/* line 721, ../../app/stylesheets/betta.sass */
+.front-page-content {
+  margin-top: 25px;
+  border: solid #0d4553;
+  padding: 5px;
+  border-width: 3px;
+  -moz-border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -o-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -khtml-border-radius: 40px;
+  border-radius: 40px;
+  background: white;
+}
+/* line 729, ../../app/stylesheets/betta.sass */
+.front-page-content td.fp-left {
+  border-right: 1px solid #0d4553;
+  width: 50%;
+}
+/* line 735, ../../app/stylesheets/betta.sass */
+.front-page-content td.fp-right {
+  border-left: 1px solid #a0e0f0;
+  width: 50%;
+}
+
+/* line 743, ../../app/stylesheets/betta.sass */
 .layer-one {
   background: url(../images/underwater-selective.jpg);
 }
 
-/* line 723, ../../app/stylesheets/betta.sass */
+/* line 747, ../../app/stylesheets/betta.sass */
 .layer-two {
   background: url(../images/moody_dots.png);
 }
 
-/* line 727, ../../app/stylesheets/betta.sass */
+/* line 751, ../../app/stylesheets/betta.sass */
 .layer-three {
   background: url(../images/moody_dots_other.png);
 }

@@ -186,7 +186,7 @@ $border-1-thickness             : 1px
 =content
   @extend .bubble-bottom-large
   @extend .align-center
-  min-height                    : 185px
+//  min-height                    : 185px
 
 .content
   +content
@@ -356,6 +356,18 @@ table
       +inline-block
       text-align                : left
 
+//front page only elements
+
+.front-page-content
+  margin-top                    : 25px
+  +bubble-large
+  background                    : $color-f
+  td.fp-left
+    border-right                : 1px solid $color-2
+    width                       : 50%
+  td.fp-right
+    border-left                 : 1px solid $color-1
+    width                       : 50%
 //o-slider setup
 .layer-one
   background                    : url(../images/underwater-selective.jpg)
@@ -363,3 +375,4 @@ table
   background                    : url(../images/moody_dots.png)
 .layer-three
   background                    : url(../images/moody_dots_other.png)
+
