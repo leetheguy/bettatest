@@ -1952,7 +1952,17 @@ body.betta {
   border: solid black 1px;
 }
 
-/* line 651, ../../app/stylesheets/betta.sass */
+/* line 649, ../../app/stylesheets/betta.sass */
+.buttle-medium a {
+  text-decoration: none;
+}
+
+/* line 657, ../../app/stylesheets/betta.sass */
+.buttle-small a {
+  text-decoration: none;
+}
+
+/* line 665, ../../app/stylesheets/betta.sass */
 form {
   text-align: center;
   display: -moz-inline-box;
@@ -1966,36 +1976,36 @@ form {
 form {
   *display: inline;
 }
-/* line 659, ../../app/stylesheets/betta.sass */
+/* line 673, ../../app/stylesheets/betta.sass */
 form input {
   max-width: 300px;
 }
-/* line 663, ../../app/stylesheets/betta.sass */
+/* line 677, ../../app/stylesheets/betta.sass */
 form textarea {
   max-width: 300px;
 }
 
-/* line 669, ../../app/stylesheets/betta.sass */
+/* line 683, ../../app/stylesheets/betta.sass */
 #stripe_error {
   color: #ffaaaa;
 }
 
-/* line 679, ../../app/stylesheets/betta.sass */
+/* line 693, ../../app/stylesheets/betta.sass */
 h1, h2, h3, h4 {
   margin: 0px;
   color: #0d4553;
   text-align: center;
 }
-/* line 687, ../../app/stylesheets/betta.sass */
+/* line 701, ../../app/stylesheets/betta.sass */
 h1 .announcement, h2 .announcement, h3 .announcement, h4 .announcement {
   color: #ff6000;
 }
 
-/* line 705, ../../app/stylesheets/betta.sass */
+/* line 719, ../../app/stylesheets/betta.sass */
 table td {
   vertical-align: top;
 }
-/* line 709, ../../app/stylesheets/betta.sass */
+/* line 723, ../../app/stylesheets/betta.sass */
 table td h3, table td h4 {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -2009,7 +2019,7 @@ table td h3, table td h4 {
   *display: inline;
 }
 
-/* line 717, ../../app/stylesheets/betta.sass */
+/* line 731, ../../app/stylesheets/betta.sass */
 hr {
   color: #0d4553;
   background-color: #0d4553;
@@ -2017,7 +2027,7 @@ hr {
   border: none;
 }
 
-/* line 733, ../../app/stylesheets/betta.sass */
+/* line 747, ../../app/stylesheets/betta.sass */
 .front-page-content {
   background: url(../images/fade_to_blue.png);
   margin-top: 25px;
@@ -2031,35 +2041,35 @@ hr {
   -khtml-border-radius: 40px;
   border-radius: 40px;
 }
-/* line 737, ../../app/stylesheets/betta.sass */
+/* line 751, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-left {
   border-right: 1px solid #0d4553;
   width: 50%;
   padding: 0px;
 }
-/* line 745, ../../app/stylesheets/betta.sass */
+/* line 759, ../../app/stylesheets/betta.sass */
 .front-page-content td.fp-right {
   border-left: 1px solid #a0e0f0;
   width: 50%;
   padding: 0px;
 }
-/* line 753, ../../app/stylesheets/betta.sass */
+/* line 767, ../../app/stylesheets/betta.sass */
 .front-page-content td.twitter {
   padding-left: 25px;
   padding-top: 12px;
 }
 
-/* line 769, ../../app/stylesheets/betta.sass */
+/* line 783, ../../app/stylesheets/betta.sass */
 .layer-one {
   background: url(../images/underwater-selective.jpg);
 }
 
-/* line 773, ../../app/stylesheets/betta.sass */
+/* line 787, ../../app/stylesheets/betta.sass */
 .layer-two {
   background: url(../images/moody_dots.png);
 }
 
-/* line 777, ../../app/stylesheets/betta.sass */
+/* line 791, ../../app/stylesheets/betta.sass */
 .layer-three {
   background: url(../images/moody_dots_other.png);
 }
